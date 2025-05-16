@@ -181,3 +181,55 @@
 </footer>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Minecraft Klicker-Spiel</title>
+<style>
+  body {
+    background: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0; padding: 0;
+  }
+  #game {
+    margin-top: 40px;
+  }
+  button {
+    font-size: 20px;
+    padding: 15px 30px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+  #score {
+    font-size: 32px;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+<h1>Minecraft Holzfäller Klicker</h1>
+<div id="game">
+  <button onclick="addLog()">Holz fällen!</button>
+  <div id="score">Gefälltes Holz: 0</div>
+</div>
+
+<script>
+  let score = 0;
+  function addLog() {
+    score++;
+    document.getElementById('score').innerText = 'Gefälltes Holz: ' + score;
+  }
+</script>
+</body>
+</html>
