@@ -3,49 +3,95 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Regeln – Minecraft Serverr</title>
+  <title>Minecraft Serverr Wezon1164</title>
   <style>
     body {
-      background-color: #000000;
+      background: url('https://wallpapercave.com/wp/wp2782477.png') repeat;
+      background-size: cover;
       color: #ffffff;
-      font-family: Arial, sans-serif;
-      padding: 40px;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      backdrop-filter: brightness(0.7);
     }
+
     h1 {
-      color: #00ffcc;
-      text-align: center;
+      font-size: 2.8em;
+      color: #00ff88;
+      text-shadow: 2px 2px #000;
+      margin-bottom: 40px;
     }
-    ul {
-      max-width: 600px;
-      margin: auto;
-      text-align: left;
-      font-size: 1.1em;
-      line-height: 1.6;
-    }
-    li {
-      margin-bottom: 15px;
-    }
-    a {
-      display: block;
-      text-align: center;
-      margin-top: 30px;
-      color: #00ffcc;
+
+    .button {
+      display: inline-block;
+      margin: 15px;
+      padding: 14px 28px;
+      background-color: #5865F2;
+      color: white;
       text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1.1em;
+      transition: transform 0.2s, background 0.3s;
+      box-shadow: 0 0 10px #00000080;
+    }
+
+    .button:hover {
+      transform: scale(1.05);
+      background-color: #4752c4;
+    }
+
+    .button.youtube {
+      background-color: #ff0000;
+    }
+
+    .button.youtube:hover {
+      background-color: #cc0000;
+    }
+
+    .button.regeln {
+      background-color: #00cc66;
+    }
+
+    .button.regeln:hover {
+      background-color: #00ff99;
+    }
+
+    footer {
+      margin-top: 60px;
+      font-size: 0.9em;
+      color: #ccc;
+      text-shadow: 1px 1px #000;
     }
   </style>
 </head>
 <body>
 
-  <h1>Regeln auf dem Server</h1>
-  <ul>
-    <li>1. Kein Griefing oder Hacken!</li>
-    <li>2. Sei respektvoll zu anderen Spielern.</li>
-    <li>3. Kein Spam oder Werbung.</li>
-    <li>4. Folge den Anweisungen der Admins.</li>
-    <li>5. Benutze deinen gesunden Menschenverstand.</li>
-  </ul>
+  <audio id="click-sound" src="https://www.myinstants.com/media/sounds/minecraft_click.mp3" preload="auto"></audio>
 
-  <a href="index.html">Zurück zur Startseite</a>
+  <h1>Willkommen auf dem Minecraft Serverr Wezon1164</h1>
+
+  <a class="button regeln" href="regeln.html" onclick="playClick()">Regeln</a>
+  <a class="button" href="https://discord.gg/wezon1164" target="_blank" onclick="playClick()">Discord beitreten</a>
+  <a class="button youtube" href="https://www.youtube.com/@Wezon1164" target="_blank" onclick="playClick()">YouTube ansehen</a>
+
+  <footer>
+    © 2025 Wezon1164 Community – Minecraft Serverr
+  </footer>
+
+  <script>
+    function playClick() {
+      const audio = document.getElementById('click-sound');
+      audio.currentTime = 0;
+      audio.play();
+    }
+  </script>
 
 </body>
 </html>
