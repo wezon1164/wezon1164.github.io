@@ -10,32 +10,31 @@
   body {
     margin: 0;
     font-family: 'Press Start 2P', cursive;
-    background: url('https://wallpaperaccess.com/full/3318332.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: #a3ff99;
-    text-shadow: 0 0 5px #000;
+    background-color: #000000; /* schwarzer Hintergrund */
+    color: #ffffff; /* weißer Text */
+    text-shadow: 0 0 5px #00ff00;
   }
 
   header {
-    background-color: rgba(0, 40, 0, 0.8);
+    background-color: #111111;
     text-align: center;
     padding: 25px;
     font-size: 2em;
-    color: #6df76d;
-    text-shadow: 0 0 10px #33cc33;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
   }
 
   nav {
     display: flex;
     justify-content: center;
-    background-color: rgba(0, 30, 0, 0.85);
+    background-color: #111111;
     padding: 15px;
   }
 
   nav button {
-    background-color: #2a6f2a;
-    border: 2px solid #52bd52;
-    color: #a3ff99;
+    background-color: #003300;
+    border: 2px solid #00ff00;
+    color: #aaffaa;
     font-family: 'Press Start 2P', cursive;
     cursor: pointer;
     margin: 0 12px;
@@ -45,21 +44,21 @@
   }
 
   nav button:hover {
-    background-color: #a3ff99;
-    color: #145214;
+    background-color: #00ff00;
+    color: #003300;
   }
 
   section {
     max-width: 900px;
     margin: 25px auto;
-    background: rgba(0, 50, 0, 0.7);
+    background: #111111;
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 0 15px #3cc13c;
+    box-shadow: 0 0 15px #00ff00;
   }
 
   h2 {
-    color: #b4ffb4;
+    color: #00ff00;
     text-align: center;
     margin-bottom: 15px;
   }
@@ -68,6 +67,7 @@
     list-style-type: disc;
     margin-left: 25px;
     font-size: 0.8em;
+    color: #ccffcc;
   }
 
   ul.rules li {
@@ -75,7 +75,7 @@
   }
 
   a {
-    color: #9bff9b;
+    color: #00ff00;
     text-decoration: none;
     font-weight: bold;
   }
@@ -94,13 +94,14 @@
 
   .gallery img {
     width: 160px;
-    height: 90px;
+    height: 160px;
     object-fit: cover;
-    border-radius: 8px;
-    border: 2px solid #60d660;
-    box-shadow: 0 0 10px #60d660;
+    border-radius: 12px;
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 10px #00ff00;
     transition: transform 0.3s;
     cursor: pointer;
+    background-color: #222;
   }
 
   .gallery img:hover {
@@ -109,7 +110,7 @@
 
   footer {
     text-align: center;
-    color: #6df76d;
+    color: #00ff00;
     font-size: 0.7em;
     margin: 20px 0;
   }
@@ -168,11 +169,10 @@
 <section id="galerie" style="display:none;">
   <h2>Minecraft Galerie</h2>
   <div class="gallery">
-    <img src="https://cdn.pixabay.com/photo/2015/07/28/20/50/minecraft-865195_1280.jpg" alt="Minecraft Bild 1" />
-    <img src="https://cdn.pixabay.com/photo/2019/07/02/13/02/minecraft-4316348_1280.jpg" alt="Minecraft Bild 2" />
-    <img src="https://cdn.pixabay.com/photo/2019/07/06/00/02/minecraft-4319849_1280.jpg" alt="Minecraft Bild 3" />
-    <img src="https://cdn.pixabay.com/photo/2020/04/19/09/50/minecraft-5068362_1280.jpg" alt="Minecraft Bild 4" />
-    <img src="https://cdn.pixabay.com/photo/2014/05/07/18/45/minecraft-340251_1280.jpg" alt="Minecraft Bild 5" />
+    <img src="https://crafatar.com/avatars/2da0f9b6-91b9-48cd-851e-03bca07a3c3c?size=160" alt="Technoblade" title="Technoblade" />
+    <img src="https://crafatar.com/avatars/dream?size=160" alt="Dream" title="Dream" />
+    <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" alt="Qauvis" title="Qauvis" />
+    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" title="Creeper" style="background:#000; border-radius: 16px;"/>
   </div>
 </section>
 
