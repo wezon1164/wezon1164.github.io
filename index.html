@@ -12,33 +12,28 @@
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
       text-align: center;
-      backdrop-filter: brightness(0.7);
+      min-height: 100vh;
     }
 
     h1 {
-      font-size: 2.8em;
+      font-size: 2.6em;
       color: #00ff88;
       text-shadow: 2px 2px #000;
-      margin-bottom: 40px;
+      padding-top: 40px;
     }
 
     .button {
       display: inline-block;
-      margin: 15px;
-      padding: 14px 28px;
+      margin: 10px;
+      padding: 12px 24px;
       background-color: #5865F2;
       color: white;
       text-decoration: none;
       border-radius: 10px;
       font-weight: bold;
-      font-size: 1.1em;
-      transition: transform 0.2s, background 0.3s;
+      font-size: 1em;
+      transition: 0.3s;
       box-shadow: 0 0 10px #00000080;
     }
 
@@ -47,25 +42,49 @@
       background-color: #4752c4;
     }
 
-    .button.youtube {
-      background-color: #ff0000;
+    .button.youtube { background-color: #ff0000; }
+    .button.youtube:hover { background-color: #cc0000; }
+    .button.green { background-color: #00cc66; }
+    .button.orange { background-color: #ffaa00; }
+
+    .section {
+      display: none;
+      padding: 30px 20px;
+      max-width: 900px;
+      margin: auto;
     }
 
-    .button.youtube:hover {
-      background-color: #cc0000;
+    .active {
+      display: block;
     }
 
-    .button.regeln {
-      background-color: #00cc66;
+    ul {
+      list-style-type: none;
+      padding: 0;
+      font-size: 1.2em;
     }
 
-    .button.regeln:hover {
-      background-color: #00ff99;
+    li {
+      margin: 15px 0;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .gallery img {
+      width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px #000;
     }
 
     footer {
       margin-top: 60px;
-      font-size: 0.9em;
+      font-size: 0.85em;
       color: #ccc;
       text-shadow: 1px 1px #000;
     }
@@ -75,17 +94,55 @@
 
   <audio id="click-sound" src="https://www.myinstants.com/media/sounds/minecraft_click.mp3" preload="auto"></audio>
 
-  <h1>Willkommen auf dem Minecraft Serverr Wezon1164</h1>
+  <h1>Minecraft Serverr Wezon1164</h1>
 
-  <a class="button regeln" href="regeln.html" onclick="playClick()">Regeln</a>
-  <a class="button" href="https://discord.gg/wezon1164" target="_blank" onclick="playClick()">Discord beitreten</a>
-  <a class="button youtube" href="https://www.youtube.com/@Wezon1164" target="_blank" onclick="playClick()">YouTube ansehen</a>
+  <div>
+    <a class="button green" href="#" onclick="showSection('start'); playClick()">🏠 Startseite</a>
+    <a class="button" href="#" onclick="showSection('rules'); playClick()">📜 Regeln</a>
+    <a class="button orange" href="#" onclick="showSection('gallery'); playClick()">🖼️ Bilder</a>
+    <a class="button" href="https://discord.gg/xjpRj57cqJ" target="_blank" onclick="playClick()">💬 Discord</a>
+    <a class="button youtube" href="https://www.youtube.com/@Wezon1164" target="_blank" onclick="playClick()">▶️ YouTube</a>
+  </div>
+
+  <!-- Startseite -->
+  <div id="start" class="section active">
+    <p>Willkommen auf dem Minecraft Server <strong>Wezon1164</strong>! 🎮<br>Trete unserer Community bei und spiele mit!</p>
+  </div>
+
+  <!-- Regeln -->
+  <div id="rules" class="section">
+    <h2>📜 Regeln</h2>
+    <ul>
+      <li>1. Kein Griefing oder Hacken!</li>
+      <li>2. Sei respektvoll zu anderen Spielern.</li>
+      <li>3. Kein Spam oder Werbung.</li>
+      <li>4. Folge den Anweisungen der Admins.</li>
+      <li>5. Benutze deinen gesunden Menschenverstand.</li>
+    </ul>
+  </div>
+
+  <!-- Galerie -->
+  <div id="gallery" class="section">
+    <h2>🖼️ Minecraft Galerie</h2>
+    <div class="gallery">
+      <img src="https://static.planetminecraft.com/files/image/minecraft/project/2021/424/15012989-minecraft-server-thumbnail-3_l.jpg" alt="Bild 1">
+      <img src="https://wallpapercave.com/wp/wp6325091.jpg" alt="Bild 2">
+      <img src="https://wallpaperaccess.com/full/3903028.jpg" alt="Bild 3">
+    </div>
+  </div>
 
   <footer>
-    © 2025 Wezon1164 Community – Minecraft Serverr
+    © 2025 Wezon1164 – Minecraft Serverr. Made with ❤️
   </footer>
 
   <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+    }
+
     function playClick() {
       const audio = document.getElementById('click-sound');
       audio.currentTime = 0;
