@@ -182,54 +182,85 @@
 </body>
 </html>
 
-<!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Minecraft Klicker-Spiel</title>
 <style>
-  body {
-    background: black;
-    color: white;
-    font-family: Arial, sans-serif;
+  /* Styles für das Klicker-Spiel */
+  #clicker-game {
+    background: #1a1a1a;
+    border: 2px solid #4caf50;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    margin: 20px auto;
+    color: #a6f1a6;
+    font-family: 'Minecraft', Arial, sans-serif;
     text-align: center;
-    margin: 0; padding: 0;
+    box-shadow: 0 0 10px #4caf50;
   }
-  #game {
-    margin-top: 40px;
+  #clicker-game h2 {
+    margin-top: 0;
+    color: #39ff14;
   }
-  button {
-    font-size: 20px;
-    padding: 15px 30px;
-    background-color: #4CAF50;
+  #clicker-game button {
+    background-color: #4caf50;
     border: none;
+    color: white;
+    font-size: 18px;
+    padding: 12px 25px;
+    margin: 10px 5px 0 5px;
     border-radius: 8px;
     cursor: pointer;
-    color: white;
+    transition: background-color 0.3s ease;
   }
-  button:hover {
-    background-color: #45a049;
+  #clicker-game button:hover {
+    background-color: #36b636;
   }
-  #score {
-    font-size: 32px;
-    margin-top: 20px;
+  #score, #upgrade-cost {
+    font-size: 20px;
+    margin: 10px 0;
+  }
+  #upgrade-button:disabled {
+    background-color: #888;
+    cursor: not-allowed;
   }
 </style>
-</head>
-<body>
-<h1>Minecraft Holzfäller Klicker</h1>
-<div id="game">
-  <button onclick="addLog()">Holz fällen!</button>
+
+<div id="clicker-game">
+  <h2>Holzfäller Klicker</h2>
   <div id="score">Gefälltes Holz: 0</div>
+  <button id="click-wood">Holz fällen!</button>
+  <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
+  <button id="upgrade-button">Upgrade Holz pro Klick (+1)</button>
 </div>
 
 <script>
   let score = 0;
-  function addLog() {
-    score++;
-    document.getElementById('score').innerText = 'Gefälltes Holz: ' + score;
+  let woodPerClick = 1;
+  let upgradeCost = 10;
+
+  const scoreDisplay = document.getElementById('score');
+  const upgradeCostDisplay = document.getElementById('upgrade-cost');
+  const upgradeButton = document.getElementById('upgrade-button');
+  const clickWoodButton = document.getElementById('click-wood');
+
+  clickWoodButton.addEventListener('click', () => {
+    score += woodPerClick;
+    updateUI();
+  });
+
+  upgradeButton.addEventListener('click', () => {
+    if (score >= upgradeCost) {
+      score -= upgradeCost;
+      woodPerClick++;
+      upgradeCost = Math.floor(upgradeCost * 1.5);
+      updateUI();
+    }
+  });
+
+  function updateUI() {
+    scoreDisplay.textContent = `Gefälltes Holz: ${score}`;
+    upgradeCostDisplay.textContent = `Upgrade kostet: ${upgradeCost} Holz`;
+    upgradeButton.disabled = score < upgradeCost;
   }
+
+  updateUI();
 </script>
-</body>
-</html>
