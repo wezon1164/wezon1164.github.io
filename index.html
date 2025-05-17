@@ -1,217 +1,265 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tom & Jerry Server</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Press Start 2P', cursive;
-      background-color: #000;
-      color: #fff;
-      text-shadow: 0 0 5px #ff6600;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Minecraft Server Wezon1164</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+  
+  body {
+    margin: 0;
+    font-family: 'Press Start 2P', cursive;
+    background-color: #000000; /* schwarzer Hintergrund */
+    color: #ffffff; /* weißer Text */
+    text-shadow: 0 0 5px #00ff00;
+  }
 
-    header {
-      background-color: #220000;
-      text-align: center;
-      padding: 25px;
-      font-size: 2em;
-      color: #ff6600;
-      text-shadow: 0 0 15px #ff6600;
-    }
+  header {
+    background-color: #111111;
+    text-align: center;
+    padding: 25px;
+    font-size: 2em;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+  }
 
-    nav {
-      display: flex;
-      justify-content: center;
-      background-color: #330000;
-      padding: 15px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+  nav {
+    display: flex;
+    justify-content: center;
+    background-color: #111111;
+    padding: 15px;
+  }
 
-    nav button {
-      background-color: #440000;
-      border: 2px solid #ff6600;
-      color: #ffbb66;
-      font-family: 'Press Start 2P', cursive;
-      cursor: pointer;
-      padding: 10px 18px;
-      border-radius: 8px;
-      transition: background-color 0.3s, color 0.3s;
-    }
+  nav button {
+    background-color: #003300;
+    border: 2px solid #00ff00;
+    color: #aaffaa;
+    font-family: 'Press Start 2P', cursive;
+    cursor: pointer;
+    margin: 0 12px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+  }
 
-    nav button:hover {
-      background-color: #ff6600;
-      color: #330000;
-    }
+  nav button:hover {
+    background-color: #00ff00;
+    color: #003300;
+  }
 
-    section {
-      max-width: 900px;
-      margin: 25px auto;
-      background: #220000;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 0 15px #ff6600;
-    }
+  section {
+    max-width: 900px;
+    margin: 25px auto;
+    background: #111111;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 15px #00ff00;
+  }
 
-    h2 {
-      color: #ff6600;
-      text-align: center;
-      margin-bottom: 15px;
-    }
+  h2 {
+    color: #00ff00;
+    text-align: center;
+    margin-bottom: 15px;
+  }
 
-    ul.rules {
-      list-style-type: disc;
-      margin-left: 25px;
-      font-size: 0.8em;
-      color: #ffbb99;
-    }
+  ul.rules {
+    list-style-type: disc;
+    margin-left: 25px;
+    font-size: 0.8em;
+    color: #ccffcc;
+  }
 
-    ul.rules li {
-      margin-bottom: 12px;
-    }
+  ul.rules li {
+    margin-bottom: 12px;
+  }
 
-    a {
-      color: #ff6600;
-      text-decoration: none;
-      font-weight: bold;
-    }
+  a {
+    color: #00ff00;
+    text-decoration: none;
+    font-weight: bold;
+  }
 
-    a:hover {
-      text-decoration: underline;
-    }
+  a:hover {
+    text-decoration: underline;
+  }
 
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-    }
+  /* Galerie für Bilder */
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
 
-    .gallery img {
-      width: 160px;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 2px solid #ff6600;
-      box-shadow: 0 0 10px #ff6600;
-      transition: transform 0.3s;
-      cursor: pointer;
-      background-color: #330000;
-    }
+  .gallery img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 10px #00ff00;
+    transition: transform 0.3s;
+    cursor: pointer;
+    background-color: #222;
+  }
 
-    .gallery img:hover {
-      transform: scale(1.1);
-    }
+  .gallery img:hover {
+    transform: scale(1.1);
+  }
 
-    footer {
-      text-align: center;
-      color: #ff6600;
-      font-size: 0.7em;
-      margin: 20px 0;
-    }
-
-    /* Klicker-Spiel Styles */
-    #clicker-game {
-      background: #330000;
-      border: 2px solid #ff6600;
-      border-radius: 10px;
-      padding: 20px;
-      width: 90%;
-      max-width: 320px;
-      margin: 25px auto;
-      color: #ffbb66;
-      font-family: 'Press Start 2P', cursive;
-      text-align: center;
-      box-shadow: 0 0 15px #ff6600;
-    }
-
-    #clicker-game h2 {
-      margin-top: 0;
-      color: #ff9900;
-    }
-
-    #clicker-game button {
-      background-color: #ff6600;
-      border: none;
-      color: #330000;
-      font-size: 18px;
-      padding: 12px 25px;
-      margin: 10px 5px 0 5px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;
-    }
-
-    #clicker-game button:hover {
-      background-color: #ffaa33;
-      transform: scale(1.05);
-    }
-
-    @media (max-width: 600px) {
-      nav {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .gallery img {
-        width: 120px;
-        height: 120px;
-      }
-    }
-  </style>
+  footer {
+    text-align: center;
+    color: #00ff00;
+    font-size: 0.7em;
+    margin: 20px 0;
+  }
+</style>
+<script>
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(sec => {
+      sec.style.display = 'none';
+    });
+    document.getElementById(id).style.display = 'block';
+  }
+  window.onload = () => {
+    showSection('startseite');
+  }
+</script>
 </head>
 <body>
-  <header>
-    Tom & Jerry Server
-  </header>
+<header>Minecraft Server Wezon1164</header>
+<nav>
+  <button onclick="showSection('startseite')">Startseite</button>
+  <button onclick="showSection('regeln')">Regeln</button>
+  <button onclick="showSection('discord')">Discord</button>
+  <button onclick="showSection('youtube')">YouTube</button>
+  <button onclick="showSection('galerie')">Galerie</button>
+</nav>
 
-  <nav>
-    <button>Start</button>
-    <button>Regeln</button>
-    <button>Galerie</button>
-    <button>Spiel</button>
-  </nav>
+<section id="startseite">
+  <h2>Willkommen auf dem Server!</h2>
+  <p>Join uns und baue deine eigenen Welten in Minecraft.</p>
+  <p>Nutze das Menü oben, um mehr zu erfahren.</p>
+</section>
 
-  <section>
-    <h2>Server-Regeln</h2>
-    <ul class="rules">
-      <li>Respektiere andere Spieler.</li>
-      <li>Keine Cheats oder Hacks.</li>
-      <li>Keine Beleidigungen.</li>
-      <li>Admins haben das letzte Wort.</li>
-    </ul>
-  </section>
+<section id="regeln" style="display:none;">
+  <h2>Regeln auf dem Server</h2>
+  <ul class="rules">
+    <li>Kein Griefing oder Hacken!</li>
+    <li>Sei respektvoll zu anderen Spielern.</li>
+    <li>Kein Spam oder Werbung.</li>
+    <li>Folge den Anweisungen der Admins.</li>
+    <li>Benutze deinen gesunden Menschenverstand.</li>
+  </ul>
+</section>
 
-  <section>
-    <h2>Bildergalerie</h2>
-    <div class="gallery">
-      <img src="bild1.jpg" alt="Tom jagt Jerry">
-      <img src="bild2.jpg" alt="Jerry entkommt">
-      <img src="bild3.jpg" alt="Tom fällt in eine Falle">
-      <!-- Weitere Bilder hier -->
-    </div>
-  </section>
+<section id="discord" style="display:none;">
+  <h2>Discord Server Beitreten</h2>
+  <p>Hier kannst du unserem Discord Server beitreten:</p>
+  <p><a href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener noreferrer">Discord Server Link</a></p>
+</section>
 
-  <section id="clicker-game">
-    <h2>Klicker-Spiel</h2>
-    <p>Punkte: <span id="points">0</span></p>
-    <button onclick="addPoint()">Klick mich!</button>
-  </section>
+<section id="youtube" style="display:none;">
+  <h2>Besuche unseren YouTube Kanal</h2>
+  <p>Schau dir unsere Minecraft Videos an:</p>
+  <p><a href="https://www.youtube.com/@Wezon1164" target="_blank" rel="noopener noreferrer">Wezon1164 auf YouTube</a></p>
+</section>
 
-  <footer>
-    &copy; 2025 Tom & Jerry Server. Alle Rechte vorbehalten.
-  </footer>
+<section id="galerie" style="display:none;">
+  <h2>Minecraft Galerie</h2>
+  <div class="gallery">
+    <img src="https://crafatar.com/avatars/2da0f9b6-91b9-48cd-851e-03bca07a3c3c?size=160" alt="Technoblade" title="Technoblade" />
+    <img src="https://crafatar.com/avatars/dream?size=160" alt="Dream" title="Dream" />
+    <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" alt="Qauvis" title="Qauvis" />
+    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" title="Creeper" style="background:#000; border-radius: 16px;"/>
+  </div>
+</section>
 
-  <script>
-    let points = 0;
-    function addPoint() {
-      points++;
-      document.getElementById("points").textContent = points;
-    }
-  </script>
+<footer>
+  &copy; 2025 Minecraft Server Wezon1164
+</footer>
 </body>
 </html>
+
+<style>
+  /* Styles für das Klicker-Spiel */
+  #clicker-game {
+    background: #1a1a1a;
+    border: 2px solid #4caf50;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    margin: 20px auto;
+    color: #a6f1a6;
+    font-family: 'Minecraft', Arial, sans-serif;
+    text-align: center;
+    box-shadow: 0 0 10px #4caf50;
+  }
+  #clicker-game h2 {
+    margin-top: 0;
+    color: #39ff14;
+  }
+  #clicker-game button {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    font-size: 18px;
+    padding: 12px 25px;
+    margin: 10px 5px 0 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  #clicker-game button:hover {
+    background-color: #36b636;
+  }
+  #score, #upgrade-cost {
+    font-size: 20px;
+    margin: 10px 0;
+  }
+  #upgrade-button:disabled {
+    background-color: #888;
+    cursor: not-allowed;
+  }
+</style>
+
+<div id="clicker-game">
+  <h2>Holzfäller Klicker</h2>
+  <div id="score">Gefälltes Holz: 0</div>
+  <button id="click-wood">Holz fällen!</button>
+  <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
+  <button id="upgrade-button">Upgrade Holz pro Klick (+1)</button>
+</div>
+
+<script>
+  let score = 0;
+  let woodPerClick = 1;
+  let upgradeCost = 10;
+
+  const scoreDisplay = document.getElementById('score');
+  const upgradeCostDisplay = document.getElementById('upgrade-cost');
+  const upgradeButton = document.getElementById('upgrade-button');
+  const clickWoodButton = document.getElementById('click-wood');
+
+  clickWoodButton.addEventListener('click', () => {
+    score += woodPerClick;
+    updateUI();
+  });
+
+  upgradeButton.addEventListener('click', () => {
+    if (score >= upgradeCost) {
+      score -= upgradeCost;
+      woodPerClick++;
+      upgradeCost = Math.floor(upgradeCost * 1.5);
+      updateUI();
+    }
+  });
+
+  function updateUI() {
+    scoreDisplay.textContent = `Gefälltes Holz: ${score}`;
+    upgradeCostDisplay.textContent = `Upgrade kostet: ${upgradeCost} Holz`;
+    upgradeButton.disabled = score < upgradeCost;
+  }
+
+  updateUI();
