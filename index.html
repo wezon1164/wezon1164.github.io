@@ -108,6 +108,46 @@
     transform: scale(1.1);
   }
 
+  /* Styles für das Klicker-Spiel */
+  #clicker-game {
+    background: #1a1a1a;
+    border: 2px solid #4caf50;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    margin: 20px auto;
+    color: #a6f1a6;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    box-shadow: 0 0 10px #4caf50;
+  }
+  #clicker-game h2 {
+    margin-top: 0;
+    color: #39ff14;
+  }
+  #clicker-game button {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    font-size: 18px;
+    padding: 12px 25px;
+    margin: 10px 5px 0 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  #clicker-game button:hover {
+    background-color: #36b636;
+  }
+  #score, #upgrade-cost {
+    font-size: 20px;
+    margin: 10px 0;
+  }
+  #upgrade-button:disabled {
+    background-color: #888;
+    cursor: not-allowed;
+  }
+
   footer {
     text-align: center;
     color: #00ff00;
@@ -135,6 +175,7 @@
   <button onclick="showSection('discord')">Discord</button>
   <button onclick="showSection('youtube')">YouTube</button>
   <button onclick="showSection('galerie')">Galerie</button>
+  <button onclick="showSection('clicker')">Holzfäller Klicker</button>
 </nav>
 
 <section id="startseite">
@@ -176,61 +217,19 @@
   </div>
 </section>
 
+<section id="clicker" style="display:none;">
+  <div id="clicker-game">
+    <h2>Holzfäller Klicker</h2>
+    <div id="score">Gefälltes Holz: 0</div>
+    <button id="click-wood">Holz fällen!</button>
+    <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
+    <button id="upgrade-button">Upgrade Holz pro Klick (+1)</button>
+  </div>
+</section>
+
 <footer>
   &copy; 2025 Minecraft Server Wezon1164
 </footer>
-</body>
-</html>
-
-<style>
-  /* Styles für das Klicker-Spiel */
-  #clicker-game {
-    background: #1a1a1a;
-    border: 2px solid #4caf50;
-    border-radius: 10px;
-    padding: 20px;
-    width: 300px;
-    margin: 20px auto;
-    color: #a6f1a6;
-    font-family: 'Minecraft', Arial, sans-serif;
-    text-align: center;
-    box-shadow: 0 0 10px #4caf50;
-  }
-  #clicker-game h2 {
-    margin-top: 0;
-    color: #39ff14;
-  }
-  #clicker-game button {
-    background-color: #4caf50;
-    border: none;
-    color: white;
-    font-size: 18px;
-    padding: 12px 25px;
-    margin: 10px 5px 0 5px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  #clicker-game button:hover {
-    background-color: #36b636;
-  }
-  #score, #upgrade-cost {
-    font-size: 20px;
-    margin: 10px 0;
-  }
-  #upgrade-button:disabled {
-    background-color: #888;
-    cursor: not-allowed;
-  }
-</style>
-
-<div id="clicker-game">
-  <h2>Holzfäller Klicker</h2>
-  <div id="score">Gefälltes Holz: 0</div>
-  <button id="click-wood">Holz fällen!</button>
-  <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
-  <button id="upgrade-button">Upgrade Holz pro Klick (+1)</button>
-</div>
 
 <script>
   let score = 0;
@@ -264,3 +263,5 @@
 
   updateUI();
 </script>
+</body>
+</html>
