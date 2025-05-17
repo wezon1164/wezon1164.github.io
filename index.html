@@ -2,10 +2,19 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Minecraft Server Wezon1164</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    :root {
+      --main-bg: #000;
+      --main-text: #0f0;
+      --card-bg: #111;
+      --highlight: #0f0;
+      --hover-bg: #004400;
+      --border-radius: 12px;
+    }
 
     * {
       box-sizing: border-box;
@@ -14,80 +23,82 @@
     body {
       margin: 0;
       font-family: 'Press Start 2P', cursive;
-      background-color: #000;
-      color: #fff;
-      text-shadow: 0 0 5px #00ff00;
+      background-color: var(--main-bg);
+      color: var(--main-text);
+      text-shadow: 0 0 5px var(--highlight);
     }
 
     header {
       background-color: #111;
       text-align: center;
-      padding: 25px;
-      font-size: 2em;
-      color: #00ff00;
-      text-shadow: 0 0 10px #00ff00;
+      padding: 30px 20px;
+      font-size: 1.5rem;
+      color: var(--highlight);
+      box-shadow: 0 0 15px var(--highlight);
     }
 
     nav {
       display: flex;
       justify-content: center;
-      background-color: #111;
+      gap: 12px;
       flex-wrap: wrap;
+      background-color: #111;
       padding: 15px;
-      gap: 10px;
     }
 
     nav button {
-      background-color: #003300;
-      border: 2px solid #00ff00;
+      background-color: #002200;
+      border: 2px solid var(--highlight);
       color: #aaffaa;
-      font-family: 'Press Start 2P', cursive;
+      padding: 12px 20px;
+      border-radius: var(--border-radius);
       cursor: pointer;
-      padding: 10px 18px;
-      border-radius: 8px;
-      transition: background-color 0.3s, color 0.3s;
+      font-family: inherit;
+      transition: all 0.3s ease;
     }
 
     nav button:hover {
-      background-color: #00ff00;
-      color: #003300;
+      background-color: var(--highlight);
+      color: #002200;
     }
 
     section {
       display: none;
+      padding: 25px;
       max-width: 900px;
       margin: 25px auto;
-      background: #111;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 0 15px #00ff00;
+      background-color: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: 0 0 15px var(--highlight);
     }
 
     section.active {
       display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     h2 {
-      color: #00ff00;
       text-align: center;
-      margin-bottom: 15px;
+      color: var(--highlight);
+      margin-bottom: 20px;
     }
 
     ul.rules {
-      list-style-type: disc;
-      margin-left: 25px;
-      font-size: 0.8em;
+      list-style: square;
+      margin-left: 30px;
+      font-size: 0.75rem;
+      line-height: 2;
       color: #ccffcc;
     }
 
-    ul.rules li {
-      margin-bottom: 12px;
-    }
-
     a {
-      color: #00ff00;
+      color: var(--highlight);
       text-decoration: none;
-      font-weight: bold;
     }
 
     a:hover {
@@ -97,76 +108,95 @@
     .gallery {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
       justify-content: center;
+      gap: 15px;
     }
 
     .gallery img {
-      width: 160px;
-      height: 160px;
+      width: 140px;
+      height: 140px;
       object-fit: cover;
-      border-radius: 12px;
-      border: 2px solid #00ff00;
-      box-shadow: 0 0 10px #00ff00;
-      transition: transform 0.3s;
+      border-radius: var(--border-radius);
+      border: 2px solid var(--highlight);
+      box-shadow: 0 0 10px var(--highlight);
+      transition: transform 0.3s ease;
       cursor: pointer;
-      background-color: #222;
     }
 
     .gallery img:hover {
       transform: scale(1.1);
     }
 
-    footer {
-      text-align: center;
-      color: #00ff00;
-      font-size: 0.7em;
-      margin: 20px 0;
-    }
-
-    /* Klicker-Spiel */
     #clicker-game {
-      background: #1a1a1a;
-      border: 2px solid #4caf50;
-      border-radius: 10px;
-      padding: 20px;
+      background: #111;
+      border: 2px solid var(--highlight);
+      border-radius: var(--border-radius);
+      padding: 25px;
+      margin: 30px auto;
       width: 300px;
-      margin: 20px auto;
-      color: #a6f1a6;
-      font-family: 'Press Start 2P', cursive;
       text-align: center;
-      box-shadow: 0 0 10px #4caf50;
-    }
-
-    #clicker-game h2 {
-      margin-top: 0;
-      color: #39ff14;
+      box-shadow: 0 0 15px var(--highlight);
     }
 
     #clicker-game button {
-      background-color: #4caf50;
+      background-color: var(--highlight);
       border: none;
-      color: white;
-      font-size: 14px;
+      color: #000;
+      font-family: inherit;
+      font-size: 12px;
       padding: 12px 20px;
-      margin: 10px 5px 0 5px;
       border-radius: 8px;
+      margin-top: 10px;
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
 
     #clicker-game button:hover {
-      background-color: #36b636;
-    }
-
-    #score, #upgrade-cost {
-      font-size: 14px;
-      margin: 10px 0;
+      background-color: #00cc00;
     }
 
     #upgrade-button:disabled {
-      background-color: #888;
+      background-color: #666;
       cursor: not-allowed;
+    }
+
+    .progress {
+      height: 15px;
+      background: #222;
+      border: 1px solid #0f0;
+      border-radius: 8px;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background-color: #0f0;
+      width: 0%;
+      transition: width 0.3s;
+    }
+
+    footer {
+      text-align: center;
+      color: #0f0;
+      font-size: 0.7rem;
+      margin: 40px 0;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .gallery img {
+        width: 100px;
+        height: 100px;
+      }
+
+      #clicker-game {
+        width: 90%;
+      }
     }
   </style>
 </head>
@@ -184,40 +214,39 @@
 
   <section id="startseite" class="active">
     <h2>Willkommen auf dem Server!</h2>
-    <p>Join uns und baue deine eigenen Welten in Minecraft.</p>
-    <p>Nutze das Menü oben, um mehr zu erfahren.</p>
+    <p>Trete unserer Community bei und erlebe spannende Abenteuer in Minecraft.</p>
   </section>
 
   <section id="regeln">
-    <h2>Regeln auf dem Server</h2>
+    <h2>Serverregeln</h2>
     <ul class="rules">
-      <li>Kein Griefing oder Hacken!</li>
-      <li>Sei respektvoll zu anderen Spielern.</li>
-      <li>Kein Spam oder Werbung.</li>
-      <li>Folge den Anweisungen der Admins.</li>
-      <li>Benutze deinen gesunden Menschenverstand.</li>
+      <li>Kein Griefing oder Hacken erlaubt</li>
+      <li>Respektiere alle Spieler</li>
+      <li>Kein Spam oder Eigenwerbung</li>
+      <li>Admin-Anweisungen befolgen</li>
+      <li>Nutze deinen gesunden Menschenverstand</li>
     </ul>
   </section>
 
   <section id="discord">
-    <h2>Discord Server Beitreten</h2>
-    <p>Hier kannst du unserem Discord Server beitreten:</p>
-    <p><a href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener noreferrer">Discord Server Link</a></p>
+    <h2>Discord Server</h2>
+    <p>Tritt unserer Community bei:</p>
+    <p><a href="https://discord.gg/xjpRj57cqJ" target="_blank">Discord beitreten</a></p>
   </section>
 
   <section id="youtube">
-    <h2>Besuche unseren YouTube Kanal</h2>
-    <p>Schau dir unsere Minecraft Videos an:</p>
-    <p><a href="https://www.youtube.com/@Wezon1164" target="_blank" rel="noopener noreferrer">Wezon1164 auf YouTube</a></p>
+    <h2>YouTube Kanal</h2>
+    <p>Schau dir unsere Videos an:</p>
+    <p><a href="https://www.youtube.com/@Wezon1164" target="_blank">YouTube besuchen</a></p>
   </section>
 
   <section id="galerie">
-    <h2>Minecraft Galerie</h2>
+    <h2>Galerie</h2>
     <div class="gallery">
-      <img src="https://crafatar.com/avatars/2da0f9b6-91b9-48cd-851e-03bca07a3c3c?size=160" alt="Technoblade" title="Technoblade" />
-      <img src="https://crafatar.com/avatars/dream?size=160" alt="Dream" title="Dream" />
-      <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" alt="Qauvis" title="Qauvis" />
-      <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" title="Creeper" style="background:#000; border-radius: 16px;" />
+      <img src="https://crafatar.com/avatars/2da0f9b6-91b9-48cd-851e-03bca07a3c3c?size=160" title="Technoblade" alt="Technoblade" />
+      <img src="https://crafatar.com/avatars/dream?size=160" title="Dream" alt="Dream" />
+      <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" title="Qauvis" alt="Qauvis" />
+      <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" title="Creeper" alt="Creeper" />
     </div>
   </section>
 
@@ -225,22 +254,19 @@
     <h2>Holzfäller Klicker</h2>
     <div id="score">Gefälltes Holz: 0</div>
     <button id="click-wood">Holz fällen!</button>
+    <div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
     <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
     <button id="upgrade-button">Upgrade Holz pro Klick (+1)</button>
   </div>
 
-  <footer>
-    &copy; 2025 Minecraft Server Wezon1164
-  </footer>
+  <footer>&copy; 2025 Minecraft Server Wezon1164</footer>
 
   <script>
     function showSection(id) {
-      document.querySelectorAll('section').forEach(section => {
-        section.classList.remove('active');
-      });
+      document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
       const target = document.getElementById(id);
       if (target) {
-        target.classList.add('active');
+        target.classList.add("active");
         window.scrollTo({ top: target.offsetTop - 60, behavior: 'smooth' });
       }
     }
@@ -248,22 +274,23 @@
     let score = 0;
     let woodPerClick = 1;
     let upgradeCost = 10;
+    const maxProgress = 1000;
 
-    const scoreDisplay = document.getElementById('score');
-    const upgradeCostDisplay = document.getElementById('upgrade-cost');
-    const upgradeButton = document.getElementById('upgrade-button');
-    const clickWoodButton = document.getElementById('click-wood');
+    const scoreDisplay = document.getElementById("score");
+    const upgradeCostDisplay = document.getElementById("upgrade-cost");
+    const upgradeButton = document.getElementById("upgrade-button");
+    const progressBar = document.getElementById("progress-bar");
 
-    clickWoodButton.addEventListener('click', () => {
+    document.getElementById("click-wood").addEventListener("click", () => {
       score += woodPerClick;
       updateUI();
     });
 
-    upgradeButton.addEventListener('click', () => {
+    upgradeButton.addEventListener("click", () => {
       if (score >= upgradeCost) {
         score -= upgradeCost;
         woodPerClick++;
-        upgradeCost = Math.floor(upgradeCost * 1.5);
+        upgradeCost = Math.floor(upgradeCost * 1.6);
         updateUI();
       }
     });
@@ -272,6 +299,9 @@
       scoreDisplay.textContent = `Gefälltes Holz: ${score}`;
       upgradeCostDisplay.textContent = `Upgrade kostet: ${upgradeCost} Holz`;
       upgradeButton.disabled = score < upgradeCost;
+
+      const progress = Math.min(score / maxProgress * 100, 100);
+      progressBar.style.width = progress + "%";
     }
 
     updateUI();
