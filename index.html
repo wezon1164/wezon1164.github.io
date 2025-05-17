@@ -1,5 +1,128 @@
-<!-- Klicker-Spiel -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Minecraft Server Wezon1164</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+  body {
+    margin: 0;
+    font-family: 'Press Start 2P', cursive;
+    background-color: #000000; /* schwarzer Hintergrund */
+    color: #ffffff; /* weißer Text */
+    text-shadow: 0 0 5px #00ff00;
+  }
+
+  header {
+    background-color: #111111;
+    text-align: center;
+    padding: 25px;
+    font-size: 2em;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    background-color: #111111;
+    padding: 15px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  nav button {
+    background-color: #003300;
+    border: 2px solid #00ff00;
+    color: #aaffaa;
+    font-family: 'Press Start 2P', cursive;
+    cursor: pointer;
+    padding: 10px 18px;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+    flex: 1 0 110px;
+    max-width: 150px;
+  }
+
+  nav button:hover {
+    background-color: #00ff00;
+    color: #003300;
+  }
+
+  section {
+    max-width: 900px;
+    margin: 25px auto;
+    background: #111111;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 15px #00ff00;
+  }
+
+  section:not(:first-of-type) {
+    display: none;
+  }
+
+  h2 {
+    color: #00ff00;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  ul.rules {
+    list-style-type: disc;
+    margin-left: 25px;
+    font-size: 0.8em;
+    color: #ccffcc;
+  }
+
+  ul.rules li {
+    margin-bottom: 12px;
+  }
+
+  a {
+    color: #00ff00;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Galerie für Bilder */
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .gallery img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 10px #00ff00;
+    transition: transform 0.3s;
+    cursor: pointer;
+    background-color: #222;
+  }
+
+  .gallery img:hover {
+    transform: scale(1.1);
+  }
+
+  footer {
+    text-align: center;
+    color: #00ff00;
+    font-size: 0.7em;
+    margin: 20px 0;
+  }
+
+  /* Styles für das Klicker-Spiel */
   #clicker-game {
     background: #1a1a1a;
     border: 2px solid #4caf50;
@@ -41,31 +164,36 @@
     user-select: none;
   }
 </style>
-
-<div id="clicker-game">
-  <h2>Holzfäller Klicker</h2>
-  <div id="score">Gefälltes Holz: 0</div>
-  <button id="click-wood">Holz fällen!</button>
-  <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
-  <button id="upgrade-button" disabled>Upgrade Holz pro Klick (+1)</button>
-</div>
-
 <script>
-  (() => {
-    let score = 0;
-    let woodPerClick = 1;
-    let upgradeCost = 10;
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(sec => {
+      sec.style.display = 'none';
+    });
+    document.getElementById(id).style.display = 'block';
+  }
+  window.onload = () => {
+    showSection('startseite');
+    updateUI(); // Klicker UI initialisieren
+  };
 
+  // Klicker-Spiel Variablen & Funktionen
+  let score = 0;
+  let woodPerClick = 1;
+  let upgradeCost = 10;
+
+  function updateUI() {
     const scoreDisplay = document.getElementById('score');
     const upgradeCostDisplay = document.getElementById('upgrade-cost');
     const upgradeButton = document.getElementById('upgrade-button');
-    const clickWoodButton = document.getElementById('click-wood');
 
-    function updateUI() {
-      scoreDisplay.textContent = `Gefälltes Holz: ${score}`;
-      upgradeCostDisplay.textContent = `Upgrade kostet: ${upgradeCost} Holz`;
-      upgradeButton.disabled = score < upgradeCost;
-    }
+    scoreDisplay.textContent = `Gefälltes Holz: ${score}`;
+    upgradeCostDisplay.textContent = `Upgrade kostet: ${upgradeCost} Holz`;
+    upgradeButton.disabled = score < upgradeCost;
+  }
+
+  function setupClicker() {
+    const clickWoodButton = document.getElementById('click-wood');
+    const upgradeButton = document.getElementById('upgrade-button');
 
     clickWoodButton.addEventListener('click', () => {
       score += woodPerClick;
@@ -80,8 +208,71 @@
         updateUI();
       }
     });
-
-    // Initial UI Update
-    updateUI();
-  })();
+  }
 </script>
+</head>
+<body onload="setupClicker()">
+<header>Minecraft Server Wezon1164</header>
+<nav>
+  <button onclick="showSection('startseite')">Startseite</button>
+  <button onclick="showSection('regeln')">Regeln</button>
+  <button onclick="showSection('discord')">Discord</button>
+  <button onclick="showSection('youtube')">YouTube</button>
+  <button onclick="showSection('galerie')">Galerie</button>
+  <button onclick="showSection('clicker')">Klicker-Spiel</button>
+</nav>
+
+<section id="startseite">
+  <h2>Willkommen auf dem Server!</h2>
+  <p>Join uns und baue deine eigenen Welten in Minecraft.</p>
+  <p>Nutze das Menü oben, um mehr zu erfahren.</p>
+</section>
+
+<section id="regeln">
+  <h2>Regeln auf dem Server</h2>
+  <ul class="rules">
+    <li>Kein Griefing oder Hacken!</li>
+    <li>Sei respektvoll zu anderen Spielern.</li>
+    <li>Kein Spam oder Werbung.</li>
+    <li>Folge den Anweisungen der Admins.</li>
+    <li>Benutze deinen gesunden Menschenverstand.</li>
+  </ul>
+</section>
+
+<section id="discord">
+  <h2>Discord Server Beitreten</h2>
+  <p>Hier kannst du unserem Discord Server beitreten:</p>
+  <p><a href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener noreferrer">Discord Server Link</a></p>
+</section>
+
+<section id="youtube">
+  <h2>Besuche unseren YouTube Kanal</h2>
+  <p>Schau dir unsere Minecraft Videos an:</p>
+  <p><a href="https://www.youtube.com/@Wezon1164" target="_blank" rel="noopener noreferrer">Wezon1164 auf YouTube</a></p>
+</section>
+
+<section id="galerie">
+  <h2>Minecraft Galerie</h2>
+  <div class="gallery">
+    <img src="https://crafatar.com/avatars/2da0f9b6-91b9-48cd-851e-03bca07a3c3c?size=160" alt="Technoblade" title="Technoblade" />
+    <img src="https://crafatar.com/avatars/dream?size=160" alt="Dream" title="Dream" />
+    <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" alt="Qauvis" title="Qauvis" />
+    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" title="Creeper" style="background:#000; border-radius: 16px;"/>
+  </div>
+</section>
+
+<section id="clicker">
+  <div id="clicker-game">
+    <h2>Holzfäller Klicker</h2>
+    <div id="score">Gefälltes Holz: 0</div>
+    <button id="click-wood">Holz fällen!</button>
+    <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
+    <button id="upgrade-button" disabled>Upgrade Holz pro Klick (+1)</button>
+  </div>
+</section>
+
+<footer>
+  &copy; 2025 Minecraft Server Wezon1164
+</footer>
+</body>
+</html>
