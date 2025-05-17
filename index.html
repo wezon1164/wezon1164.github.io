@@ -9,12 +9,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
   
   <style>
-    /* Grundlayout */
     body {
       margin: 0;
       font-family: 'Press Start 2P', cursive;
-      background-color: #1d1d1d;
-      background-image: url('https://i.imgur.com/7QH14bV.png'); /* Minecraft Holztextur */
+      background-color: #3a5a40;
+      background-image: url('https://i.imgur.com/5zH3Pe3.png'); /* Minecraft Gras-Textur */
       background-repeat: repeat;
       color: #d0f0c0;
       text-shadow: 0 0 5px #056608;
@@ -74,16 +73,18 @@
     main {
       max-width: 900px;
       margin: 30px auto;
+      padding: 0 15px;
+    }
+
+    section {
+      display: none;
       background: #2e2e2ecc;
       border: 5px solid #4caf50;
       border-radius: 12px;
       padding: 30px;
       box-shadow: 0 0 25px #1b5e20;
       color: #dcedc8;
-    }
-
-    section {
-      display: none;
+      margin-bottom: 30px;
     }
 
     section.active {
@@ -108,7 +109,7 @@
     }
 
     ul.rules {
-      list-style-image: url('https://i.imgur.com/W7wlO7J.png'); /* Minecraft Blatt-Icon */
+      list-style-image: url('https://i.imgur.com/W7wlO7J.png');
       padding-left: 30px;
     }
 
@@ -127,7 +128,6 @@
       text-decoration: underline;
     }
 
-    /* Galerie */
     .gallery {
       display: flex;
       flex-wrap: wrap;
@@ -152,7 +152,6 @@
       box-shadow: 0 0 35px #81c784;
     }
 
-    /* Klicker-Spiel */
     #clicker-game {
       max-width: 400px;
       margin: 0 auto;
@@ -209,6 +208,17 @@
       text-shadow: 0 0 5px #000000cc;
     }
 
+    /* Neue Box für zusätzliche Infos */
+    .info-box {
+      background: #154907dd;
+      border: 3px solid #4caf50;
+      border-radius: 10px;
+      padding: 15px 20px;
+      margin-top: 25px;
+      box-shadow: 0 0 15px #1b5e20cc;
+      font-size: 0.9rem;
+    }
+
     footer {
       text-align: center;
       color: #8bc34a;
@@ -219,7 +229,6 @@
   </style>
 
   <script>
-    // Zeige die ausgewählte Sektion, verstecke den Rest
     function showSection(id) {
       document.querySelectorAll('section').forEach(sec => {
         sec.classList.remove('active');
@@ -227,7 +236,6 @@
       document.getElementById(id).classList.add('active');
     }
 
-    // Klicker-Spiel-Logik
     let score = 0;
     let woodPerClick = 1;
     let upgradeCost = 10;
@@ -278,6 +286,13 @@
       <h2>Willkommen auf dem Server!</h2>
       <p>Baue, entdecke und kämpfe in deiner eigenen Minecraft-Welt!</p>
       <p>Benutze das Menü oben, um mehr zu erfahren und loszulegen.</p>
+
+      <div class="info-box">
+        <strong>Neuigkeiten:</strong><br>
+        - Bald kommt ein spannendes Event!<br>
+        - Der Server ist rund um die Uhr online.<br>
+        - Lade deine Freunde ein und baut gemeinsam!
+      </div>
     </section>
 
     <section id="regeln">
@@ -289,18 +304,36 @@
         <li>Folge den Anweisungen der Admins</li>
         <li>Verhalte dich fair und freundlich</li>
       </ul>
+
+      <div class="info-box">
+        <strong>Wichtig:</strong><br>
+        Bei Regelverstößen droht ein Bann.<br>
+        Sei ein guter Teil der Community!
+      </div>
     </section>
 
     <section id="discord">
       <h2>Discord Server</h2>
       <p>Tritt unserem Discord bei, um mit anderen Spielern zu chatten und Infos zu bekommen:</p>
       <p><a href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener noreferrer">Discord Server Link</a></p>
+
+      <div class="info-box">
+        <strong>Discord Tipps:</strong><br>
+        - Nutze die Kanäle für Spielersuche.<br>
+        - Melde Bugs im Support-Kanal.<br>
+        - Erhalte News & Events direkt.
+      </div>
     </section>
 
     <section id="youtube">
       <h2>YouTube Kanal</h2>
       <p>Sieh dir unsere spannenden Minecraft-Videos an:</p>
       <p><a href="https://www.youtube.com/@Wezon1164" target="_blank" rel="noopener noreferrer">Wezon1164 auf YouTube</a></p>
+
+      <div class="info-box">
+        <strong>Highlight:</strong><br>
+        Abonniere für Tutorials, Let's Plays und Server-News!
+      </div>
     </section>
 
     <section id="galerie">
@@ -311,6 +344,12 @@
         <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" alt="Qauvis" title="Qauvis" />
         <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" title="Creeper" style="background:#000; border-radius: 12px;" />
       </div>
+
+      <div class="info-box">
+        <strong>Galerie Infos:</strong><br>
+        Klicke auf Bilder für Details.<br>
+        Eigene Screenshots können bald hochgeladen werden!
+      </div>
     </section>
 
     <section id="clicker">
@@ -320,6 +359,13 @@
         <button id="click-wood">Holz fällen!</button>
         <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
         <button id="upgrade-button" disabled>Upgrade Holz pro Klick (+1)</button>
+
+        <div class="info-box" style="margin-top:20px;">
+          <strong>Spiel-Tipps:</strong><br>
+          Sammle so viel Holz wie möglich.<br>
+          Upgrade für mehr Holz pro Klick.<br>
+          Viel Spaß beim Klickern!
+        </div>
       </div>
     </section>
   </main>
