@@ -6,6 +6,7 @@
 <title>Minecraft Server Wezon1164</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
   body {
     margin: 0;
     font-family: 'Press Start 2P', cursive;
@@ -103,7 +104,7 @@
     margin: 20px 0;
   }
 
-  /* Klicker-Spiel Styles */
+  /* Holzfäller Klicker */
   #clicker-game {
     background: #1a1a1a;
     border: 2px solid #4caf50;
@@ -131,7 +132,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  #clicker-game button:hover {
+  #clicker-game button:hover:not(:disabled) {
     background-color: #36b636;
   }
   #score, #upgrade-cost {
@@ -143,8 +144,8 @@
     cursor: not-allowed;
   }
 
-  /* Tom & Jerry Spiel Styles */
-  #tomjerry-game {
+  /* Tom & Jerry Spiel */
+  #tomjerry {
     background: #111;
     border: 2px solid #00ff00;
     border-radius: 12px;
@@ -159,6 +160,15 @@
     height: 400px;
     overflow: hidden;
   }
+  #tomjerry-game {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    border: 1px solid #00ff00;
+    border-radius: 10px;
+    margin-top: 10px;
+    background-color: #003300;
+  }
   #tom {
     position: absolute;
     width: 60px;
@@ -167,6 +177,7 @@
     top: 50%;
     left: 10%;
     transform: translate(-50%, -50%);
+    user-select: none;
   }
   #jerry {
     position: absolute;
@@ -176,6 +187,7 @@
     top: 50%;
     left: 80%;
     transform: translate(-50%, -50%);
+    user-select: none;
   }
   #score-tj {
     font-size: 18px;
@@ -187,7 +199,7 @@
   }
 </style>
 <script>
-  // Sektionen anzeigen
+  // Menü Sektionen wechseln
   function showSection(id) {
     document.querySelectorAll('section').forEach(sec => {
       sec.classList.remove('active');
@@ -195,11 +207,14 @@
     document.getElementById(id).classList.add('active');
   }
 
+  // Beim Laden Startseite anzeigen
   window.onload = () => {
     showSection('startseite');
+    initClicker();
+    initTomJerry();
   };
 
-  // Klicker-Spiel Logik
+  // ===== Holzfäller Klicker Spiel =====
   let score = 0;
   let woodPerClick = 1;
   let upgradeCost = 10;
@@ -211,11 +226,15 @@
   }
 
   function initClicker() {
-    document.getElementById('click-wood').addEventListener('click', () => {
+    const clickWoodBtn = document.getElementById('click-wood');
+    const upgradeBtn = document.getElementById('upgrade-button');
+
+    clickWoodBtn.addEventListener('click', () => {
       score += woodPerClick;
       updateClickerUI();
     });
-    document.getElementById('upgrade-button').addEventListener('click', () => {
+
+    upgradeBtn.addEventListener('click', () => {
       if(score >= upgradeCost) {
         score -= upgradeCost;
         woodPerClick++;
@@ -223,15 +242,21 @@
         updateClickerUI();
       }
     });
+
     updateClickerUI();
   }
 
-  // Tom & Jerry Spiel Logik
+  // ===== Tom & Jerry Spiel =====
   let tom, jerry, tjGame, tjScore;
-  let tomPos = {x: 10, y: 50};
+  let tomPos = {x: 10, y: 50};  // Prozentwerte für Position
   let jerryPos = {x: 80, y: 50};
   let scoreTJ = 0;
   let gameInterval;
+
+  // Hilfsfunktion, ob Tom & Jerry Spiel sichtbar ist
+  function isTomJerryVisible() {
+    return document.getElementById('tomjerry').classList.contains('active');
+  }
 
   function initTomJerry() {
     tom = document.getElementById('tom');
@@ -239,27 +264,41 @@
     tjGame = document.getElementById('tomjerry-game');
     tjScore = document.getElementById('score-tj');
 
+    // Tom mit Pfeiltasten bewegen
     document.addEventListener('keydown', (e) => {
-      // Tom bewegen mit Pfeiltasten
-      const step = 5;
-      if(!tjGame.classList.contains('active')) return; // nur aktiv, wenn sichtbar
+      if(!isTomJerryVisible()) return;
 
-      if(e.key === 'ArrowUp') tomPos.y = Math.max(0, tomPos.y - step);
-      if(e.key === 'ArrowDown') tomPos.y = Math.min(100, tomPos.y + step);
-      if(e.key === 'ArrowLeft') tomPos.x = Math.max(0, tomPos.x - step);
-      if(e.key === 'ArrowRight') tomPos.x = Math.min(100, tomPos.x + step);
+      const step = 5;
+      switch(e.key) {
+        case 'ArrowUp':
+          tomPos.y = Math.max(0, tomPos.y - step);
+          break;
+        case 'ArrowDown':
+          tomPos.y = Math.min(100, tomPos.y + step);
+          break;
+        case 'ArrowLeft':
+          tomPos.x = Math.max(0, tomPos.x - step);
+          break;
+        case 'ArrowRight':
+          tomPos.x = Math.min(100, tomPos.x + step);
+          break;
+        default:
+          return; // andere Tasten ignorieren
+      }
       updateTomJerryPositions();
       checkCatch();
     });
 
-    // Jerry bewegt sich zufällig alle 500ms
+    // Jerry bewegt sich zufällig alle 500ms, wenn Spiel sichtbar
     gameInterval = setInterval(() => {
-      if(!tjGame.classList.contains('active')) return;
+      if(!isTomJerryVisible()) return;
       jerryPos.x = Math.random() * 90 + 5;
       jerryPos.y = Math.random() * 90 + 5;
       updateTomJerryPositions();
       checkCatch();
     }, 500);
+
+    updateTomJerryPositions();
   }
 
   function updateTomJerryPositions() {
@@ -270,23 +309,19 @@
   }
 
   function checkCatch() {
-    const dx = (tomPos.x - jerryPos.x) * 6;  // Verhältnis anpassen wegen % und px
+    // Abstand (proportional zu % Position)
+    const dx = (tomPos.x - jerryPos.x) * 6;  // wegen relativer Position + Größe
     const dy = (tomPos.y - jerryPos.y) * 4;
     const dist = Math.sqrt(dx*dx + dy*dy);
-    if(dist < 30) {  // wenn Tom nahe genug bei Jerry
+    if(dist < 30) {
       scoreTJ++;
       tjScore.textContent = 'Jerry gefangen: ' + scoreTJ;
-      // Jerry woanders platzieren
+      // Jerry neu positionieren
       jerryPos.x = Math.random() * 90 + 5;
       jerryPos.y = Math.random() * 90 + 5;
       updateTomJerryPositions();
     }
   }
-
-  window.addEventListener('load', () => {
-    initClicker();
-    initTomJerry();
-  });
 </script>
 </head>
 <body>
@@ -326,4 +361,42 @@
 
 <section id="youtube">
   <h2>Besuche unseren YouTube Kanal</h2>
-  <p>Schau dir unsere Minecraft Videos an
+  <p>Schau dir unsere Minecraft Videos an.</p>
+</section>
+
+<section id="galerie">
+  <h2>Galerie</h2>
+  <div class="gallery">
+    <img src="https://minecraftskinstealer.com/achievement/22/Hello%20World!/Wezon1164" alt="Skin 1" />
+    <img src="https://minecraftskinstealer.com/achievement/21/Amazing%20Build!/Wezon1164" alt="Skin 2" />
+    <img src="https://minecraftskinstealer.com/achievement/20/Survival%20Master!/Wezon1164" alt="Skin 3" />
+  </div>
+</section>
+
+<section id="clicker">
+  <h2>Holzfäller Klicker Spiel</h2>
+  <div id="clicker-game">
+    <div id="score">Gefälltes Holz: 0</div>
+    <button id="click-wood">Holz fällen</button><br />
+    <button id="upgrade-button">Upgrade kaufen</button>
+    <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
+  </div>
+</section>
+
+<section id="tomjerry">
+  <h2>Tom & Jerry Fangspiel</h2>
+  <div id="tomjerry-game">
+    <div id="tom" draggable="false"></div>
+    <div id="jerry" draggable="false"></div>
+  </div>
+  <div id="score-tj">Jerry gefangen: 0</div>
+  <div id="instructions">
+    Steuerung: Benutze die Pfeiltasten, um Tom zu bewegen und versuche Jerry zu fangen!
+  </div>
+</section>
+
+<footer>
+  &copy; 2025 Minecraft Server Wezon1164
+</footer>
+</body>
+</html>
