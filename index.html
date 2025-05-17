@@ -6,15 +6,13 @@
 <title>Minecraft Server Wezon1164</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-  
   body {
     margin: 0;
     font-family: 'Press Start 2P', cursive;
-    background-color: #000000; /* schwarzer Hintergrund */
-    color: #ffffff; /* weißer Text */
+    background-color: #000000;
+    color: #ffffff;
     text-shadow: 0 0 5px #00ff00;
   }
-
   header {
     background-color: #111111;
     text-align: center;
@@ -23,14 +21,12 @@
     color: #00ff00;
     text-shadow: 0 0 10px #00ff00;
   }
-
   nav {
     display: flex;
     justify-content: center;
     background-color: #111111;
     padding: 15px;
   }
-
   nav button {
     background-color: #003300;
     border: 2px solid #00ff00;
@@ -42,14 +38,10 @@
     border-radius: 8px;
     transition: background-color 0.3s, color 0.3s;
   }
-
-  nav button:hover,
-  nav button:focus {
+  nav button:hover {
     background-color: #00ff00;
     color: #003300;
-    outline: none;
   }
-
   section {
     max-width: 900px;
     margin: 25px auto;
@@ -59,48 +51,37 @@
     box-shadow: 0 0 15px #00ff00;
     display: none;
   }
-
   section.active {
     display: block;
   }
-
   h2 {
     color: #00ff00;
     text-align: center;
     margin-bottom: 15px;
   }
-
   ul.rules {
     list-style-type: disc;
     margin-left: 25px;
     font-size: 0.8em;
     color: #ccffcc;
   }
-
   ul.rules li {
     margin-bottom: 12px;
   }
-
   a {
     color: #00ff00;
     text-decoration: none;
     font-weight: bold;
   }
-
-  a:hover,
-  a:focus {
+  a:hover {
     text-decoration: underline;
-    outline: none;
   }
-
-  /* Galerie für Bilder */
   .gallery {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
     justify-content: center;
   }
-
   .gallery img {
     width: 160px;
     height: 160px;
@@ -112,13 +93,9 @@
     cursor: pointer;
     background-color: #222;
   }
-
-  .gallery img:hover,
-  .gallery img:focus {
+  .gallery img:hover {
     transform: scale(1.1);
-    outline: none;
   }
-
   footer {
     text-align: center;
     color: #00ff00;
@@ -132,14 +109,14 @@
     border: 2px solid #4caf50;
     border-radius: 10px;
     padding: 20px;
-    width: 320px;
-    margin: 20px auto 0 auto;
+    width: 300px;
+    margin: 20px auto;
     color: #a6f1a6;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Minecraft', Arial, sans-serif;
     text-align: center;
-    box-shadow: 0 0 15px #4caf50;
+    box-shadow: 0 0 10px #4caf50;
   }
-  #clicker-game h3 {
+  #clicker-game h2 {
     margin-top: 0;
     color: #39ff14;
   }
@@ -154,10 +131,8 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  #clicker-game button:hover,
-  #clicker-game button:focus {
+  #clicker-game button:hover {
     background-color: #36b636;
-    outline: none;
   }
   #score, #upgrade-cost {
     font-size: 20px;
@@ -168,24 +143,51 @@
     cursor: not-allowed;
   }
 
-  /* Responsive */
-  @media (max-width: 400px) {
-    #clicker-game {
-      width: 90%;
-      padding: 15px;
-    }
-    nav {
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    nav button {
-      margin: 6px 6px;
-      padding: 8px 14px;
-      font-size: 0.7em;
-    }
+  /* Tom & Jerry Spiel Styles */
+  #tomjerry-game {
+    background: #111;
+    border: 2px solid #00ff00;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+    color: #00ff00;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    box-shadow: 0 0 15px #00ff00;
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+  }
+  #tom {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: url('https://i.imgur.com/ld4Ho9L.png') no-repeat center/contain;
+    top: 50%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+  }
+  #jerry {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: url('https://i.imgur.com/63qCpWJ.png') no-repeat center/contain;
+    top: 50%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+  }
+  #score-tj {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  #instructions {
+    font-size: 14px;
+    margin-top: 15px;
   }
 </style>
 <script>
+  // Sektionen anzeigen
   function showSection(id) {
     document.querySelectorAll('section').forEach(sec => {
       sec.classList.remove('active');
@@ -195,34 +197,117 @@
 
   window.onload = () => {
     showSection('startseite');
+  };
+
+  // Klicker-Spiel Logik
+  let score = 0;
+  let woodPerClick = 1;
+  let upgradeCost = 10;
+
+  function updateClickerUI() {
+    document.getElementById('score').textContent = `Gefälltes Holz: ${score}`;
+    document.getElementById('upgrade-cost').textContent = `Upgrade kostet: ${upgradeCost} Holz`;
+    document.getElementById('upgrade-button').disabled = score < upgradeCost;
   }
+
+  function initClicker() {
+    document.getElementById('click-wood').addEventListener('click', () => {
+      score += woodPerClick;
+      updateClickerUI();
+    });
+    document.getElementById('upgrade-button').addEventListener('click', () => {
+      if(score >= upgradeCost) {
+        score -= upgradeCost;
+        woodPerClick++;
+        upgradeCost = Math.floor(upgradeCost * 1.5);
+        updateClickerUI();
+      }
+    });
+    updateClickerUI();
+  }
+
+  // Tom & Jerry Spiel Logik
+  let tom, jerry, tjGame, tjScore;
+  let tomPos = {x: 10, y: 50};
+  let jerryPos = {x: 80, y: 50};
+  let scoreTJ = 0;
+  let gameInterval;
+
+  function initTomJerry() {
+    tom = document.getElementById('tom');
+    jerry = document.getElementById('jerry');
+    tjGame = document.getElementById('tomjerry-game');
+    tjScore = document.getElementById('score-tj');
+
+    document.addEventListener('keydown', (e) => {
+      // Tom bewegen mit Pfeiltasten
+      const step = 5;
+      if(!tjGame.classList.contains('active')) return; // nur aktiv, wenn sichtbar
+
+      if(e.key === 'ArrowUp') tomPos.y = Math.max(0, tomPos.y - step);
+      if(e.key === 'ArrowDown') tomPos.y = Math.min(100, tomPos.y + step);
+      if(e.key === 'ArrowLeft') tomPos.x = Math.max(0, tomPos.x - step);
+      if(e.key === 'ArrowRight') tomPos.x = Math.min(100, tomPos.x + step);
+      updateTomJerryPositions();
+      checkCatch();
+    });
+
+    // Jerry bewegt sich zufällig alle 500ms
+    gameInterval = setInterval(() => {
+      if(!tjGame.classList.contains('active')) return;
+      jerryPos.x = Math.random() * 90 + 5;
+      jerryPos.y = Math.random() * 90 + 5;
+      updateTomJerryPositions();
+      checkCatch();
+    }, 500);
+  }
+
+  function updateTomJerryPositions() {
+    tom.style.left = tomPos.x + '%';
+    tom.style.top = tomPos.y + '%';
+    jerry.style.left = jerryPos.x + '%';
+    jerry.style.top = jerryPos.y + '%';
+  }
+
+  function checkCatch() {
+    const dx = (tomPos.x - jerryPos.x) * 6;  // Verhältnis anpassen wegen % und px
+    const dy = (tomPos.y - jerryPos.y) * 4;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    if(dist < 30) {  // wenn Tom nahe genug bei Jerry
+      scoreTJ++;
+      tjScore.textContent = 'Jerry gefangen: ' + scoreTJ;
+      // Jerry woanders platzieren
+      jerryPos.x = Math.random() * 90 + 5;
+      jerryPos.y = Math.random() * 90 + 5;
+      updateTomJerryPositions();
+    }
+  }
+
+  window.addEventListener('load', () => {
+    initClicker();
+    initTomJerry();
+  });
 </script>
 </head>
 <body>
 <header>Minecraft Server Wezon1164</header>
 <nav>
-  <button onclick="showSection('startseite')" aria-controls="startseite" aria-selected="true">Startseite</button>
-  <button onclick="showSection('regeln')" aria-controls="regeln">Regeln</button>
-  <button onclick="showSection('discord')" aria-controls="discord">Discord</button>
-  <button onclick="showSection('youtube')" aria-controls="youtube">YouTube</button>
-  <button onclick="showSection('galerie')" aria-controls="galerie">Galerie</button>
+  <button onclick="showSection('startseite')">Startseite</button>
+  <button onclick="showSection('regeln')">Regeln</button>
+  <button onclick="showSection('discord')">Discord</button>
+  <button onclick="showSection('youtube')">YouTube</button>
+  <button onclick="showSection('galerie')">Galerie</button>
+  <button onclick="showSection('clicker')">Holzfäller Klicker</button>
+  <button onclick="showSection('tomjerry')">Tom & Jerry Spiel</button>
 </nav>
 
-<section id="startseite" class="active" tabindex="0">
+<section id="startseite" class="active">
   <h2>Willkommen auf dem Server!</h2>
   <p>Join uns und baue deine eigenen Welten in Minecraft.</p>
   <p>Nutze das Menü oben, um mehr zu erfahren.</p>
-
-  <div id="clicker-game" aria-label="Holzfäller Klicker Spiel">
-    <h3>Holzfäller Klicker</h3>
-    <div id="score" aria-live="polite">Gefälltes Holz: 0</div>
-    <button id="click-wood" aria-describedby="score">Holz fällen!</button>
-    <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
-    <button id="upgrade-button" disabled>Upgrade Holz pro Klick (+1)</button>
-  </div>
 </section>
 
-<section id="regeln" tabindex="0">
+<section id="regeln">
   <h2>Regeln auf dem Server</h2>
   <ul class="rules">
     <li>Kein Griefing oder Hacken!</li>
@@ -233,64 +318,12 @@
   </ul>
 </section>
 
-<section id="discord" tabindex="0">
+<section id="discord">
   <h2>Discord Server Beitreten</h2>
   <p>Hier kannst du unserem Discord Server beitreten:</p>
   <p><a href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener noreferrer">Discord Server Link</a></p>
 </section>
 
-<section id="youtube" tabindex="0">
+<section id="youtube">
   <h2>Besuche unseren YouTube Kanal</h2>
-  <p>Schau dir unsere Minecraft Videos an:</p>
-  <p><a href="https://www.youtube.com/@Wezon1164" target="_blank" rel="noopener noreferrer">Wezon1164 auf YouTube</a></p>
-</section>
-
-<section id="galerie" tabindex="0">
-  <h2>Minecraft Galerie</h2>
-  <div class="gallery">
-    <img src="https://crafatar.com/avatars/2da0f9b6-91b9-48cd-851e-03bca07a3c3c?size=160" alt="Technoblade" title="Technoblade" tabindex="0" />
-    <img src="https://crafatar.com/avatars/dream?size=160" alt="Dream" title="Dream" tabindex="0" />
-    <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" alt="Qauvis" title="Qauvis" tabindex="0" />
-    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" title="Creeper" style="background:#000; border-radius: 16px;" tabindex="0" />
-  </div>
-</section>
-
-<footer>
-  &copy; 2025 Minecraft Server Wezon1164
-</footer>
-
-<script>
-  // Klicker-Spiel Logik
-  let score = 0;
-  let woodPerClick = 1;
-  let upgradeCost = 10;
-
-  const scoreDisplay = document.getElementById('score');
-  const upgradeCostDisplay = document.getElementById('upgrade-cost');
-  const upgradeButton = document.getElementById('upgrade-button');
-  const clickWoodButton = document.getElementById('click-wood');
-
-  clickWoodButton.addEventListener('click', () => {
-    score += woodPerClick;
-    updateUI();
-  });
-
-  upgradeButton.addEventListener('click', () => {
-    if (score >= upgradeCost) {
-      score -= upgradeCost;
-      woodPerClick++;
-      upgradeCost = Math.floor(upgradeCost * 1.5);
-      updateUI();
-    }
-  });
-
-  function updateUI() {
-    scoreDisplay.textContent = `Gefälltes Holz: ${score}`;
-    upgradeCostDisplay.textContent = `Upgrade kostet: ${upgradeCost} Holz`;
-    upgradeButton.disabled = score < upgradeCost;
-  }
-
-  updateUI();
-</script>
-</body>
-</html>
+  <p>Schau dir unsere Minecraft Videos an
