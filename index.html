@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+
+    Das <!DOCTYPE html>
+
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -7,197 +9,200 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-    :root {
-      --main-bg: #000;
-      --main-text: #0f0;
-      --card-bg: #111;
-      --highlight: #0f0;
-      --hover-bg: #004400;
-      --border-radius: 12px;
-    }
+```
+:root {
+  --main-bg: #000;
+  --main-text: #0f0;
+  --card-bg: #111;
+  --highlight: #0f0;
+  --hover-bg: #004400;
+  --border-radius: 12px;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      font-family: 'Press Start 2P', cursive;
-      background-color: var(--main-bg);
-      color: var(--main-text);
-      text-shadow: 0 0 5px var(--highlight);
-    }
+body {
+  margin: 0;
+  font-family: 'Press Start 2P', cursive;
+  background-color: var(--main-bg);
+  color: var(--main-text);
+  text-shadow: 0 0 5px var(--highlight);
+}
 
-    header {
-      background-color: #111;
-      text-align: center;
-      padding: 30px 20px;
-      font-size: 1.5rem;
-      color: var(--highlight);
-      box-shadow: 0 0 15px var(--highlight);
-    }
+header {
+  background-color: #111;
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 1.5rem;
+  color: var(--highlight);
+  box-shadow: 0 0 15px var(--highlight);
+}
 
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      background-color: #111;
-      padding: 15px;
-    }
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  background-color: #111;
+  padding: 15px;
+}
 
-    nav button {
-      background-color: #002200;
-      border: 2px solid var(--highlight);
-      color: #aaffaa;
-      padding: 12px 20px;
-      border-radius: var(--border-radius);
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.3s ease;
-    }
+nav button {
+  background-color: #002200;
+  border: 2px solid var(--highlight);
+  color: #aaffaa;
+  padding: 12px 20px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
 
-    nav button:hover {
-      background-color: var(--highlight);
-      color: #002200;
-    }
+nav button:hover {
+  background-color: var(--highlight);
+  color: #002200;
+}
 
-    section {
-      display: none;
-      padding: 25px;
-      max-width: 900px;
-      margin: 25px auto;
-      background-color: var(--card-bg);
-      border-radius: var(--border-radius);
-      box-shadow: 0 0 15px var(--highlight);
-    }
+section {
+  display: none;
+  padding: 25px;
+  max-width: 900px;
+  margin: 25px auto;
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 15px var(--highlight);
+}
 
-    section.active {
-      display: block;
-      animation: fadeIn 0.5s ease;
-    }
+section.active {
+  display: block;
+  animation: fadeIn 0.5s ease;
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    h2 {
-      text-align: center;
-      color: var(--highlight);
-      margin-bottom: 20px;
-    }
+h2 {
+  text-align: center;
+  color: var(--highlight);
+  margin-bottom: 20px;
+}
 
-    ul.rules {
-      list-style: square;
-      margin-left: 30px;
-      font-size: 0.75rem;
-      line-height: 2;
-      color: #ccffcc;
-    }
+ul.rules {
+  list-style: square;
+  margin-left: 30px;
+  font-size: 0.75rem;
+  line-height: 2;
+  color: #ccffcc;
+}
 
-    a {
-      color: var(--highlight);
-      text-decoration: none;
-    }
+a {
+  color: var(--highlight);
+  text-decoration: none;
+}
 
-    a:hover {
-      text-decoration: underline;
-    }
+a:hover {
+  text-decoration: underline;
+}
 
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-    }
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
 
-    .gallery img {
-      width: 140px;
-      height: 140px;
-      object-fit: cover;
-      border-radius: var(--border-radius);
-      border: 2px solid var(--highlight);
-      box-shadow: 0 0 10px var(--highlight);
-      transition: transform 0.3s ease;
-      cursor: pointer;
-    }
+.gallery img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--highlight);
+  box-shadow: 0 0 10px var(--highlight);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
 
-    .gallery img:hover {
-      transform: scale(1.1);
-    }
+.gallery img:hover {
+  transform: scale(1.1);
+}
 
-    #clicker-game {
-      background: #111;
-      border: 2px solid var(--highlight);
-      border-radius: var(--border-radius);
-      padding: 25px;
-      margin: 30px auto;
-      width: 300px;
-      text-align: center;
-      box-shadow: 0 0 15px var(--highlight);
-    }
+#clicker-game {
+  background: #111;
+  border: 2px solid var(--highlight);
+  border-radius: var(--border-radius);
+  padding: 25px;
+  margin: 30px auto;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 0 15px var(--highlight);
+}
 
-    #clicker-game button {
-      background-color: var(--highlight);
-      border: none;
-      color: #000;
-      font-family: inherit;
-      font-size: 12px;
-      padding: 12px 20px;
-      border-radius: 8px;
-      margin-top: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
+#clicker-game button {
+  background-color: var(--highlight);
+  border: none;
+  color: #000;
+  font-family: inherit;
+  font-size: 12px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-    #clicker-game button:hover {
-      background-color: #00cc00;
-    }
+#clicker-game button:hover {
+  background-color: #00cc00;
+}
 
-    #upgrade-button:disabled {
-      background-color: #666;
-      cursor: not-allowed;
-    }
+#upgrade-button:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+}
 
-    .progress {
-      height: 15px;
-      background: #222;
-      border: 1px solid #0f0;
-      border-radius: 8px;
-      margin-top: 10px;
-      overflow: hidden;
-    }
+.progress {
+  height: 15px;
+  background: #222;
+  border: 1px solid #0f0;
+  border-radius: 8px;
+  margin-top: 10px;
+  overflow: hidden;
+}
 
-    .progress-bar {
-      height: 100%;
-      background-color: #0f0;
-      width: 0%;
-      transition: width 0.3s;
-    }
+.progress-bar {
+  height: 100%;
+  background-color: #0f0;
+  width: 0%;
+  transition: width 0.3s;
+}
 
-    footer {
-      text-align: center;
-      color: #0f0;
-      font-size: 0.7rem;
-      margin: 40px 0;
-    }
+footer {
+  text-align: center;
+  color: #0f0;
+  font-size: 0.7rem;
+  margin: 40px 0;
+}
 
-    @media (max-width: 600px) {
-      nav {
-        flex-direction: column;
-        align-items: center;
-      }
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
 
-      .gallery img {
-        width: 100px;
-        height: 100px;
-      }
+  .gallery img {
+    width: 100px;
+    height: 100px;
+  }
 
-      #clicker-game {
-        width: 90%;
-      }
-    }
+  #clicker-game {
+    width: 90%;
+  }
+}
+```
+
   </style>
 </head>
 
@@ -305,6 +310,8 @@
 
     updateUI();
   </script>
+
 </body>
 </html>
 </IMG_1128.jpeg>
+
