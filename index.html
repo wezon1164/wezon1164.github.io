@@ -1,311 +1,265 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Minecraft Server Wezon1164</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Minecraft Server Wezon1164</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
   
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-  
-  <style>
-    /* Grundlayout */
-    body {
-      margin: 0;
-      background: #2a2a2a url('https://i.imgur.com/1DzZqvF.png') repeat; /* Minecraft Gras-Block */
-      font-family: 'Press Start 2P', cursive;
-      color: #eee;
-      user-select: none;
-    }
+  body {
+    margin: 0;
+    font-family: 'Press Start 2P', cursive;
+    background-color: #000000; /* schwarzer Hintergrund */
+    color: #ffffff; /* weißer Text */
+    text-shadow: 0 0 5px #00ff00;
+  }
 
-    /* Container */
-    main {
-      max-width: 900px;
-      margin: 40px auto;
-      background: #3a2d14;
-      border: 8px solid #664421;
-      border-radius: 12px;
-      box-shadow: 6px 6px 0 #b88a26;
-      padding: 40px 30px;
-    }
+  header {
+    background-color: #111111;
+    text-align: center;
+    padding: 25px;
+    font-size: 2em;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+  }
 
-    header {
-      text-align: center;
-      font-size: 3rem;
-      color: #b88a26;
-      text-shadow: 4px 4px 0 #4c3d0a;
-      margin-bottom: 40px;
-      user-select: none;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-    }
+  nav {
+    display: flex;
+    justify-content: center;
+    background-color: #111111;
+    padding: 15px;
+  }
 
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
-    }
+  nav button {
+    background-color: #003300;
+    border: 2px solid #00ff00;
+    color: #aaffaa;
+    font-family: 'Press Start 2P', cursive;
+    cursor: pointer;
+    margin: 0 12px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+  }
 
-    nav button {
-      background: #8c6a1f;
-      border: 4px solid #5c4612;
-      color: #f3e8c4;
-      padding: 14px 22px;
-      font-family: 'Press Start 2P', cursive;
-      font-size: 0.7rem;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      box-shadow: inset 0 3px 0 #d6c16a;
-      transition: background-color 0.2s ease;
-      border-radius: 4px;
-      user-select: none;
-    }
+  nav button:hover {
+    background-color: #00ff00;
+    color: #003300;
+  }
 
-    nav button:hover {
-      background: #bfa742;
-      border-color: #9c7d22;
-      box-shadow: inset 0 3px 0 #fffdaa;
-    }
+  section {
+    max-width: 900px;
+    margin: 25px auto;
+    background: #111111;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 15px #00ff00;
+  }
 
-    nav button:active {
-      box-shadow: inset 0 1px 0 #5c4612;
-      background: #876b1b;
-    }
+  h2 {
+    color: #00ff00;
+    text-align: center;
+    margin-bottom: 15px;
+  }
 
-    section {
-      display: none;
-      background: #4d3c0f;
-      border: 6px solid #7b6217;
-      border-radius: 12px;
-      padding: 30px 25px;
-      box-shadow: 5px 5px 0 #b88a26;
-      color: #f3e8c4;
-    }
+  ul.rules {
+    list-style-type: disc;
+    margin-left: 25px;
+    font-size: 0.8em;
+    color: #ccffcc;
+  }
 
-    section.active {
-      display: block;
-    }
+  ul.rules li {
+    margin-bottom: 12px;
+  }
 
-    h2 {
-      font-size: 1.8rem;
-      text-align: center;
-      margin-bottom: 25px;
-      color: #e9d46a;
-      text-shadow: 2px 2px 0 #3c2e06;
-      user-select: none;
-    }
+  a {
+    color: #00ff00;
+    text-decoration: none;
+    font-weight: bold;
+  }
 
-    p, ul {
-      font-size: 0.8rem;
-      line-height: 1.5;
-      margin-bottom: 15px;
-    }
+  a:hover {
+    text-decoration: underline;
+  }
 
-    ul {
-      padding-left: 20px;
-    }
+  /* Galerie für Bilder */
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
 
-    ul li {
-      margin-bottom: 10px;
-      list-style-type: square;
-      list-style-position: inside;
-    }
+  .gallery img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 10px #00ff00;
+    transition: transform 0.3s;
+    cursor: pointer;
+    background-color: #222;
+  }
 
-    a {
-      color: #f3e8c4;
-      font-weight: 700;
-      text-decoration: underline;
-    }
+  .gallery img:hover {
+    transform: scale(1.1);
+  }
 
-    a:hover {
-      color: #e9d46a;
-      text-decoration: none;
-    }
-
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      justify-content: center;
-    }
-
-    .gallery img {
-      width: 150px;
-      height: 150px;
-      border: 5px solid #7b6217;
-      border-radius: 8px;
-      object-fit: cover;
-      cursor: pointer;
-      box-shadow: 3px 3px 0 #b88a26;
-      background: #2a2a2a;
-      transition: transform 0.3s ease;
-    }
-
-    .gallery img:hover {
-      transform: scale(1.1);
-      box-shadow: 5px 5px 0 #e9d46a;
-    }
-
-    #clicker-game {
-      background: #3a2d14;
-      border: 6px solid #7b6217;
-      border-radius: 12px;
-      padding: 25px;
-      box-shadow: 5px 5px 0 #b88a26;
-      text-align: center;
-    }
-
-    #clicker-game h2 {
-      color: #e9d46a;
-      margin-bottom: 25px;
-    }
-
-    #score, #upgrade-cost {
-      font-size: 1rem;
-      margin-bottom: 15px;
-      user-select: none;
-    }
-
-    #click-wood, #upgrade-button {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 0.75rem;
-      padding: 15px 30px;
-      border: 4px solid #5c4612;
-      border-radius: 8px;
-      background: #8c6a1f;
-      color: #f3e8c4;
-      cursor: pointer;
-      margin: 8px 12px;
-      box-shadow: inset 0 3px 0 #d6c16a;
-      transition: background-color 0.2s ease;
-      user-select: none;
-    }
-
-    #click-wood:hover, #upgrade-button:hover:not(:disabled) {
-      background: #bfa742;
-      box-shadow: inset 0 3px 0 #fffdaa;
-    }
-
-    #upgrade-button:disabled {
-      background: #5c4612;
-      cursor: not-allowed;
-      box-shadow: none;
-      color: #8c8c8c;
-    }
-
-    footer {
-      text-align: center;
-      color: #b88a26;
-      margin: 40px 0 20px;
-      text-shadow: 2px 2px 0 #3c2e06;
-      font-size: 0.7rem;
-      user-select: none;
-    }
-  </style>
-
-  <script>
-    function showSection(id) {
-      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
-
-    let score = 0;
-    let woodPerClick = 1;
-    let upgradeCost = 10;
-
-    function updateClickerUI() {
-      document.getElementById('score').textContent = `Gefälltes Holz: ${score}`;
-      document.getElementById('upgrade-cost').textContent = `Upgrade kostet: ${upgradeCost} Holz`;
-      document.getElementById('upgrade-button').disabled = score < upgradeCost;
-    }
-
-    window.onload = () => {
-      showSection('startseite');
-      updateClickerUI();
-
-      document.getElementById('click-wood').addEventListener('click', () => {
-        score += woodPerClick;
-        updateClickerUI();
-      });
-
-      document.getElementById('upgrade-button').addEventListener('click', () => {
-        if (score >= upgradeCost) {
-          score -= upgradeCost;
-          woodPerClick++;
-          upgradeCost = Math.floor(upgradeCost * 1.6);
-          updateClickerUI();
-        }
-      });
-    };
-  </script>
+  footer {
+    text-align: center;
+    color: #00ff00;
+    font-size: 0.7em;
+    margin: 20px 0;
+  }
+</style>
+<script>
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(sec => {
+      sec.style.display = 'none';
+    });
+    document.getElementById(id).style.display = 'block';
+  }
+  window.onload = () => {
+    showSection('startseite');
+  }
+</script>
 </head>
 <body>
-  <main>
-    <header>Minecraft Server Wezon1164</header>
+<header>Minecraft Server Wezon1164</header>
+<nav>
+  <button onclick="showSection('startseite')">Startseite</button>
+  <button onclick="showSection('regeln')">Regeln</button>
+  <button onclick="showSection('discord')">Discord</button>
+  <button onclick="showSection('youtube')">YouTube</button>
+  <button onclick="showSection('galerie')">Galerie</button>
+</nav>
 
-    <nav>
-      <button onclick="showSection('startseite')">Startseite</button>
-      <button onclick="showSection('regeln')">Regeln</button>
-      <button onclick="showSection('discord')">Discord</button>
-      <button onclick="showSection('youtube')">YouTube</button>
-      <button onclick="showSection('galerie')">Galerie</button>
-      <button onclick="showSection('clicker')">Klicker-Spiel</button>
-    </nav>
+<section id="startseite">
+  <h2>Willkommen auf dem Server!</h2>
+  <p>Join uns und baue deine eigenen Welten in Minecraft.</p>
+  <p>Nutze das Menü oben, um mehr zu erfahren.</p>
+</section>
 
-    <section id="startseite" class="active">
-      <h2>Willkommen auf dem Server!</h2>
-      <p>Baue, entdecke und kämpfe in deiner eigenen Minecraft-Welt.</p>
-      <p>Benutze das Menü oben, um mehr zu erfahren und loszulegen.</p>
-    </section>
+<section id="regeln" style="display:none;">
+  <h2>Regeln auf dem Server</h2>
+  <ul class="rules">
+    <li>Kein Griefing oder Hacken!</li>
+    <li>Sei respektvoll zu anderen Spielern.</li>
+    <li>Kein Spam oder Werbung.</li>
+    <li>Folge den Anweisungen der Admins.</li>
+    <li>Benutze deinen gesunden Menschenverstand.</li>
+  </ul>
+</section>
 
-    <section id="regeln">
-      <h2>Server-Regeln</h2>
-      <ul>
-        <li>Kein Griefing oder Hacks</li>
-        <li>Respektiere andere Spieler</li>
-        <li>Kein Spam oder Werbung</li>
-        <li>Folge den Anweisungen der Admins</li>
-        <li>Sei freundlich und fair</li>
-      </ul>
-    </section>
+<section id="discord" style="display:none;">
+  <h2>Discord Server Beitreten</h2>
+  <p>Hier kannst du unserem Discord Server beitreten:</p>
+  <p><a href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener noreferrer">Discord Server Link</a></p>
+</section>
 
-    <section id="discord">
-      <h2>Discord Server</h2>
-      <p>Tritt unserem Discord bei, um mit anderen Spielern zu chatten und Infos zu bekommen:</p>
-      <p><a href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener noreferrer">Discord Server Link</a></p>
-    </section>
+<section id="youtube" style="display:none;">
+  <h2>Besuche unseren YouTube Kanal</h2>
+  <p>Schau dir unsere Minecraft Videos an:</p>
+  <p><a href="https://www.youtube.com/@Wezon1164" target="_blank" rel="noopener noreferrer">Wezon1164 auf YouTube</a></p>
+</section>
 
-    <section id="youtube">
-      <h2>YouTube Kanal</h2>
-      <p>Sieh dir unsere spannenden Minecraft-Videos an:</p>
-      <p><a href="https://www.youtube.com/@Wezon1164" target="_blank" rel="noopener noreferrer">Wezon1164 auf YouTube</a></p>
-    </section>
+<section id="galerie" style="display:none;">
+  <h2>Minecraft Galerie</h2>
+  <div class="gallery">
+    <img src="https://crafatar.com/avatars/2da0f9b6-91b9-48cd-851e-03bca07a3c3c?size=160" alt="Technoblade" title="Technoblade" />
+    <img src="https://crafatar.com/avatars/dream?size=160" alt="Dream" title="Dream" />
+    <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" alt="Qauvis" title="Qauvis" />
+    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" title="Creeper" style="background:#000; border-radius: 16px;"/>
+  </div>
+</section>
 
-    <section id="galerie">
-      <h2>Minecraft Galerie</h2>
-      <div class="gallery">
-        <img src="https://crafatar.com/avatars/2da0f9b6-91b9-48cd-851e-03bca07a3c3c?size=160" alt="Technoblade" title="Technoblade" />
-        <img src="https://crafatar.com/avatars/dream?size=160" alt="Dream" title="Dream" />
-        <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" alt="Qauvis" title="Qauvis" />
-        <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" title="Creeper" style="background:#000; border-radius: 8px;" />
-      </div>
-    </section>
-
-    <section id="clicker">
-      <div id="clicker-game">
-        <h2>Holzfäller Klicker</h2>
-        <div id="score">Gefälltes Holz: 0</div>
-        <button id="click-wood">Holz fällen!</button>
-        <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
-        <button id="upgrade-button" disabled>Upgrade Holz pro Klick (+1)</button>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    &copy; 2025 Minecraft Server Wezon1164
-  </footer>
+<footer>
+  &copy; 2025 Minecraft Server Wezon1164
+</footer>
 </body>
 </html>
+
+<style>
+  /* Styles für das Klicker-Spiel */
+  #clicker-game {
+    background: #1a1a1a;
+    border: 2px solid #4caf50;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    margin: 20px auto;
+    color: #a6f1a6;
+    font-family: 'Minecraft', Arial, sans-serif;
+    text-align: center;
+    box-shadow: 0 0 10px #4caf50;
+  }
+  #clicker-game h2 {
+    margin-top: 0;
+    color: #39ff14;
+  }
+  #clicker-game button {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    font-size: 18px;
+    padding: 12px 25px;
+    margin: 10px 5px 0 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  #clicker-game button:hover {
+    background-color: #36b636;
+  }
+  #score, #upgrade-cost {
+    font-size: 20px;
+    margin: 10px 0;
+  }
+  #upgrade-button:disabled {
+    background-color: #888;
+    cursor: not-allowed;
+  }
+</style>
+
+<div id="clicker-game">
+  <h2>Holzfäller Klicker</h2>
+  <div id="score">Gefälltes Holz: 0</div>
+  <button id="click-wood">Holz fällen!</button>
+  <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
+  <button id="upgrade-button">Upgrade Holz pro Klick (+1)</button>
+</div>
+
+<script>
+  let score = 0;
+  let woodPerClick = 1;
+  let upgradeCost = 10;
+
+  const scoreDisplay = document.getElementById('score');
+  const upgradeCostDisplay = document.getElementById('upgrade-cost');
+  const upgradeButton = document.getElementById('upgrade-button');
+  const clickWoodButton = document.getElementById('click-wood');
+
+  clickWoodButton.addEventListener('click', () => {
+    score += woodPerClick;
+    updateUI();
+  });
+
+  upgradeButton.addEventListener('click', () => {
+    if (score >= upgradeCost) {
+      score -= upgradeCost;
+      woodPerClick++;
+      upgradeCost = Math.floor(upgradeCost * 1.5);
+      updateUI();
+    }
+  });
+
+  function updateUI() {
+    scoreDisplay.textContent = `Gefälltes Holz: ${score}`;
+    upgradeCostDisplay.textContent = `Upgrade kostet: ${upgradeCost} Holz`;
+    upgradeButton.disabled = score < upgradeCost;
+  }
+
+  updateUI();
