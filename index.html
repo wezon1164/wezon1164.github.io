@@ -43,9 +43,11 @@
     transition: background-color 0.3s, color 0.3s;
   }
 
-  nav button:hover {
+  nav button:hover,
+  nav button:focus {
     background-color: #00ff00;
     color: #003300;
+    outline: none;
   }
 
   section {
@@ -55,6 +57,11 @@
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 0 15px #00ff00;
+    display: none;
+  }
+
+  section.active {
+    display: block;
   }
 
   h2 {
@@ -80,8 +87,10 @@
     font-weight: bold;
   }
 
-  a:hover {
+  a:hover,
+  a:focus {
     text-decoration: underline;
+    outline: none;
   }
 
   /* Galerie für Bilder */
@@ -104,8 +113,10 @@
     background-color: #222;
   }
 
-  .gallery img:hover {
+  .gallery img:hover,
+  .gallery img:focus {
     transform: scale(1.1);
+    outline: none;
   }
 
   footer {
@@ -114,89 +125,21 @@
     font-size: 0.7em;
     margin: 20px 0;
   }
-</style>
-<script>
-  function showSection(id) {
-    document.querySelectorAll('section').forEach(sec => {
-      sec.style.display = 'none';
-    });
-    document.getElementById(id).style.display = 'block';
-  }
-  window.onload = () => {
-    showSection('startseite');
-  }
-</script>
-</head>
-<body>
-<header>Minecraft Server Wezon1164</header>
-<nav>
-  <button onclick="showSection('startseite')">Startseite</button>
-  <button onclick="showSection('regeln')">Regeln</button>
-  <button onclick="showSection('discord')">Discord</button>
-  <button onclick="showSection('youtube')">YouTube</button>
-  <button onclick="showSection('galerie')">Galerie</button>
-</nav>
 
-<section id="startseite">
-  <h2>Willkommen auf dem Server!</h2>
-  <p>Join uns und baue deine eigenen Welten in Minecraft.</p>
-  <p>Nutze das Menü oben, um mehr zu erfahren.</p>
-</section>
-
-<section id="regeln" style="display:none;">
-  <h2>Regeln auf dem Server</h2>
-  <ul class="rules">
-    <li>Kein Griefing oder Hacken!</li>
-    <li>Sei respektvoll zu anderen Spielern.</li>
-    <li>Kein Spam oder Werbung.</li>
-    <li>Folge den Anweisungen der Admins.</li>
-    <li>Benutze deinen gesunden Menschenverstand.</li>
-  </ul>
-</section>
-
-<section id="discord" style="display:none;">
-  <h2>Discord Server Beitreten</h2>
-  <p>Hier kannst du unserem Discord Server beitreten:</p>
-  <p><a href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener noreferrer">Discord Server Link</a></p>
-</section>
-
-<section id="youtube" style="display:none;">
-  <h2>Besuche unseren YouTube Kanal</h2>
-  <p>Schau dir unsere Minecraft Videos an:</p>
-  <p><a href="https://www.youtube.com/@Wezon1164" target="_blank" rel="noopener noreferrer">Wezon1164 auf YouTube</a></p>
-</section>
-
-<section id="galerie" style="display:none;">
-  <h2>Minecraft Galerie</h2>
-  <div class="gallery">
-    <img src="https://crafatar.com/avatars/2da0f9b6-91b9-48cd-851e-03bca07a3c3c?size=160" alt="Technoblade" title="Technoblade" />
-    <img src="https://crafatar.com/avatars/dream?size=160" alt="Dream" title="Dream" />
-    <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" alt="Qauvis" title="Qauvis" />
-    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" title="Creeper" style="background:#000; border-radius: 16px;"/>
-  </div>
-</section>
-
-<footer>
-  &copy; 2025 Minecraft Server Wezon1164
-</footer>
-</body>
-</html>
-
-<style>
-  /* Styles für das Klicker-Spiel */
+  /* Klicker-Spiel Styles */
   #clicker-game {
     background: #1a1a1a;
     border: 2px solid #4caf50;
     border-radius: 10px;
     padding: 20px;
-    width: 300px;
-    margin: 20px auto;
+    width: 320px;
+    margin: 20px auto 0 auto;
     color: #a6f1a6;
-    font-family: 'Minecraft', Arial, sans-serif;
+    font-family: 'Press Start 2P', cursive;
     text-align: center;
-    box-shadow: 0 0 10px #4caf50;
+    box-shadow: 0 0 15px #4caf50;
   }
-  #clicker-game h2 {
+  #clicker-game h3 {
     margin-top: 0;
     color: #39ff14;
   }
@@ -211,8 +154,10 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  #clicker-game button:hover {
+  #clicker-game button:hover,
+  #clicker-game button:focus {
     background-color: #36b636;
+    outline: none;
   }
   #score, #upgrade-cost {
     font-size: 20px;
@@ -222,17 +167,100 @@
     background-color: #888;
     cursor: not-allowed;
   }
-</style>
 
-<div id="clicker-game">
-  <h2>Holzfäller Klicker</h2>
-  <div id="score">Gefälltes Holz: 0</div>
-  <button id="click-wood">Holz fällen!</button>
-  <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
-  <button id="upgrade-button">Upgrade Holz pro Klick (+1)</button>
-</div>
+  /* Responsive */
+  @media (max-width: 400px) {
+    #clicker-game {
+      width: 90%;
+      padding: 15px;
+    }
+    nav {
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    nav button {
+      margin: 6px 6px;
+      padding: 8px 14px;
+      font-size: 0.7em;
+    }
+  }
+</style>
+<script>
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(sec => {
+      sec.classList.remove('active');
+    });
+    document.getElementById(id).classList.add('active');
+  }
+
+  window.onload = () => {
+    showSection('startseite');
+  }
+</script>
+</head>
+<body>
+<header>Minecraft Server Wezon1164</header>
+<nav>
+  <button onclick="showSection('startseite')" aria-controls="startseite" aria-selected="true">Startseite</button>
+  <button onclick="showSection('regeln')" aria-controls="regeln">Regeln</button>
+  <button onclick="showSection('discord')" aria-controls="discord">Discord</button>
+  <button onclick="showSection('youtube')" aria-controls="youtube">YouTube</button>
+  <button onclick="showSection('galerie')" aria-controls="galerie">Galerie</button>
+</nav>
+
+<section id="startseite" class="active" tabindex="0">
+  <h2>Willkommen auf dem Server!</h2>
+  <p>Join uns und baue deine eigenen Welten in Minecraft.</p>
+  <p>Nutze das Menü oben, um mehr zu erfahren.</p>
+
+  <div id="clicker-game" aria-label="Holzfäller Klicker Spiel">
+    <h3>Holzfäller Klicker</h3>
+    <div id="score" aria-live="polite">Gefälltes Holz: 0</div>
+    <button id="click-wood" aria-describedby="score">Holz fällen!</button>
+    <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
+    <button id="upgrade-button" disabled>Upgrade Holz pro Klick (+1)</button>
+  </div>
+</section>
+
+<section id="regeln" tabindex="0">
+  <h2>Regeln auf dem Server</h2>
+  <ul class="rules">
+    <li>Kein Griefing oder Hacken!</li>
+    <li>Sei respektvoll zu anderen Spielern.</li>
+    <li>Kein Spam oder Werbung.</li>
+    <li>Folge den Anweisungen der Admins.</li>
+    <li>Benutze deinen gesunden Menschenverstand.</li>
+  </ul>
+</section>
+
+<section id="discord" tabindex="0">
+  <h2>Discord Server Beitreten</h2>
+  <p>Hier kannst du unserem Discord Server beitreten:</p>
+  <p><a href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener noreferrer">Discord Server Link</a></p>
+</section>
+
+<section id="youtube" tabindex="0">
+  <h2>Besuche unseren YouTube Kanal</h2>
+  <p>Schau dir unsere Minecraft Videos an:</p>
+  <p><a href="https://www.youtube.com/@Wezon1164" target="_blank" rel="noopener noreferrer">Wezon1164 auf YouTube</a></p>
+</section>
+
+<section id="galerie" tabindex="0">
+  <h2>Minecraft Galerie</h2>
+  <div class="gallery">
+    <img src="https://crafatar.com/avatars/2da0f9b6-91b9-48cd-851e-03bca07a3c3c?size=160" alt="Technoblade" title="Technoblade" tabindex="0" />
+    <img src="https://crafatar.com/avatars/dream?size=160" alt="Dream" title="Dream" tabindex="0" />
+    <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" alt="Qauvis" title="Qauvis" tabindex="0" />
+    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" title="Creeper" style="background:#000; border-radius: 16px;" tabindex="0" />
+  </div>
+</section>
+
+<footer>
+  &copy; 2025 Minecraft Server Wezon1164
+</footer>
 
 <script>
+  // Klicker-Spiel Logik
   let score = 0;
   let woodPerClick = 1;
   let upgradeCost = 10;
@@ -263,3 +291,6 @@
   }
 
   updateUI();
+</script>
+</body>
+</html>
