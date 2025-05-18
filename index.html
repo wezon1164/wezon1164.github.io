@@ -1,265 +1,243 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Minecraft Server Wezon1164</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Minecraft Server Wezon1164</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-    body {
-      margin: 0;
-      font-family: 'Press Start 2P', cursive;
-      background-color: #000;
-      color: #fff;
-      text-shadow: 0 0 5px #00ff00;
-    }
+  /* Body & Grundlayout */
+  body {
+    margin: 0;
+    font-family: 'Press Start 2P', cursive;
+    background: linear-gradient(135deg, #0b3d0b 0%, #003300 100%);
+    color: #c8ffc8;
+    text-shadow: 0 0 8px #00ff00;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
 
-    header {
-      background-color: #111;
-      text-align: center;
-      padding: 25px;
-      font-size: 2em;
-      color: #0f0;
-      text-shadow: 0 0 10px #0f0;
-    }
+  header {
+    background: #004d00;
+    padding: 30px 10px;
+    text-align: center;
+    font-size: 2.5em;
+    color: #a6f1a6;
+    text-shadow: 0 0 15px #39ff14;
+    letter-spacing: 4px;
+    user-select: none;
+    border-bottom: 3px solid #39ff14;
+  }
 
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      background-color: #111;
-      padding: 15px;
-    }
+  nav {
+    display: flex;
+    justify-content: center;
+    background: #002200;
+    padding: 15px 0;
+    gap: 15px;
+  }
 
-    nav button {
-      background-color: #003300;
-      border: 2px solid #0f0;
-      color: #aaffaa;
-      font-family: inherit;
-      cursor: pointer;
-      margin: 6px;
-      padding: 10px 18px;
-      border-radius: 8px;
-      transition: background-color 0.3s, color 0.3s;
-    }
+  nav button {
+    background: #0a620a;
+    border: 2px solid #39ff14;
+    color: #ccffcc;
+    padding: 12px 25px;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: all 0.25s ease;
+    box-shadow: 0 0 8px #00ff00;
+  }
 
-    nav button:hover,
-    nav button:focus {
-      background-color: #0f0;
-      color: #003300;
-      outline: none;
-    }
+  nav button:hover,
+  nav button:focus {
+    background: #39ff14;
+    color: #002200;
+    outline: none;
+    box-shadow: 0 0 20px #00ff00;
+    transform: scale(1.1);
+  }
 
-    section {
-      max-width: 900px;
-      margin: 25px auto;
-      background: #111;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 0 15px #0f0;
-      display: none;
-    }
+  main {
+    flex: 1;
+    max-width: 900px;
+    margin: 30px auto 50px;
+    background: #002200cc;
+    border-radius: 20px;
+    padding: 25px 30px;
+    box-shadow: 0 0 25px #39ff14aa;
+  }
 
-    section.active {
-      display: block;
-    }
+  section {
+    display: none;
+    animation: fadeIn 0.5s ease forwards;
+  }
 
-    h2 {
-      color: #0f0;
-      text-align: center;
-      margin-bottom: 15px;
-    }
+  section.active {
+    display: block;
+  }
 
-    input, select {
-      padding: 8px;
-      margin: 6px;
-      font-family: 'Press Start 2P', cursive;
-      font-size: 12px;
-      border-radius: 5px;
-      border: 1px solid #0f0;
-      background: #000;
-      color: #0f0;
-    }
+  h2 {
+    color: #00ff00;
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #00ff00;
+  }
 
-    button.calc, button.trans {
-      padding: 10px 15px;
-      margin: 6px;
-      font-family: 'Press Start 2P', cursive;
-      background: #0f0;
-      color: #000;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+  p {
+    font-size: 1em;
+    line-height: 1.5;
+    margin: 15px 0;
+  }
 
-    button.calc:hover, button.trans:hover {
-      background: #33ff33;
-    }
+  ul.rules {
+    list-style: inside disc;
+    font-size: 1em;
+    color: #aaffaa;
+    margin-left: 15px;
+  }
 
-    ul.rules {
-      list-style-type: disc;
-      margin-left: 25px;
-      font-size: 0.8em;
-      color: #ccffcc;
-    }
+  ul.rules li {
+    margin-bottom: 15px;
+    text-shadow: 0 0 5px #00bb00;
+  }
 
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-    }
+  a {
+    color: #66ff66;
+    text-decoration: none;
+    font-weight: bold;
+  }
 
-    .gallery img {
-      width: 160px;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 2px solid #0f0;
-      box-shadow: 0 0 10px #0f0;
-      transition: transform 0.3s;
-      cursor: pointer;
-      background-color: #222;
-    }
+  a:hover,
+  a:focus {
+    text-decoration: underline;
+  }
 
-    .gallery img:hover {
-      transform: scale(1.1);
-    }
+  /* Galerie */
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
 
-    #clicker-game {
-      background: #1a1a1a;
-      border: 2px solid #4caf50;
-      border-radius: 10px;
-      padding: 20px;
-      width: 300px;
-      margin: 40px auto 20px;
-      color: #a6f1a6;
-      text-align: center;
-      box-shadow: 0 0 10px #4caf50;
-    }
+  .gallery img {
+    width: 160px;
+    height: 160px;
+    border-radius: 18px;
+    border: 3px solid #39ff14;
+    box-shadow: 0 0 12px #00ff00;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    background: #003300;
+  }
 
-    footer {
-      text-align: center;
-      color: #0f0;
-      font-size: 0.7em;
-      margin: 20px 0;
-    }
-  </style>
-</head>
-<body>
+  .gallery img:hover,
+  .gallery img:focus {
+    transform: scale(1.15);
+    outline: none;
+    box-shadow: 0 0 25px #39ff14;
+  }
 
-<header>Minecraft Server Wezon1164</header>
+  /* Klicker Spiel */
+  #clicker-game {
+    margin: 40px auto 0;
+    background: #003300cc;
+    border-radius: 20px;
+    padding: 25px 30px;
+    max-width: 350px;
+    text-align: center;
+    box-shadow: 0 0 20px #00ff00aa;
+    color: #b2ffb2;
+  }
 
-<nav>
-  <button onclick="showSection('startseite')">Startseite</button>
-  <button onclick="showSection('regeln')">Regeln</button>
-  <button onclick="showSection('discord')">Discord</button>
-  <button onclick="showSection('youtube')">YouTube</button>
-  <button onclick="showSection('galerie')">Galerie</button>
-  <button onclick="showSection('clicker')">Klicker-Spiel</button>
-  <button onclick="showSection('rechner')">Rechner</button>
-  <button onclick="showSection('uebersetzer')">Übersetzer</button>
-</nav>
+  #clicker-game h2 {
+    margin-top: 0;
+    color: #7fff7f;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px #00ff00;
+  }
 
-<section id="startseite" class="active">
-  <h2>Willkommen auf dem Server!</h2>
-  <p>Join uns und baue deine eigenen Welten in Minecraft.</p>
-  <p>Nutze das Menü oben, um mehr zu erfahren.</p>
-</section>
+  #clicker-game button {
+    background: #39ff14;
+    border: none;
+    color: #003300;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 15px 30px;
+    margin: 10px 8px 0 8px;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 0 12px #00ff00;
+    transition: background-color 0.3s ease;
+  }
 
-<section id="regeln">
-  <h2>Regeln auf dem Server</h2>
-  <ul class="rules">
-    <li>Kein Griefing oder Hacken!</li>
-    <li>Sei respektvoll zu anderen Spielern.</li>
-    <li>Kein Spam oder Werbung.</li>
-    <li>Folge den Anweisungen der Admins.</li>
-    <li>Benutze deinen gesunden Menschenverstand.</li>
-  </ul>
-</section>
+  #clicker-game button:hover:not(:disabled),
+  #clicker-game button:focus:not(:disabled) {
+    background-color: #2ac82a;
+    outline: none;
+  }
 
-<section id="discord">
-  <h2>Discord Server Beitreten</h2>
-  <p><a href="https://discord.gg/xjpRj57cqJ" target="_blank">Jetzt beitreten</a></p>
-</section>
+  #clicker-game button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+  }
 
-<section id="youtube">
-  <h2>YouTube Kanal</h2>
-  <p><a href="https://www.youtube.com/@Wezon1164" target="_blank">Wezon1164 auf YouTube</a></p>
-</section>
+  #score, #upgrade-cost {
+    font-size: 1.2em;
+    margin: 15px 0;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00bb00;
+  }
 
-<section id="galerie">
-  <h2>Minecraft Galerie</h2>
-  <div class="gallery">
-    <img src="https://crafatar.com/avatars/2da0f9b6-91b9-48cd-851e-03bca07a3c3c?size=160" alt="Technoblade" />
-    <img src="https://crafatar.com/avatars/dream?size=160" alt="Dream" />
-    <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" alt="Qauvis" />
-    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" />
-  </div>
-</section>
+  /* Footer */
+  footer {
+    background: #004d00;
+    text-align: center;
+    padding: 15px 10px;
+    color: #a6f1a6;
+    font-size: 0.8em;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px #39ff14;
+    user-select: none;
+  }
 
-<section id="clicker">
-  <div id="clicker-game">
-    <h2>Holzfäller Klicker</h2>
-    <div id="score">Gefälltes Holz: 0</div>
-    <button id="click-wood">Holz fällen!</button>
-    <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
-    <button id="upgrade-button">Upgrade Holz pro Klick (+1)</button>
-  </div>
-</section>
+  /* Animation */
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
 
-<section id="rechner">
-  <h2>Mini-Taschenrechner</h2>
-  <input type="number" id="zahl1" placeholder="Zahl 1">
-  <input type="number" id="zahl2" placeholder="Zahl 2">
-  <select id="operation">
-    <option value="add">+</option>
-    <option value="sub">−</option>
-    <option value="mul">×</option>
-    <option value="div">÷</option>
-  </select>
-  <button class="calc" onclick="berechne()">Berechne</button>
-  <p id="ergebnis">Ergebnis: </p>
-</section>
-
-<section id="uebersetzer">
-  <h2>Mini-Übersetzer (Deutsch → Englisch)</h2>
-  <input type="text" id="deutsch" placeholder="z. B. Haus">
-  <button class="trans" onclick="uebersetzen()">Übersetzen</button>
-  <p id="uebersetzung">Übersetzung: </p>
-</section>
-
-<footer>
-  &copy; 2025 Minecraft Server Wezon1164
-</footer>
-
+</style>
 <script>
+  // Navigation Funktion mit Tasten-Fokus für Barrierefreiheit
   function showSection(id) {
     document.querySelectorAll('section').forEach(sec => {
       sec.classList.remove('active');
+      sec.setAttribute('aria-hidden', 'true');
     });
-    document.getElementById(id).classList.add('active');
+    const activeSection = document.getElementById(id);
+    if (activeSection) {
+      activeSection.classList.add('active');
+      activeSection.setAttribute('aria-hidden', 'false');
+      activeSection.focus();
+    }
   }
 
-  // Klicker-Spiel
+  window.onload = () => {
+    showSection('startseite');
+  };
+
+  // Klicker-Spiel Logik
   let score = 0;
   let woodPerClick = 1;
   let upgradeCost = 10;
-
-  document.getElementById('click-wood').onclick = () => {
-    score += woodPerClick;
-    updateUI();
-  };
-
-  document.getElementById('upgrade-button').onclick = () => {
-    if (score >= upgradeCost) {
-      score -= upgradeCost;
-      woodPerClick++;
-      upgradeCost = Math.floor(upgradeCost * 1.5);
-      updateUI();
-    }
-  };
 
   function updateUI() {
     document.getElementById('score').textContent = `Gefälltes Holz: ${score}`;
@@ -267,39 +245,89 @@
     document.getElementById('upgrade-button').disabled = score < upgradeCost;
   }
 
-  updateUI();
+  function addWood() {
+    score += woodPerClick;
+    updateUI();
+  }
 
-  // Rechner
-  function berechne() {
-    const z1 = parseFloat(document.getElementById('zahl1').value);
-    const z2 = parseFloat(document.getElementById('zahl2').value);
-    const op = document.getElementById('operation').value;
-    let erg = 'Ungültige Eingabe';
-    if (!isNaN(z1) && !isNaN(z2)) {
-      switch (op) {
-        case 'add': erg = z1 + z2; break;
-        case 'sub': erg = z1 - z2; break;
-        case 'mul': erg = z1 * z2; break;
-        case 'div': erg = z2 !== 0 ? z1 / z2 : 'Division durch 0!'; break;
-      }
+  function upgrade() {
+    if (score >= upgradeCost) {
+      score -= upgradeCost;
+      woodPerClick++;
+      upgradeCost = Math.floor(upgradeCost * 1.5);
+      updateUI();
     }
-    document.getElementById('ergebnis').textContent = `Ergebnis: ${erg}`;
   }
 
-  // Übersetzer
-  function uebersetzen() {
-    const woerterbuch = {
-      haus: 'house',
-      baum: 'tree',
-      wasser: 'water',
-      feuer: 'fire',
-      stein: 'stone'
-    };
-    const eingabe = document.getElementById('deutsch').value.trim().toLowerCase();
-    const englisch = woerterbuch[eingabe] || 'Unbekannt';
-    document.getElementById('uebersetzung').textContent = `Übersetzung: ${englisch}`;
-  }
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('click-wood').addEventListener('click', addWood);
+    document.getElementById('upgrade-button').addEventListener('click', upgrade);
+    updateUI();
+  });
 </script>
+</head>
+<body>
+<header>Minecraft Server Wezon1164</header>
 
+<nav role="navigation" aria-label="Hauptmenü">
+  <button onclick="showSection('startseite')" aria-controls="startseite" aria-selected="true">Startseite</button>
+  <button onclick="showSection('regeln')" aria-controls="regeln">Regeln</button>
+  <button onclick="showSection('discord')" aria-controls="discord">Discord</button>
+  <button onclick="showSection('youtube')" aria-controls="youtube">YouTube</button>
+  <button onclick="showSection('galerie')" aria-controls="galerie">Galerie</button>
+</nav>
+
+<main>
+  <section id="startseite" tabindex="-1" aria-label="Startseite">
+    <h2>Willkommen auf dem Server!</h2>
+    <p>Join uns und baue deine eigenen Welten in Minecraft.</p>
+    <p>Nutze das Menü oben, um mehr zu erfahren.</p>
+  </section>
+
+  <section id="regeln" tabindex="-1" aria-label="Serverregeln" aria-hidden="true">
+    <h2>Regeln auf dem Server</h2>
+    <ul class="rules">
+      <li>Kein Griefing oder Hacken!</li>
+      <li>Sei respektvoll zu anderen Spielern.</li>
+      <li>Kein Spam oder Werbung.</li>
+      <li>Folge den Anweisungen der Admins.</li>
+      <li>Benutze deinen gesunden Menschenverstand.</li>
+    </ul>
+  </section>
+
+  <section id="discord" tabindex="-1" aria-label="Discord Server" aria-hidden="true">
+    <h2>Discord Server Beitreten</h2>
+    <p>Hier kannst du unserem Discord Server beitreten:</p>
+    <p><a href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener noreferrer">Discord Server Link</a></p>
+  </section>
+
+  <section id="youtube" tabindex="-1" aria-label="YouTube Kanal" aria-hidden="true">
+    <h2>Besuche unseren YouTube Kanal</h2>
+    <p>Schau dir unsere Minecraft Videos an:</p>
+    <p><a href="https://www.youtube.com/@Wezon1164" target="_blank" rel="noopener noreferrer">Wezon1164 auf YouTube</a></p>
+  </section>
+
+  <section id="galerie" tabindex="-1" aria-label="Minecraft Galerie" aria-hidden="true">
+    <h2>Minecraft Galerie</h2>
+    <div class="gallery" role="list">
+      <img src="https://crafatar.com/avatars/2da0f9b6-91b9-48cd-851e-03bca07a3c3c?size=160" alt="Technoblade" title="Technoblade" role="listitem" tabindex="0" />
+      <img src="https://crafatar.com/avatars/dream?size=160" alt="Dream" title="Dream" role="listitem" tabindex="0" />
+      <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" alt="Qauvis" title="Qauvis" role="listitem" tabindex="0" />
+      <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" title="Creeper" role="listitem" tabindex="0" style="background:#000; border-radius: 16px;" />
+    </div>
+  </section>
+
+  <div id="clicker-game" aria-label="Holzfäller Klicker Spiel" tabindex="0">
+    <h2>Holzfäller Klicker</h2>
+    <div id="score" aria-live="polite">Gefälltes Holz: 0</div>
+    <button id="click-wood" aria-label="Holz fällen">Holz fällen!</button>
+    <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
+    <button id="upgrade-button" aria-label="Upgrade Holz pro Klick (+1)">Upgrade Holz pro Klick (+1)</button>
+  </div>
+</main>
+
+<footer>
+  &copy; 2025 Minecraft Server Wezon1164
+</footer>
 </body>
 </html>
