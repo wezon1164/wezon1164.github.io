@@ -1,3 +1,4 @@
+Du:
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -7,73 +8,58 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-  /* Body & Grundlayout */
+  /* Grundlayout */
   body {
     margin: 0;
     font-family: 'Press Start 2P', cursive;
-    background: linear-gradient(135deg, #0b3d0b 0%, #003300 100%);
-    color: #c8ffc8;
-    text-shadow: 0 0 8px #00ff00;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    background-color: #000;
+    color: #fff;
+    text-shadow: 0 0 5px #00ff00;
   }
 
   header {
-    background: #004d00;
-    padding: 30px 10px;
+    background-color: #111;
     text-align: center;
-    font-size: 2.5em;
-    color: #a6f1a6;
-    text-shadow: 0 0 15px #39ff14;
-    letter-spacing: 4px;
-    user-select: none;
-    border-bottom: 3px solid #39ff14;
+    padding: 25px;
+    font-size: 2em;
+    color: #0f0;
+    text-shadow: 0 0 10px #0f0;
   }
 
   nav {
     display: flex;
     justify-content: center;
-    background: #002200;
-    padding: 15px 0;
-    gap: 15px;
+    background-color: #111;
+    padding: 15px;
   }
 
   nav button {
-    background: #0a620a;
-    border: 2px solid #39ff14;
-    color: #ccffcc;
-    padding: 12px 25px;
+    background-color: #003300;
+    border: 2px solid #0f0;
+    color: #aaffaa;
     font-family: inherit;
-    font-weight: bold;
     cursor: pointer;
-    border-radius: 12px;
-    transition: all 0.25s ease;
-    box-shadow: 0 0 8px #00ff00;
+    margin: 0 12px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
   }
 
   nav button:hover,
   nav button:focus {
-    background: #39ff14;
-    color: #002200;
+    background-color: #0f0;
+    color: #003300;
     outline: none;
-    box-shadow: 0 0 20px #00ff00;
-    transform: scale(1.1);
-  }
-
-  main {
-    flex: 1;
-    max-width: 900px;
-    margin: 30px auto 50px;
-    background: #002200cc;
-    border-radius: 20px;
-    padding: 25px 30px;
-    box-shadow: 0 0 25px #39ff14aa;
   }
 
   section {
+    max-width: 900px;
+    margin: 25px auto;
+    background: #111;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 15px #0f0;
     display: none;
-    animation: fadeIn 0.5s ease forwards;
   }
 
   section.active {
@@ -81,33 +67,24 @@
   }
 
   h2 {
-    color: #00ff00;
+    color: #0f0;
     text-align: center;
-    font-size: 1.8em;
-    margin-bottom: 20px;
-    text-shadow: 0 0 10px #00ff00;
-  }
-
-  p {
-    font-size: 1em;
-    line-height: 1.5;
-    margin: 15px 0;
+    margin-bottom: 15px;
   }
 
   ul.rules {
-    list-style: inside disc;
-    font-size: 1em;
-    color: #aaffaa;
-    margin-left: 15px;
+    list-style-type: disc;
+    margin-left: 25px;
+    font-size: 0.8em;
+    color: #ccffcc;
   }
 
   ul.rules li {
-    margin-bottom: 15px;
-    text-shadow: 0 0 5px #00bb00;
+    margin-bottom: 12px;
   }
 
   a {
-    color: #66ff66;
+    color: #0f0;
     text-decoration: none;
     font-weight: bold;
   }
@@ -115,155 +92,105 @@
   a:hover,
   a:focus {
     text-decoration: underline;
+    outline: none;
   }
 
   /* Galerie */
   .gallery {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 12px;
     justify-content: center;
   }
 
   .gallery img {
     width: 160px;
     height: 160px;
-    border-radius: 18px;
-    border: 3px solid #39ff14;
-    box-shadow: 0 0 12px #00ff00;
     object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #0f0;
+    box-shadow: 0 0 10px #0f0;
+    transition: transform 0.3s;
     cursor: pointer;
-    transition: transform 0.3s ease;
-    background: #003300;
+    background-color: #222;
   }
 
   .gallery img:hover,
   .gallery img:focus {
-    transform: scale(1.15);
+    transform: scale(1.1);
     outline: none;
-    box-shadow: 0 0 25px #39ff14;
   }
 
-  /* Klicker Spiel */
-  #clicker-game {
-    margin: 40px auto 0;
-    background: #003300cc;
-    border-radius: 20px;
-    padding: 25px 30px;
-    max-width: 350px;
+  footer {
     text-align: center;
-    box-shadow: 0 0 20px #00ff00aa;
-    color: #b2ffb2;
+    color: #0f0;
+    font-size: 0.7em;
+    margin: 20px 0;
+  }
+
+  /* Klicker-Spiel */
+  #clicker-game {
+    background: #1a1a1a;
+    border: 2px solid #4caf50;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    margin: 40px auto 20px;
+    color: #a6f1a6;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    box-shadow: 0 0 10px #4caf50;
   }
 
   #clicker-game h2 {
     margin-top: 0;
-    color: #7fff7f;
-    font-size: 1.5em;
-    margin-bottom: 20px;
-    text-shadow: 0 0 15px #00ff00;
+    color: #39ff14;
   }
 
   #clicker-game button {
-    background: #39ff14;
+    background-color: #4caf50;
     border: none;
-    color: #003300;
-    font-weight: bold;
-    font-size: 1.2em;
-    padding: 15px 30px;
-    margin: 10px 8px 0 8px;
-    border-radius: 15px;
+    color: white;
+    font-size: 18px;
+    padding: 12px 25px;
+    margin: 10px 5px 0 5px;
+    border-radius: 8px;
     cursor: pointer;
-    box-shadow: 0 0 12px #00ff00;
     transition: background-color 0.3s ease;
   }
 
   #clicker-game button:hover:not(:disabled),
   #clicker-game button:focus:not(:disabled) {
-    background-color: #2ac82a;
+    background-color: #36b636;
     outline: none;
   }
 
   #clicker-game button:disabled {
-    background-color: #555;
+    background-color: #888;
     cursor: not-allowed;
   }
 
-  #score, #upgrade-cost {
-    font-size: 1.2em;
-    margin: 15px 0;
-    font-weight: bold;
-    text-shadow: 0 0 10px #00bb00;
+  #score,
+  #upgrade-cost {
+    font-size: 20px;
+    margin: 10px 0;
   }
-
-  /* Footer */
-  footer {
-    background: #004d00;
-    text-align: center;
-    padding: 15px 10px;
-    color: #a6f1a6;
-    font-size: 0.8em;
-    letter-spacing: 2px;
-    text-shadow: 0 0 10px #39ff14;
-    user-select: none;
-  }
-
-  /* Animation */
-  @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-  }
-
 </style>
 <script>
-  // Navigation Funktion mit Tasten-Fokus für Barrierefreiheit
+  // Navigation Funktion
   function showSection(id) {
     document.querySelectorAll('section').forEach(sec => {
       sec.classList.remove('active');
-      sec.setAttribute('aria-hidden', 'true');
     });
     const activeSection = document.getElementById(id);
-    if (activeSection) {
+    if(activeSection) {
       activeSection.classList.add('active');
-      activeSection.setAttribute('aria-hidden', 'false');
-      activeSection.focus();
     }
   }
 
   window.onload = () => {
     showSection('startseite');
   };
-
-  // Klicker-Spiel Logik
-  let score = 0;
-  let woodPerClick = 1;
-  let upgradeCost = 10;
-
-  function updateUI() {
-    document.getElementById('score').textContent = `Gefälltes Holz: ${score}`;
-    document.getElementById('upgrade-cost').textContent = `Upgrade kostet: ${upgradeCost} Holz`;
-    document.getElementById('upgrade-button').disabled = score < upgradeCost;
-  }
-
-  function addWood() {
-    score += woodPerClick;
-    updateUI();
-  }
-
-  function upgrade() {
-    if (score >= upgradeCost) {
-      score -= upgradeCost;
-      woodPerClick++;
-      upgradeCost = Math.floor(upgradeCost * 1.5);
-      updateUI();
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('click-wood').addEventListener('click', addWood);
-    document.getElementById('upgrade-button').addEventListener('click', upgrade);
-    updateUI();
-  });
 </script>
 </head>
 <body>
@@ -277,57 +204,89 @@
   <button onclick="showSection('galerie')" aria-controls="galerie">Galerie</button>
 </nav>
 
-<main>
-  <section id="startseite" tabindex="-1" aria-label="Startseite">
-    <h2>Willkommen auf dem Server!</h2>
-    <p>Join uns und baue deine eigenen Welten in Minecraft.</p>
-    <p>Nutze das Menü oben, um mehr zu erfahren.</p>
-  </section>
+<section id="startseite" class="active" tabindex="0" aria-label="Startseite">
+  <h2>Willkommen auf dem Server!</h2>
+  <p>Join uns und baue deine eigenen Welten in Minecraft.</p>
+  <p>Nutze das Menü oben, um mehr zu erfahren.</p>
+</section>
 
-  <section id="regeln" tabindex="-1" aria-label="Serverregeln" aria-hidden="true">
-    <h2>Regeln auf dem Server</h2>
-    <ul class="rules">
-      <li>Kein Griefing oder Hacken!</li>
-      <li>Sei respektvoll zu anderen Spielern.</li>
-      <li>Kein Spam oder Werbung.</li>
-      <li>Folge den Anweisungen der Admins.</li>
-      <li>Benutze deinen gesunden Menschenverstand.</li>
-    </ul>
-  </section>
+<section id="regeln" tabindex="0" aria-label="Serverregeln">
+  <h2>Regeln auf dem Server</h2>
+  <ul class="rules">
+    <li>Kein Griefing oder Hacken!</li>
+    <li>Sei respektvoll zu anderen Spielern.</li>
+    <li>Kein Spam oder Werbung.</li>
+    <li>Folge den Anweisungen der Admins.</li>
+    <li>Benutze deinen gesunden Menschenverstand.</li>
+  </ul>
+</section>
 
-  <section id="discord" tabindex="-1" aria-label="Discord Server" aria-hidden="true">
-    <h2>Discord Server Beitreten</h2>
-    <p>Hier kannst du unserem Discord Server beitreten:</p>
-    <p><a href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener noreferrer">Discord Server Link</a></p>
-  </section>
+<section id="discord" tabindex="0" aria-label="Discord Server">
+  <h2>Discord Server Beitreten</h2>
+  <p>Hier kannst du unserem Discord Server beitreten:</p>
+  <p><a href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener noreferrer">Discord Server Link</a></p>
+</section>
 
-  <section id="youtube" tabindex="-1" aria-label="YouTube Kanal" aria-hidden="true">
-    <h2>Besuche unseren YouTube Kanal</h2>
-    <p>Schau dir unsere Minecraft Videos an:</p>
-    <p><a href="https://www.youtube.com/@Wezon1164" target="_blank" rel="noopener noreferrer">Wezon1164 auf YouTube</a></p>
-  </section>
+<section id="youtube" tabindex="0" aria-label="YouTube Kanal">
+  <h2>Besuche unseren YouTube Kanal</h2>
+  <p>Schau dir unsere Minecraft Videos an:</p>
+  <p><a href="https://www.youtube.com/@Wezon1164" target="_blank" rel="noopener noreferrer">Wezon1164 auf YouTube</a></p>
+</section>
 
-  <section id="galerie" tabindex="-1" aria-label="Minecraft Galerie" aria-hidden="true">
-    <h2>Minecraft Galerie</h2>
-    <div class="gallery" role="list">
-      <img src="https://crafatar.com/avatars/2da0f9b6-91b9-48cd-851e-03bca07a3c3c?size=160" alt="Technoblade" title="Technoblade" role="listitem" tabindex="0" />
-      <img src="https://crafatar.com/avatars/dream?size=160" alt="Dream" title="Dream" role="listitem" tabindex="0" />
-      <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" alt="Qauvis" title="Qauvis" role="listitem" tabindex="0" />
-      <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" title="Creeper" role="listitem" tabindex="0" style="background:#000; border-radius: 16px;" />
-    </div>
-  </section>
-
-  <div id="clicker-game" aria-label="Holzfäller Klicker Spiel" tabindex="0">
-    <h2>Holzfäller Klicker</h2>
-    <div id="score" aria-live="polite">Gefälltes Holz: 0</div>
-    <button id="click-wood" aria-label="Holz fällen">Holz fällen!</button>
-    <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
-    <button id="upgrade-button" aria-label="Upgrade Holz pro Klick (+1)">Upgrade Holz pro Klick (+1)</button>
+<section id="galerie" tabindex="0" aria-label="Minecraft Galerie">
+  <h2>Minecraft Galerie</h2>
+  <div class="gallery" role="list">
+    <img src="https://crafatar.com/avatars/2da0f9b6-91b9-48cd-851e-03bca07a3c3c?size=160" alt="Technoblade" title="Technoblade" role="listitem" tabindex="0" />
+    <img src="https://crafatar.com/avatars/dream?size=160" alt="Dream" title="Dream" role="listitem" tabindex="0" />
+    <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" alt="Qauvis" title="Qauvis" role="listitem" tabindex="0" />
+    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" title="Creeper" role="listitem" tabindex="0" style="background:#000; border-radius: 16px;" />
   </div>
-</main>
+</section>
+
+<div id="clicker-game" aria-label="Holzfäller Klicker Spiel" tabindex="0">
+  <h2>Holzfäller Klicker</h2>
+  <div id="score" aria-live="polite">Gefälltes Holz: 0</div>
+  <button id="click-wood" aria-label="Holz fällen">Holz fällen!</button>
+  <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
+  <button id="upgrade-button" aria-label="Upgrade Holz pro Klick (+1)">Upgrade Holz pro Klick (+1)</button>
+</div>
 
 <footer>
   &copy; 2025 Minecraft Server Wezon1164
 </footer>
+
+<script>
+  // Klicker-Spiel Logik
+  let score = 0;
+  let woodPerClick = 1;
+  let upgradeCost = 10;
+
+  const scoreDisplay = document.getElementById('score');
+  const upgradeCostDisplay = document.getElementById('upgrade-cost');
+  const upgradeButton = document.getElementById('upgrade-button');
+  const clickWoodButton = document.getElementById('click-wood');
+
+  clickWoodButton.addEventListener('click', () => {
+    score += woodPerClick;
+    updateUI();
+  });
+
+  upgradeButton.addEventListener('click', () => {
+    if (score >= upgradeCost) {
+      score -= upgradeCost;
+      woodPerClick++;
+      upgradeCost = Math.floor(upgradeCost * 1.5);
+      updateUI();
+    }
+  });
+
+  function updateUI() {
+    scoreDisplay.textContent = Gefälltes Holz: ${score};
+    upgradeCostDisplay.textContent = Upgrade kostet: ${upgradeCost} Holz;
+    upgradeButton.disabled = score < upgradeCost;
+  }
+
+  updateUI();
+</script>
 </body>
 </html>
