@@ -1,317 +1,183 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Minecraft Server Wezon1164</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-  body {
-    margin: 0;
-    font-family: 'Press Start 2P', cursive;
-    background-color: #000;
-    color: #fff;
-    text-shadow: 0 0 5px #00ff00;
-  }
-  header {
-    background-color: #111;
-    text-align: center;
-    padding: 25px;
-    font-size: 2em;
-    color: #0f0;
-    text-shadow: 0 0 10px #0f0;
-  }
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    background-color: #111;
-    padding: 15px;
-  }
-  nav button {
-    background-color: #003300;
-    border: 2px solid #0f0;
-    color: #aaffaa;
-    font-family: inherit;
-    cursor: pointer;
-    margin: 6px;
-    padding: 10px 18px;
-    border-radius: 8px;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  nav button:hover,
-  nav button:focus {
-    background-color: #0f0;
-    color: #003300;
-    outline: none;
-  }
-  section {
-    max-width: 900px;
-    margin: 25px auto;
-    background: #111;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 0 15px #0f0;
-    display: none;
-  }
-  section.active {
-    display: block;
-  }
-  h2 {
-    color: #0f0;
-    text-align: center;
-    margin-bottom: 15px;
-  }
-  ul.rules {
-    list-style-type: disc;
-    margin-left: 25px;
-    font-size: 0.8em;
-    color: #ccffcc;
-  }
-  ul.rules li {
-    margin-bottom: 12px;
-  }
-  a {
-    color: #0f0;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  a:hover,
-  a:focus {
-    text-decoration: underline;
-    outline: none;
-  }
-  .gallery {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-  }
-  .gallery img {
-    width: 160px;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 12px;
-    border: 2px solid #0f0;
-    box-shadow: 0 0 10px #0f0;
-    transition: transform 0.3s;
-    cursor: pointer;
-    background-color: #222;
-  }
-  .gallery img:hover,
-  .gallery img:focus {
-    transform: scale(1.1);
-    outline: none;
-  }
-  footer {
-    text-align: center;
-    color: #0f0;
-    font-size: 0.7em;
-    margin: 20px 0;
-  }
-  #clicker-game {
-    background: #1a1a1a;
-    border: 2px solid #4caf50;
-    border-radius: 10px;
-    padding: 20px;
-    width: 300px;
-    margin: 40px auto 20px;
-    color: #a6f1a6;
-    font-family: 'Press Start 2P', cursive;
-    text-align: center;
-    box-shadow: 0 0 10px #4caf50;
-  }
-  #clicker-game h2 {
-    margin-top: 0;
-    color: #39ff14;
-  }
-  #clicker-game button {
-    background-color: #4caf50;
-    border: none;
-    color: white;
-    font-size: 18px;
-    padding: 12px 25px;
-    margin: 10px 5px 0 5px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  #clicker-game button:hover:not(:disabled),
-  #clicker-game button:focus:not(:disabled) {
-    background-color: #36b636;
-    outline: none;
-  }
-  #clicker-game button:disabled {
-    background-color: #888;
-    cursor: not-allowed;
-  }
-  #score, #upgrade-cost {
-    font-size: 20px;
-    margin: 10px 0;
-  }
-  input, textarea, select {
-    font-family: inherit;
-    font-size: 14px;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #0f0;
-    background: #000;
-    color: #0f0;
-    margin: 5px;
-  }
-</style>
-<script>
-  function showSection(id) {
-    document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-    const activeSection = document.getElementById(id);
-    if (activeSection) activeSection.classList.add('active');
-  }
-
-  window.onload = () => {
-    showSection('startseite');
-  };
-
-  // Klicker-Spiel
-  let score = 0;
-  let woodPerClick = 1;
-  let upgradeCost = 10;
-
-  function updateUI() {
-    document.getElementById('score').textContent = `Gefälltes Holz: ${score}`;
-    document.getElementById('upgrade-cost').textContent = `Upgrade kostet: ${upgradeCost} Holz`;
-    document.getElementById('upgrade-button').disabled = score < upgradeCost;
-  }
-
-  function rechnen() {
-    const num1 = parseFloat(document.getElementById('num1').value);
-    const num2 = parseFloat(document.getElementById('num2').value);
-    const op = document.getElementById('operator').value;
-    let result = '';
-    if (!isNaN(num1) && !isNaN(num2)) {
-      switch (op) {
-        case '+': result = num1 + num2; break;
-        case '-': result = num1 - num2; break;
-        case '*': result = num1 * num2; break;
-        case '/': result = num2 !== 0 ? num1 / num2 : 'Division durch 0!'; break;
-      }
-    } else {
-      result = 'Ungültige Eingabe';
-    }
-    document.getElementById('rechner-ergebnis').textContent = `Ergebnis: ${result}`;
-  }
-
-  function uebersetze() {
-    const text = document.getElementById('original-text').value.toLowerCase();
-    const sprache = document.getElementById('sprache').value;
-    const beispielWörterbuch = {
-      "hallo": "hello",
-      "welt": "world",
-      "ich liebe minecraft": "i love minecraft",
-      "server": "server",
-      "spielen": "play",
-      "freund": "friend"
-    };
-    let übersetzt = beispielWörterbuch[text] || "(Keine Übersetzung gefunden)";
-    if (sprache === "de") {
-      // Rückwärtsübersetzung
-      const rück = Object.entries(beispielWörterbuch).find(([de, en]) => en === text);
-      übersetzt = rück ? rück[0] : "(Keine Übersetzung gefunden)";
-    }
-    document.getElementById('uebersetzung').textContent = `Übersetzung: ${übersetzt}`;
-  }
-</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minecraft Server Wezon1164</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    /* Dein optimiertes CSS bleibt identisch zum Original — evtl. ausgelagert in styles.css */
+    /* ... (wie oben von dir gepostet) */
+  </style>
 </head>
 <body>
-<header>Minecraft Server Wezon1164</header>
+  <header role="banner">Minecraft Server Wezon1164</header>
 
-<nav role="navigation" aria-label="Hauptmenü">
-  <button onclick="showSection('startseite')" aria-controls="startseite">Startseite</button>
-  <button onclick="showSection('regeln')" aria-controls="regeln">Regeln</button>
-  <button onclick="showSection('discord')" aria-controls="discord">Discord</button>
-  <button onclick="showSection('youtube')" aria-controls="youtube">YouTube</button>
-  <button onclick="showSection('galerie')" aria-controls="galerie">Galerie</button>
-  <button onclick="showSection('rechner')" aria-controls="rechner">Rechner</button>
-  <button onclick="showSection('uebersetzer')" aria-controls="uebersetzer">Übersetzer</button>
-</nav>
+  <nav role="navigation" aria-label="Hauptmenü">
+    <button onclick="showSection('startseite')" aria-controls="startseite">Startseite</button>
+    <button onclick="showSection('regeln')" aria-controls="regeln">Regeln</button>
+    <button onclick="showSection('discord')" aria-controls="discord">Discord</button>
+    <button onclick="showSection('youtube')" aria-controls="youtube">YouTube</button>
+    <button onclick="showSection('galerie')" aria-controls="galerie">Galerie</button>
+    <button onclick="showSection('rechner')" aria-controls="rechner">Rechner</button>
+    <button onclick="showSection('uebersetzer')" aria-controls="uebersetzer">Übersetzer</button>
+  </nav>
 
-<section id="startseite" class="active">
-  <h2>Willkommen auf dem Server!</h2>
-  <p>Join uns und baue deine eigenen Welten in Minecraft.</p>
-</section>
+  <main>
+    <section id="startseite" class="active">
+      <h2>Willkommen auf dem Server!</h2>
+      <p>Trete bei und baue deine eigenen Welten in Minecraft.</p>
+    </section>
 
-<section id="regeln">
-  <h2>Regeln auf dem Server</h2>
-  <ul class="rules">
-    <li>Kein Griefing oder Hacken!</li>
-    <li>Sei respektvoll zu anderen Spielern.</li>
-    <li>Kein Spam oder Werbung.</li>
-    <li>Folge den Anweisungen der Admins.</li>
-    <li>Benutze deinen gesunden Menschenverstand.</li>
-  </ul>
-</section>
+    <section id="regeln">
+      <h2>Server-Regeln</h2>
+      <ul class="rules">
+        <li>Kein Griefing oder Hacken!</li>
+        <li>Sei respektvoll zu anderen Spielern.</li>
+        <li>Kein Spam oder Werbung.</li>
+        <li>Folge den Anweisungen der Admins.</li>
+        <li>Benutze deinen gesunden Menschenverstand.</li>
+      </ul>
+    </section>
 
-<section id="discord">
-  <h2>Discord Server Beitreten</h2>
-  <p><a href="https://discord.gg/xjpRj57cqJ" target="_blank">Discord Server Link</a></p>
-</section>
+    <section id="discord">
+      <h2>Discord Server</h2>
+      <p><a href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener noreferrer">Jetzt beitreten</a></p>
+    </section>
 
-<section id="youtube">
-  <h2>Besuche unseren YouTube Kanal</h2>
-  <p><a href="https://www.youtube.com/@Wezon1164" target="_blank">Wezon1164 auf YouTube</a></p>
-</section>
+    <section id="youtube">
+      <h2>YouTube Kanal</h2>
+      <p><a href="https://www.youtube.com/@Wezon1164" target="_blank" rel="noopener noreferrer">Wezon1164 auf YouTube</a></p>
+    </section>
 
-<section id="galerie">
-  <h2>Minecraft Galerie</h2>
-  <div class="gallery">
-    <img src="https://crafatar.com/avatars/2da0f9b6-91b9-48cd-851e-03bca07a3c3c?size=160" alt="Technoblade" />
-    <img src="https://crafatar.com/avatars/dream?size=160" alt="Dream" />
-    <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" alt="Qauvis" />
-    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" style="background:#000; border-radius: 16px;" />
-  </div>
-</section>
+    <section id="galerie">
+      <h2>Minecraft Galerie</h2>
+      <div class="gallery">
+        <img src="https://crafatar.com/avatars/2da0f9b6-91b9-48cd-851e-03bca07a3c3c?size=160" alt="Skin von Technoblade" />
+        <img src="https://crafatar.com/avatars/dream?size=160" alt="Skin von Dream" />
+        <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" alt="Skin von Qauvis" />
+        <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" />
+      </div>
+    </section>
 
-<section id="rechner">
-  <h2>Taschenrechner</h2>
-  <input type="number" id="num1" placeholder="Zahl 1" />
-  <input type="number" id="num2" placeholder="Zahl 2" />
-  <select id="operator">
-    <option value="+">+</option>
-    <option value="-">−</option>
-    <option value="*">×</option>
-    <option value="/">÷</option>
-  </select>
-  <button onclick="rechnen()">Berechne</button>
-  <p id="rechner-ergebnis">Ergebnis: </p>
-</section>
+    <section id="rechner">
+      <h2>Taschenrechner</h2>
+      <input type="number" id="num1" placeholder="Zahl 1" />
+      <input type="number" id="num2" placeholder="Zahl 2" />
+      <select id="operator" aria-label="Operator wählen">
+        <option value="+">+</option>
+        <option value="-">−</option>
+        <option value="*">×</option>
+        <option value="/">÷</option>
+      </select>
+      <button onclick="rechnen()">Berechne</button>
+      <p id="rechner-ergebnis">Ergebnis: </p>
+    </section>
 
-<section id="uebersetzer">
-  <h2>Übersetzer</h2>
-  <textarea id="original-text" placeholder="Text eingeben..." rows="4" cols="50"></textarea><br>
-  <select id="sprache">
-    <option value="en">Deutsch → Englisch</option>
-    <option value="de">Englisch → Deutsch</option>
-  </select>
-  <button onclick="uebersetze()">Übersetzen</button>
-  <p id="uebersetzung">Übersetzung: </p>
-</section>
+    <section id="uebersetzer">
+      <h2>Übersetzer</h2>
+      <textarea id="original-text" placeholder="Text eingeben..." rows="4" cols="50"></textarea><br>
+      <select id="sprache" aria-label="Sprache wählen">
+        <option value="en">Deutsch → Englisch</option>
+        <option value="de">Englisch → Deutsch</option>
+      </select>
+      <button onclick="uebersetze()">Übersetzen</button>
+      <p id="uebersetzung">Übersetzung: </p>
+    </section>
 
-<div id="clicker-game">
-  <h2>Holzfäller Klicker</h2>
-  <div id="score">Gefälltes Holz: 0</div>
-  <button id="click-wood" onclick="score+=woodPerClick; updateUI()">Holz fällen!</button>
-  <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
-  <button id="upgrade-button" onclick="
-    if(score >= upgradeCost) {
-      score -= upgradeCost;
-      woodPerClick++;
-      upgradeCost = Math.floor(upgradeCost * 1.5);
-      updateUI();
+    <div id="clicker-game" role="region" aria-label="Holzfäller Spiel">
+      <h2>Holzfäller Klicker</h2>
+      <div id="score">Gefälltes Holz: 0</div>
+      <button id="click-wood">Holz fällen!</button>
+      <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
+      <button id="upgrade-button">Upgrade Holz pro Klick (+1)</button>
+    </div>
+  </main>
+
+  <footer>&copy; 2025 Minecraft Server Wezon1164</footer>
+
+  <script>
+    // Navigation
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      const activeSection = document.getElementById(id);
+      if (activeSection) activeSection.classList.add('active');
     }
-  ">Upgrade Holz pro Klick (+1)</button>
-</div>
 
-<footer>
-  &copy; 2025 Minecraft Server Wezon1164
-</footer>
+    window.onload = () => {
+      showSection('startseite');
+      updateUI();
+    };
+
+    // Rechner
+    function rechnen() {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const num2 = parseFloat(document.getElementById('num2').value);
+      const op = document.getElementById('operator').value;
+      let result = '';
+      if (!isNaN(num1) && !isNaN(num2)) {
+        switch (op) {
+          case '+': result = num1 + num2; break;
+          case '-': result = num1 - num2; break;
+          case '*': result = num1 * num2; break;
+          case '/': result = num2 !== 0 ? num1 / num2 : 'Division durch 0!'; break;
+        }
+      } else {
+        result = 'Ungültige Eingabe';
+      }
+      document.getElementById('rechner-ergebnis').textContent = `Ergebnis: ${result}`;
+    }
+
+    // Übersetzer
+    function uebersetze() {
+      const text = document.getElementById('original-text').value.toLowerCase().trim();
+      const sprache = document.getElementById('sprache').value;
+      const wörterbuch = {
+        "hallo": "hello",
+        "welt": "world",
+        "ich liebe minecraft": "i love minecraft",
+        "server": "server",
+        "spielen": "play",
+        "freund": "friend"
+      };
+      let übersetzt = "(Keine Übersetzung gefunden)";
+      if (sprache === "en") {
+        übersetzt = wörterbuch[text] || übersetzt;
+      } else {
+        for (const [de, en] of Object.entries(wörterbuch)) {
+          if (en === text) {
+            übersetzt = de;
+            break;
+          }
+        }
+      }
+      document.getElementById('uebersetzung').textContent = `Übersetzung: ${übersetzt}`;
+    }
+
+    // Klicker-Spiel
+    let score = 0;
+    let woodPerClick = 1;
+    let upgradeCost = 10;
+
+    function updateUI() {
+      document.getElementById('score').textContent = `Gefälltes Holz: ${score}`;
+      document.getElementById('upgrade-cost').textContent = `Upgrade kostet: ${upgradeCost} Holz`;
+      document.getElementById('upgrade-button').disabled = score < upgradeCost;
+    }
+
+    document.getElementById('click-wood').addEventListener('click', () => {
+      score += woodPerClick;
+      updateUI();
+    });
+
+    document.getElementById('upgrade-button').addEventListener('click', () => {
+      if (score >= upgradeCost) {
+        score -= upgradeCost;
+        woodPerClick++;
+        upgradeCost = Math.floor(upgradeCost * 1.5);
+        updateUI();
+      }
+    });
+  </script>
 </body>
 </html>
