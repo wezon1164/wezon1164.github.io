@@ -130,16 +130,11 @@ Du:
 
   /* Klicker-Spiel */
   #clicker-game {
-    background: #1a1a1a;
-    border: 2px solid #4caf50;
-    border-radius: 10px;
-    padding: 20px;
-    width: 300px;
-    margin: 40px auto 20px;
-    color: #a6f1a6;
-    font-family: 'Press Start 2P', cursive;
-    text-align: center;
-    box-shadow: 0 0 10px #4caf50;
+  function updateUI() {
+  scoreDisplay.textContent = `Gefälltes Holz: ${score}`;
+  upgradeCostDisplay.textContent = `Upgrade kostet: ${upgradeCost} Holz`;
+  upgradeButton.disabled = score < upgradeCost;
+}
   }
 
   #clicker-game h2 {
