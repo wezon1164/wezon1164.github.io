@@ -83,6 +83,8 @@
       font-size: 0.8em;
       color: #ccffcc;
     }
+<img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png"
+     alt="Creeper" title="Creeper" onclick="explodeCreeper(this)">
 
     .gallery {
       display: flex;
@@ -293,5 +295,35 @@ footer {
   animation: glitch 1.5s infinite;
 }
 
+  // Creeper Explosion Effekt
+function explodeCreeper(img) {
+  img.style.transition = "transform 0.5s ease";
+  img.style.transform = "scale(1.5) rotate(360deg)";
+  setTimeout(() => {
+    img.style.transform = "scale(0)";
+    setTimeout(() => {
+      img.style.display = "none";
+      alert("💥 Boom! Creeper explodiert!");
+    }, 300);
+  }, 500);
+}
+
+// Zufälliges Minecraft-Zitat
+const quotes = [
+  "„Everything not saved will be lost.“ – Nintendo Quit Screen",
+  "„Herobrine is watching you... 👁️“",
+  "„Creepers just want a hug. A deadly one.“",
+  "„Punching trees since 2009.“",
+  "„Don't dig straight down!“"
+];
+document.querySelector('#startseite p').textContent = quotes[Math.floor(Math.random() * quotes.length)];
+const clickSound = new Audio('https://www.myinstants.com/media/sounds/minecraft_click.mp3');
+clickWoodButton.addEventListener('click', () => {
+  score += woodPerClick;
+  clickSound.play();
+  updateUI();
+});
+
+  
 </body>
 </html>
