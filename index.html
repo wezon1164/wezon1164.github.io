@@ -276,6 +276,22 @@
       showSection('startseite');
       updateUI();
     };
-  </script>
+  </script>@keyframes glitch {
+  0% { text-shadow: 2px 0 red; }
+  20% { text-shadow: -2px 0 cyan; }
+  40% { text-shadow: 2px 0 blue; }
+  60% { text-shadow: -2px 0 lime; }
+  80% { text-shadow: 2px 0 magenta; }
+  100% { text-shadow: -2px 0 yellow; }
+}
+
+nav button:hover {
+  animation: glitch 0.3s infinite;
+}
+
+footer {
+  animation: glitch 1.5s infinite;
+}
+
 </body>
 </html>
