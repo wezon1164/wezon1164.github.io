@@ -5,15 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Minecraft Webseite Wezon1164</title>
 
-  <!-- Google Fonts -->
+  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 
   <style>
-    /* Basic Styles */
     body {
       margin: 0;
       font-family: 'Press Start 2P', cursive;
-      background: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png/revision/latest?cb=20200930021101') repeat;
+      background: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png') repeat;
       background-size: 100px 100px;
       color: #0f0;
       text-shadow: 0 0 5px #00ff00;
@@ -31,10 +30,8 @@
       text-align: center;
       padding: 25px;
       font-size: 1.5em;
-      text-shadow: 0 0 10px #0f0;
       animation: glitch 1.5s infinite;
       position: relative;
-      z-index: 10;
     }
 
     .glitch-button {
@@ -47,8 +44,6 @@
       padding: 6px 12px;
       border-radius: 10px;
       cursor: pointer;
-      z-index: 11;
-      font-family: inherit;
     }
 
     nav {
@@ -57,8 +52,6 @@
       justify-content: center;
       background-color: #111;
       padding: 15px;
-      position: relative;
-      z-index: 10;
     }
 
     nav button {
@@ -70,8 +63,8 @@
       border-radius: 8px;
       cursor: pointer;
       font-family: inherit;
-      transition: 0.3s;
     }
+
     nav button:hover {
       background-color: #0f0;
       color: #003300;
@@ -95,11 +88,8 @@
       padding: 20px;
       box-shadow: 0 0 15px #0f0;
       display: none;
-      width: 90%;
       color: #aaffaa;
       font-size: 0.85em;
-      position: relative;
-      z-index: 12;
     }
 
     section.active {
@@ -112,8 +102,18 @@
       margin-bottom: 15px;
     }
 
-    /* Mehr Sections und Styles kannst du easy kopieren und anpassen */
+    #clickCount {
+      font-size: 2em;
+      text-align: center;
+      margin: 10px;
+    }
 
+    input, select {
+      font-family: inherit;
+      font-size: 0.8em;
+      padding: 6px;
+      margin: 5px;
+    }
   </style>
 </head>
 <body>
@@ -150,18 +150,96 @@
     </ul>
   </section>
 
-  <!-- Add more sections here as you like -->
+  <section id="discord">
+    <h2>Unser Discord Server</h2>
+    <p>Join uns auf Discord: <a href="https://discord.gg/deinserver" target="_blank">discord.gg/deinserver</a></p>
+  </section>
+
+  <section id="youtube">
+    <h2>YouTube Channel</h2>
+    <p>Abonnier uns auf YouTube: <a href="https://youtube.com/@deinChannel" target="_blank">@deinChannel</a></p>
+  </section>
+
+  <section id="galerie">
+    <h2>Galerie</h2>
+    <p>Bilder von coolen Momenten auf dem Server!</p>
+    <img src="https://i.imgur.com/Ot5DWAW.png" alt="Minecraft Screenshot" width="100%">
+  </section>
+
+  <section id="clicker">
+    <h2>Clicker Game</h2>
+    <div id="clickCount">0</div>
+    <button onclick="clickMe()">Click mich!</button>
+  </section>
+
+  <section id="rechner">
+    <h2>Rechner</h2>
+    <input type="number" id="zahl1" placeholder="Zahl 1">
+    <input type="number" id="zahl2" placeholder="Zahl 2">
+    <select id="operation">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+    </select>
+    <button onclick="rechnen()">Berechnen</button>
+    <div id="ergebnis"></div>
+  </section>
+
+  <section id="translator">
+    <h2>Übersetzer (Mini-Version)</h2>
+    <input type="text" id="textToTranslate" placeholder="Text auf Deutsch">
+    <button onclick="translate()">Englisch</button>
+    <div id="translatedText"></div>
+  </section>
+
+  <section id="settings">
+    <h2>Settings</h2>
+    <p>Hier kannst du später Optionen ändern. Aktuell nur Dark/Light Mode.</p>
+  </section>
 
   <script>
-    // Section switchen
     function showSection(id) {
       document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
       document.getElementById(id).classList.add('active');
     }
 
-    // Dark/Light Mode toggle
     function toggleMode() {
       document.body.classList.toggle('light-mode');
+    }
+
+    let count = 0;
+    function clickMe() {
+      count++;
+      document.getElementById("clickCount").innerText = count;
+    }
+
+    function rechnen() {
+      const a = parseFloat(document.getElementById("zahl1").value);
+      const b = parseFloat(document.getElementById("zahl2").value);
+      const op = document.getElementById("operation").value;
+      let result;
+      if (!isNaN(a) && !isNaN(b)) {
+        switch (op) {
+          case '+': result = a + b; break;
+          case '-': result = a - b; break;
+          case '*': result = a * b; break;
+          case '/': result = b !== 0 ? a / b : "Fehler: Division durch 0"; break;
+        }
+        document.getElementById("ergebnis").innerText = "Ergebnis: " + result;
+      }
+    }
+
+    function translate() {
+      const text = document.getElementById("textToTranslate").value.toLowerCase();
+      const words = {
+        "hallo": "hello",
+        "welt": "world",
+        "spieler": "player",
+        "minecraft": "minecraft"
+      };
+      const translated = text.split(" ").map(word => words[word] || word).join(" ");
+      document.getElementById("translatedText").innerText = translated;
     }
   </script>
 </body>
