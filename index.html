@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Minecraft Server Wezon1164</title>
+  <title>Minecraft Webseite Wezon1164</title>
 
   <!-- OG & Fonts -->
   <meta name="description" content="Minecraft Server Wezon1164 – Regeln, Galerie, Discord & YouTube." />
   <meta name="author" content="Wezon1164" />
-  <meta property="og:title" content="Minecraft Server Wezon1164" />
+  <meta property="og:title" content="Minecraft Webseite Wezon1164" />
   <meta property="og:description" content="Trete dem Server bei und entdecke unsere Community!" />
   <meta property="og:image" content="https://example.com/screenshot.png" />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 
-  <!-- Dark/Light Toggle Styles & Regen -->
   <style>
     body {
       margin: 0;
@@ -95,21 +94,137 @@
       animation: glitch 0.3s infinite;
     }
 
-    @keyframes glitch {
-      0% { text-shadow: 2px 0 red; }
-      20% { text-shadow: -2px 0 cyan; }
-      40% { text-shadow: 2px 0 blue; }
-      60% { text-shadow: -2px 0 lime; }
-      80% { text-shadow: 2px 0 magenta; }
-      100% { text-shadow: -2px 0 yellow; }
+    section {
+      max-width: 900px;
+      margin: 25px auto;
+      background: #111;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 15px #0f0;
+      display: none;
+      width: 90%;
+      color: #aaffaa;
+      font-size: 0.85em;
     }
+
+    section.active {
+      display: block;
+    }
+
+    h2 {
+      color: #0f0;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    /* Besucher Counter */
+    #visitor-counter {
+      text-align: center;
+      font-size: 1em;
+      margin-bottom: 20px;
+      color: #0f0;
+      text-shadow: 0 0 5px #00ff00;
+    }
+
+    /* Skin Preview */
+    #skin-preview {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    #skin-url {
+      width: 100%;
+      max-width: 400px;
+      padding: 8px;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.8em;
+      border-radius: 8px;
+      border: 2px solid #0f0;
+      background: #111;
+      color: #aaffaa;
+      margin-bottom: 10px;
+    }
+
+    #skin-head {
+      margin-top: 10px;
+      border: 4px solid #0f0;
+      border-radius: 16px;
+      width: 160px;
+      height: 160px;
+      background-color: #222;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 10px #0f0;
+    }
+
+    /* Chat */
+    #chat-box {
+      background: #222;
+      border: 2px solid #0f0;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: 0 auto 20px;
+      height: 250px;
+      overflow-y: auto;
+      padding: 10px;
+      font-size: 0.8em;
+      color: #aaffaa;
+      box-shadow: 0 0 10px #0f0;
+    }
+
+    #chat-input-container {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    #chat-input {
+      flex-grow: 1;
+      padding: 8px;
+      border-radius: 8px;
+      border: 2px solid #0f0;
+      background: #111;
+      color: #aaffaa;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.8em;
+    }
+
+    #chat-send {
+      background: #003300;
+      border: 2px solid #0f0;
+      color: #aaffaa;
+      font-family: inherit;
+      padding: 8px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    #chat-send:hover {
+      background-color: #0f0;
+      color: #003300;
+    }
+
+    /* Creeper Easter Egg */
+    .creeper-img {
+      cursor: pointer;
+      display: block;
+      margin: 10px auto;
+      width: 120px;
+      transition: transform 0.5s ease;
+    }
+
   </style>
 </head>
 
 <body>
   <div class="rain"></div>
+
   <header>
-    Minecraft Server Wezon1164
+    Minecraft Webseite Wezon1164
     <button class="glitch-button" onclick="toggleMode()">🌗 Mode</button>
   </header>
 
@@ -121,3 +236,160 @@
     <button onclick="showSection('galerie')">Galerie</button>
     <button onclick="showSection('settings')">⚙️ Settings</button>
   </nav>
+
+  <!-- Startseite -->
+  <section id="startseite" class="active">
+    <h2>Willkommen auf dem Server!</h2>
+    <p id="random-quote">Minecraft ist Liebe, Minecraft ist Leben.</p>
+    <div class="ip-copy">
+      <p><strong>Server-IP:</strong> <span id="server-ip">play.wezon1164.de</span></p>
+      <button onclick="copyIP()">IP kopieren</button>
+    </div>
+    <div id="visitor-counter"></div>
+  </section>
+
+  <!-- Regeln -->
+  <section id="regeln">
+    <h2>Regeln auf dem Server</h2>
+    <ul class="rules">
+      <li>Kein Griefing oder Hacken!</li>
+      <li>Sei respektvoll zu anderen Spielern.</li>
+      <li>Kein Spam oder Werbung.</li>
+      <li>Folge den Anweisungen der Admins.</li>
+      <li>Benutze deinen gesunden Menschenverstand.</li>
+    </ul>
+  </section>
+
+  <!-- Discord -->
+  <section id="discord">
+    <h2>Discord Server Beitreten</h2>
+    <p><a href="https://discord.gg/xjpRj57cqJ" target="_blank" style="color:#0f0;">Discord Server Link</a></p>
+  </section>
+
+  <!-- YouTube -->
+  <section id="youtube">
+    <h2>YouTube Kanal</h2>
+    <p><a href="https://www.youtube.com/@Wezon1164" target="_blank" style="color:#0f0;">Wezon1164 auf YouTube</a></p>
+  </section>
+
+  <!-- Galerie -->
+  <section id="galerie">
+    <h2>Minecraft Galerie</h2>
+    <div class="gallery">
+      <img src="https://crafatar.com/avatars/2da0f9b6-91b9-48cd-851e-03bca07a3c3c?size=160" alt="Technoblade" title="Technoblade">
+      <img src="https://crafatar.com/avatars/dream?size=160" alt="Dream" title="Dream">
+      <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" alt="Qauvis" title="Qauvis">
+      <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" title="Creeper" class="creeper-img" onclick="explodeCreeper(this)">
+    </div>
+
+    <div id="skin-preview">
+      <h3>Minecraft Skin Preview</h3>
+      <input id="skin-url" type="text" placeholder="Skin URL hier einfügen..." />
+      <div id="skin-head"></div>
+      <button onclick="loadSkin()">Skin laden</button>
+    </div>
+  </section>
+
+  <!-- Settings / Chat -->
+  <section id="settings">
+    <h2>Community Chat & Settings</h2>
+    <div id="chat-box"></div>
+    <div id="chat-input-container">
+      <input id="chat-input" type="text" placeholder="Schreib was, Digga!" />
+      <button id="chat-send">Senden</button>
+    </div>
+  </section>
+
+  <script>
+    // Abschnitte wechseln
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id)?.classList.add('active');
+    }
+
+    // IP kopieren
+    function copyIP() {
+      const ip = document.getElementById('server-ip').textContent;
+      navigator.clipboard.writeText(ip).then(() => alert('Server-IP kopiert!'));
+    }
+
+    // Zufälliges Minecraft-Zitat
+    const quotes = [
+      "„Everything not saved will be lost.“ – Nintendo Quit Screen",
+      "„Herobrine is watching you... 👁️“",
+      "„Creepers just want a hug. A deadly one.“",
+      "„Punching trees since 2009.“",
+      "„Don't dig straight down!“"
+    ];
+    document.getElementById("random-quote").textContent = quotes[Math.floor(Math.random() * quotes.length)];
+
+    // Creeper Explosion Easter Egg
+    function explodeCreeper(img) {
+      img.style.transform = "scale(1.5) rotate(360deg)";
+      setTimeout(() => {
+        img.style.transform = "scale(0)";
+        setTimeout(() => {
+          img.style.display = "none";
+          alert("💥 Boom! Creeper explodiert!");
+        }, 300);
+      }, 500);
+    }
+
+    // Dark/Light Mode Toggle
+    function toggleMode() {
+      document.body.classList.toggle('light-mode');
+    }
+
+    // Besucher-Counter (lokal, fake aber fresh)
+    let visitors = localStorage.getItem('visitors') || 0;
+    visitors++;
+    localStorage.setItem('visitors', visitors);
+    document.getElementById('visitor-counter').textContent = `🔥 Besucher bisher: ${visitors}`;
+
+    // Minecraft Skin laden
+    function loadSkin() {
+      const url = document.getElementById('skin-url').value.trim();
+      if(!url) return alert('Digga, erst Skin URL reinballern!');
+      const headDiv = document.getElementById('skin-head');
+      // Clear old
+      headDiv.innerHTML = '';
+      // Skin-Avatar von crafatar.com anzeigen
+      // Beispiel URL: https://crafatar.com/avatars/<uuid>?size=160
+      // Hier nehmen wir direkt die eingegebene URL
+      const img = document.createElement('img');
+      img.src = url;
+      img.alt = 'Minecraft Skin Head';
+      img.style.width = '160px';
+      img.style.height = '160px';
+      img.style.borderRadius = '16px';
+      headDiv.appendChild(img);
+    }
+
+    // Einfacher Chat (nur lokal, no server)
+    const chatBox = document.getElementById('chat-box');
+    const chatInput = document.getElementById('chat-input');
+    const chatSend = document.getElementById('chat-send');
+
+    chatSend.addEventListener('click', () => {
+      sendMessage();
+    });
+
+    chatInput.addEventListener('keydown', e => {
+      if(e.key === 'Enter') sendMessage();
+    });
+
+    function sendMessage() {
+      const text = chatInput.value.trim();
+      if(!text) return;
+      const msg = document.createElement('div');
+      msg.textContent = `Du: ${text}`;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+      chatInput.value = '';
+    }
+
+    // Standardmäßig Startseite zeigen
+    showSection('startseite');
+  </script>
+</body>
+</html>
