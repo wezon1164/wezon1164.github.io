@@ -4,14 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Minecraft Server Wezon1164</title>
+
+  <!-- OG & Fonts -->
   <meta name="description" content="Minecraft Server Wezon1164 – Regeln, Galerie, Discord & YouTube." />
   <meta name="author" content="Wezon1164" />
   <meta property="og:title" content="Minecraft Server Wezon1164" />
   <meta property="og:description" content="Trete dem Server bei und entdecke unsere Community!" />
   <meta property="og:image" content="https://example.com/screenshot.png" />
-
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 
+  <!-- Dark/Light Toggle Styles & Regen -->
   <style>
     body {
       margin: 0;
@@ -19,6 +21,24 @@
       background-color: #000;
       color: #fff;
       text-shadow: 0 0 5px #00ff00;
+      overflow-x: hidden;
+    }
+
+    body.light-mode {
+      background-color: #f0f0f0;
+      color: #000;
+      text-shadow: none;
+    }
+
+    .rain {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      background-image: url('https://i.imgur.com/NM3F4Vo.gif');
+      opacity: 0.15;
+      z-index: 0;
     }
 
     header {
@@ -28,6 +48,23 @@
       font-size: 1.5em;
       color: #0f0;
       text-shadow: 0 0 10px #0f0;
+      animation: glitch 1.5s infinite;
+      position: relative;
+      z-index: 2;
+    }
+
+    .glitch-button {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      background: #003300;
+      border: 2px solid #0f0;
+      color: #aaffaa;
+      font-family: inherit;
+      padding: 6px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 3;
     }
 
     nav {
@@ -36,6 +73,8 @@
       justify-content: center;
       background-color: #111;
       padding: 15px;
+      z-index: 2;
+      position: relative;
     }
 
     nav button {
@@ -56,115 +95,6 @@
       animation: glitch 0.3s infinite;
     }
 
-    section {
-      max-width: 900px;
-      margin: 25px auto;
-      background: #111;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 0 15px #0f0;
-      display: none;
-      width: 90%;
-    }
-
-    section.active {
-      display: block;
-    }
-
-    h2 {
-      color: #0f0;
-      text-align: center;
-      margin-bottom: 15px;
-    }
-
-    ul.rules {
-      list-style-type: disc;
-      margin-left: 25px;
-      font-size: 0.8em;
-      color: #ccffcc;
-    }
-
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-    }
-
-    .gallery img {
-      width: 100%;
-      max-width: 160px;
-      height: auto;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 2px solid #0f0;
-      box-shadow: 0 0 10px #0f0;
-      transition: transform 0.3s;
-      cursor: pointer;
-      background-color: #222;
-    }
-
-    .gallery img:hover {
-      transform: scale(1.1);
-    }
-
-    footer {
-      text-align: center;
-      color: #0f0;
-      font-size: 0.7em;
-      margin: 20px 0;
-      animation: glitch 1.5s infinite;
-    }
-
-    #clicker-game {
-      background: #1a1a1a;
-      border: 2px solid #4caf50;
-      border-radius: 10px;
-      padding: 20px;
-      width: 90%;
-      max-width: 300px;
-      margin: 40px auto 20px;
-      color: #a6f1a6;
-      text-align: center;
-      box-shadow: 0 0 10px #4caf50;
-    }
-
-    #clicker-game button {
-      background-color: #4caf50;
-      border: none;
-      color: white;
-      font-size: 14px;
-      padding: 10px;
-      margin: 8px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    #clicker-game button:hover:not(:disabled) {
-      background-color: #36b636;
-    }
-
-    #clicker-game button:disabled {
-      background-color: #888;
-      cursor: not-allowed;
-    }
-
-    .ip-copy {
-      text-align: center;
-      margin: 20px 0;
-    }
-
-    .ip-copy button {
-      background: #003300;
-      border: 2px solid #0f0;
-      color: #aaffaa;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-family: inherit;
-      cursor: pointer;
-    }
-
     @keyframes glitch {
       0% { text-shadow: 2px 0 red; }
       20% { text-shadow: -2px 0 cyan; }
@@ -175,8 +105,13 @@
     }
   </style>
 </head>
+
 <body>
-  <header>Minecraft Server Wezon1164</header>
+  <div class="rain"></div>
+  <header>
+    Minecraft Server Wezon1164
+    <button class="glitch-button" onclick="toggleMode()">🌗 Mode</button>
+  </header>
 
   <nav>
     <button onclick="showSection('startseite')">Startseite</button>
@@ -184,136 +119,5 @@
     <button onclick="showSection('discord')">Discord</button>
     <button onclick="showSection('youtube')">YouTube</button>
     <button onclick="showSection('galerie')">Galerie</button>
+    <button onclick="showSection('settings')">⚙️ Settings</button>
   </nav>
-
-  <section id="startseite" class="active">
-    <h2>Willkommen auf dem Server!</h2>
-    <p id="random-quote">Minecraft ist Liebe, Minecraft ist Leben.</p>
-    <div class="ip-copy">
-      <p><strong>Server-IP:</strong> <span id="server-ip">play.wezon1164.de</span></p>
-      <button onclick="copyIP()">IP kopieren</button>
-    </div>
-  </section>
-
-  <section id="regeln">
-    <h2>Regeln auf dem Server</h2>
-    <ul class="rules">
-      <li>Kein Griefing oder Hacken!</li>
-      <li>Sei respektvoll zu anderen Spielern.</li>
-      <li>Kein Spam oder Werbung.</li>
-      <li>Folge den Anweisungen der Admins.</li>
-      <li>Benutze deinen gesunden Menschenverstand.</li>
-    </ul>
-  </section>
-
-  <section id="discord">
-    <h2>Discord Server Beitreten</h2>
-    <p><a href="https://discord.gg/xjpRj57cqJ" target="_blank">Discord Server Link</a></p>
-  </section>
-
-  <section id="youtube">
-    <h2>YouTube Kanal</h2>
-    <p><a href="https://www.youtube.com/@Wezon1164" target="_blank">Wezon1164 auf YouTube</a></p>
-  </section>
-
-  <section id="galerie">
-    <h2>Minecraft Galerie</h2>
-    <div class="gallery">
-      <img src="https://crafatar.com/avatars/2da0f9b6-91b9-48cd-851e-03bca07a3c3c?size=160" alt="Technoblade" title="Technoblade">
-      <img src="https://crafatar.com/avatars/dream?size=160" alt="Dream" title="Dream">
-      <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" alt="Qauvis" title="Qauvis">
-      <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" title="Creeper" onclick="explodeCreeper(this)">
-    </div>
-  </section>
-
-  <div id="clicker-game">
-    <h2>Holzfäller Klicker</h2>
-    <div id="score">Gefälltes Holz: 0</div>
-    <button id="click-wood">Holz fällen!</button>
-    <div id="upgrade-cost">Upgrade kostet: 10 Holz</div>
-    <button id="upgrade-button">Upgrade Holz pro Klick (+1)</button>
-  </div>
-
-  <footer>&copy; 2025 Minecraft Server Wezon1164</footer>
-
-  <script>
-    // Abschnitt wechseln
-    function showSection(id) {
-      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id)?.classList.add('active');
-    }
-
-    // IP kopieren
-    function copyIP() {
-      const ip = document.getElementById('server-ip').textContent;
-      navigator.clipboard.writeText(ip).then(() => alert('Server-IP kopiert!'));
-    }
-
-    // Zufälliges Minecraft-Zitat
-    const quotes = [
-      "„Everything not saved will be lost.“ – Nintendo Quit Screen",
-      "„Herobrine is watching you... 👁️“",
-      "„Creepers just want a hug. A deadly one.“",
-      "„Punching trees since 2009.“",
-      "„Don't dig straight down!“"
-    ];
-    document.getElementById("random-quote").textContent = quotes[Math.floor(Math.random() * quotes.length)];
-
-    // Creeper-Explosion
-    function explodeCreeper(img) {
-      img.style.transition = "transform 0.5s ease";
-      img.style.transform = "scale(1.5) rotate(360deg)";
-      setTimeout(() => {
-        img.style.transform = "scale(0)";
-        setTimeout(() => {
-          img.style.display = "none";
-          alert("💥 Boom! Creeper explodiert!");
-        }, 300);
-      }, 500);
-    }
-
-    // Clicker-Game Logik
-    let score = 0;
-    let woodPerClick = 1;
-    let upgradeCost = 10;
-
-    const scoreDisplay = document.getElementById('score');
-    const upgradeCostDisplay = document.getElementById('upgrade-cost');
-    const upgradeButton = document.getElementById('upgrade-button');
-    const clickWoodButton = document.getElementById('click-wood');
-    const clickSound = new Audio('https://www.myinstants.com/media/sounds/minecraft_click.mp3');
-
-    function updateUI() {
-      scoreDisplay.textContent = `Gefälltes Holz: ${score}`;
-      upgradeCostDisplay.textContent = `Upgrade kostet: ${upgradeCost} Holz`;
-      upgradeButton.disabled = score < upgradeCost;
-      localStorage.setItem('clickerData', JSON.stringify({ score, woodPerClick, upgradeCost }));
-    }
-
-    clickWoodButton.addEventListener('click', () => {
-      score += woodPerClick;
-      clickSound.play();
-      updateUI();
-    });
-
-    upgradeButton.addEventListener('click', () => {
-      if (score >= upgradeCost) {
-        score -= upgradeCost;
-        woodPerClick++;
-        upgradeCost = Math.floor(upgradeCost * 1.5);
-        updateUI();
-      }
-    });
-
-    window.onload = () => {
-      const saved = JSON.parse(localStorage.getItem('clickerData'));
-      if (saved) {
-        score = saved.score;
-        woodPerClick = saved.woodPerClick;
-        upgradeCost = saved.upgradeCost;
-      }
-      updateUI();
-    };
-  </script>
-</body>
-</html>
