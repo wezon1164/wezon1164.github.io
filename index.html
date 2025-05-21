@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Minecraft Webseite Wezon1164</title>
+  <title>Minecraft Server Wezon1164</title>
   <meta name="description" content="Minecraft Server Wezon1164 – Regeln, Galerie, Discord & YouTube." />
   <meta name="author" content="Wezon1164" />
   <meta property="og:title" content="Minecraft Server Wezon1164" />
   <meta property="og:description" content="Trete dem Server bei und entdecke unsere Community!" />
   <meta property="og:image" content="https://example.com/screenshot.png" />
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+
+  <style>
     body {
       margin: 0;
       font-family: 'Press Start 2P', cursive;
@@ -49,11 +50,10 @@
       transition: background-color 0.3s, color 0.3s;
     }
 
-    nav button:hover,
-    nav button:focus {
+    nav button:hover {
       background-color: #0f0;
       color: #003300;
-      outline: none;
+      animation: glitch 0.3s infinite;
     }
 
     section {
@@ -83,8 +83,6 @@
       font-size: 0.8em;
       color: #ccffcc;
     }
-<img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png"
-     alt="Creeper" title="Creeper" onclick="explodeCreeper(this)">
 
     .gallery {
       display: flex;
@@ -115,6 +113,7 @@
       color: #0f0;
       font-size: 0.7em;
       margin: 20px 0;
+      animation: glitch 1.5s infinite;
     }
 
     #clicker-game {
@@ -155,6 +154,7 @@
       text-align: center;
       margin: 20px 0;
     }
+
     .ip-copy button {
       background: #003300;
       border: 2px solid #0f0;
@@ -164,10 +164,20 @@
       font-family: inherit;
       cursor: pointer;
     }
+
+    @keyframes glitch {
+      0% { text-shadow: 2px 0 red; }
+      20% { text-shadow: -2px 0 cyan; }
+      40% { text-shadow: 2px 0 blue; }
+      60% { text-shadow: -2px 0 lime; }
+      80% { text-shadow: 2px 0 magenta; }
+      100% { text-shadow: -2px 0 yellow; }
+    }
   </style>
 </head>
 <body>
   <header>Minecraft Server Wezon1164</header>
+
   <nav>
     <button onclick="showSection('startseite')">Startseite</button>
     <button onclick="showSection('regeln')">Regeln</button>
@@ -178,7 +188,7 @@
 
   <section id="startseite" class="active">
     <h2>Willkommen auf dem Server!</h2>
-    <p>Join uns und baue deine eigenen Welten in Minecraft.</p>
+    <p id="random-quote">Minecraft ist Liebe, Minecraft ist Leben.</p>
     <div class="ip-copy">
       <p><strong>Server-IP:</strong> <span id="server-ip">play.wezon1164.de</span></p>
       <button onclick="copyIP()">IP kopieren</button>
@@ -212,7 +222,7 @@
       <img src="https://crafatar.com/avatars/2da0f9b6-91b9-48cd-851e-03bca07a3c3c?size=160" alt="Technoblade" title="Technoblade">
       <img src="https://crafatar.com/avatars/dream?size=160" alt="Dream" title="Dream">
       <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" alt="Qauvis" title="Qauvis">
-      <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" title="Creeper">
+      <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" title="Creeper" onclick="explodeCreeper(this)">
     </div>
   </section>
 
@@ -227,17 +237,42 @@
   <footer>&copy; 2025 Minecraft Server Wezon1164</footer>
 
   <script>
+    // Abschnitt wechseln
     function showSection(id) {
       document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
       document.getElementById(id)?.classList.add('active');
     }
 
+    // IP kopieren
     function copyIP() {
       const ip = document.getElementById('server-ip').textContent;
       navigator.clipboard.writeText(ip).then(() => alert('Server-IP kopiert!'));
     }
 
-    // Clicker-Spiel
+    // Zufälliges Minecraft-Zitat
+    const quotes = [
+      "„Everything not saved will be lost.“ – Nintendo Quit Screen",
+      "„Herobrine is watching you... 👁️“",
+      "„Creepers just want a hug. A deadly one.“",
+      "„Punching trees since 2009.“",
+      "„Don't dig straight down!“"
+    ];
+    document.getElementById("random-quote").textContent = quotes[Math.floor(Math.random() * quotes.length)];
+
+    // Creeper-Explosion
+    function explodeCreeper(img) {
+      img.style.transition = "transform 0.5s ease";
+      img.style.transform = "scale(1.5) rotate(360deg)";
+      setTimeout(() => {
+        img.style.transform = "scale(0)";
+        setTimeout(() => {
+          img.style.display = "none";
+          alert("💥 Boom! Creeper explodiert!");
+        }, 300);
+      }, 500);
+    }
+
+    // Clicker-Game Logik
     let score = 0;
     let woodPerClick = 1;
     let upgradeCost = 10;
@@ -246,6 +281,7 @@
     const upgradeCostDisplay = document.getElementById('upgrade-cost');
     const upgradeButton = document.getElementById('upgrade-button');
     const clickWoodButton = document.getElementById('click-wood');
+    const clickSound = new Audio('https://www.myinstants.com/media/sounds/minecraft_click.mp3');
 
     function updateUI() {
       scoreDisplay.textContent = `Gefälltes Holz: ${score}`;
@@ -256,6 +292,7 @@
 
     clickWoodButton.addEventListener('click', () => {
       score += woodPerClick;
+      clickSound.play();
       updateUI();
     });
 
@@ -275,55 +312,8 @@
         woodPerClick = saved.woodPerClick;
         upgradeCost = saved.upgradeCost;
       }
-      showSection('startseite');
       updateUI();
     };
-  </script>@keyframes glitch {
-  0% { text-shadow: 2px 0 red; }
-  20% { text-shadow: -2px 0 cyan; }
-  40% { text-shadow: 2px 0 blue; }
-  60% { text-shadow: -2px 0 lime; }
-  80% { text-shadow: 2px 0 magenta; }
-  100% { text-shadow: -2px 0 yellow; }
-}
-
-nav button:hover {
-  animation: glitch 0.3s infinite;
-}
-
-footer {
-  animation: glitch 1.5s infinite;
-}
-
-  // Creeper Explosion Effekt
-function explodeCreeper(img) {
-  img.style.transition = "transform 0.5s ease";
-  img.style.transform = "scale(1.5) rotate(360deg)";
-  setTimeout(() => {
-    img.style.transform = "scale(0)";
-    setTimeout(() => {
-      img.style.display = "none";
-      alert("💥 Boom! Creeper explodiert!");
-    }, 300);
-  }, 500);
-}
-
-// Zufälliges Minecraft-Zitat
-const quotes = [
-  "„Everything not saved will be lost.“ – Nintendo Quit Screen",
-  "„Herobrine is watching you... 👁️“",
-  "„Creepers just want a hug. A deadly one.“",
-  "„Punching trees since 2009.“",
-  "„Don't dig straight down!“"
-];
-document.querySelector('#startseite p').textContent = quotes[Math.floor(Math.random() * quotes.length)];
-const clickSound = new Audio('https://www.myinstants.com/media/sounds/minecraft_click.mp3');
-clickWoodButton.addEventListener('click', () => {
-  score += woodPerClick;
-  clickSound.play();
-  updateUI();
-});
-
-  
+  </script>
 </body>
 </html>
