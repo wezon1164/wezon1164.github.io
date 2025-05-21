@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Minecraft Webseite Wezon1164</title>
 
-  <!-- Fonts -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 
   <style>
-    /* Basics */
+    /* Basic Styles */
     body {
       margin: 0;
       font-family: 'Press Start 2P', cursive;
@@ -19,7 +19,6 @@
       text-shadow: 0 0 5px #00ff00;
       overflow-x: hidden;
     }
-
     body.light-mode {
       background: #f0f0f0;
       color: #000;
@@ -28,10 +27,10 @@
 
     header {
       background-color: #111;
+      color: #0f0;
       text-align: center;
       padding: 25px;
       font-size: 1.5em;
-      color: #0f0;
       text-shadow: 0 0 10px #0f0;
       animation: glitch 1.5s infinite;
       position: relative;
@@ -45,11 +44,11 @@
       background: #003300;
       border: 2px solid #0f0;
       color: #aaffaa;
-      font-family: inherit;
       padding: 6px 12px;
       border-radius: 10px;
       cursor: pointer;
       z-index: 11;
+      font-family: inherit;
     }
 
     nav {
@@ -58,22 +57,21 @@
       justify-content: center;
       background-color: #111;
       padding: 15px;
-      z-index: 10;
       position: relative;
+      z-index: 10;
     }
 
     nav button {
       background-color: #003300;
       border: 2px solid #0f0;
       color: #aaffaa;
-      font-family: inherit;
-      cursor: pointer;
       margin: 6px;
       padding: 10px 18px;
       border-radius: 8px;
-      transition: background-color 0.3s, color 0.3s;
+      cursor: pointer;
+      font-family: inherit;
+      transition: 0.3s;
     }
-
     nav button:hover {
       background-color: #0f0;
       color: #003300;
@@ -114,244 +112,12 @@
       margin-bottom: 15px;
     }
 
-    /* Besucher Counter */
-    #visitor-counter {
-      text-align: center;
-      font-size: 1em;
-      margin-bottom: 20px;
-      color: #0f0;
-      text-shadow: 0 0 5px #00ff00;
-    }
-
-    /* Skin Preview */
-    #skin-preview {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    #skin-url {
-      width: 100%;
-      max-width: 400px;
-      padding: 8px;
-      font-family: 'Press Start 2P', cursive;
-      font-size: 0.8em;
-      border-radius: 8px;
-      border: 2px solid #0f0;
-      background: #111;
-      color: #aaffaa;
-      margin-bottom: 10px;
-    }
-
-    #skin-head {
-      margin-top: 10px;
-      border: 4px solid #0f0;
-      border-radius: 16px;
-      width: 160px;
-      height: 160px;
-      background-color: #222;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: 0 0 10px #0f0;
-    }
-
-    /* Chat */
-    #chat-box {
-      background: #222;
-      border: 2px solid #0f0;
-      border-radius: 12px;
-      max-width: 600px;
-      margin: 0 auto 20px;
-      height: 250px;
-      overflow-y: auto;
-      padding: 10px;
-      font-size: 0.8em;
-      color: #aaffaa;
-      box-shadow: 0 0 10px #0f0;
-    }
-
-    #chat-input-container {
-      max-width: 600px;
-      margin: 0 auto;
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 40px;
-    }
-
-    #chat-input {
-      flex-grow: 1;
-      padding: 8px;
-      border-radius: 8px;
-      border: 2px solid #0f0;
-      background: #111;
-      color: #aaffaa;
-      font-family: 'Press Start 2P', cursive;
-      font-size: 0.8em;
-    }
-
-    #chat-send {
-      background: #003300;
-      border: 2px solid #0f0;
-      color: #aaffaa;
-      font-family: inherit;
-      padding: 8px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    #chat-send:hover {
-      background-color: #0f0;
-      color: #003300;
-    }
-
-    /* Creeper Easter Egg */
-    .creeper-img {
-      cursor: pointer;
-      display: block;
-      margin: 10px auto;
-      width: 120px;
-      transition: transform 0.5s ease;
-    }
-
-    /* Clicker Game */
-    #clicker {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    #clicker button {
-      background-color: #004400;
-      border: 2px solid #0f0;
-      color: #aaffaa;
-      font-family: inherit;
-      padding: 15px 30px;
-      font-size: 1.2em;
-      border-radius: 12px;
-      cursor: pointer;
-      box-shadow: 0 0 10px #0f0;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    #clicker button:hover {
-      background-color: #0f0;
-      color: #004400;
-    }
-
-    #clicker-count {
-      font-size: 1.5em;
-      margin-top: 10px;
-      color: #0f0;
-      text-shadow: 0 0 8px #00ff00;
-    }
-
-    /* Rechner */
-    #rechner {
-      background: #000;
-      color: #0f0;
-      font-family: 'Press Start 2P', cursive;
-      max-width: 320px;
-      margin: 30px auto 0;
-      border-radius: 12px;
-      box-shadow: 0 0 20px #0f0;
-      padding: 20px;
-    }
-
-    #rechner-screen {
-      background: #111;
-      color: #0f0;
-      height: 50px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      padding: 10px;
-      font-size: 1.2em;
-      text-align: right;
-      box-shadow: inset 0 0 10px #0f0;
-      overflow-x: auto;
-      white-space: nowrap;
-    }
-
-    #rechner-buttons {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-
-    #rechner-buttons button {
-      background: #003300;
-      border: 2px solid #0f0;
-      color: #aaffaa;
-      font-family: inherit;
-      font-size: 1.2em;
-      border-radius: 8px;
-      padding: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s, color 0.3s;
-      user-select: none;
-    }
-
-    #rechner-buttons button:hover {
-      background-color: #0f0;
-      color: #003300;
-    }
-
-    /* Übersetzer */
-    #translator {
-      max-width: 700px;
-      margin: 30px auto;
-      background: #111;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 0 15px #0f0;
-      color: #aaffaa;
-    }
-
-    #translator textarea {
-      width: 100%;
-      height: 100px;
-      background: #000;
-      color: #0f0;
-      font-family: 'Press Start 2P', cursive;
-      font-size: 0.85em;
-      border-radius: 10px;
-      border: 2px solid #0f0;
-      padding: 10px;
-      resize: vertical;
-    }
-
-    #translator select, #translator button {
-      margin-top: 10px;
-      background: #003300;
-      border: 2px solid #0f0;
-      color: #aaffaa;
-      font-family: inherit;
-      font-size: 1em;
-      border-radius: 8px;
-      padding: 8px 16px;
-      cursor: pointer;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    #translator select:hover, #translator button:hover {
-      background-color: #0f0;
-      color: #003300;
-    }
-
-    #translation-result {
-      margin-top: 20px;
-      background: #000;
-      padding: 15px;
-      border-radius: 10px;
-      min-height: 60px;
-      font-size: 0.9em;
-      box-shadow: inset 0 0 10px #0f0;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-    }
+    /* Mehr Sections und Styles kannst du easy kopieren und anpassen */
 
   </style>
 </head>
 <body>
+
   <header>
     Minecraft Webseite Wezon1164
     <button class="glitch-button" onclick="toggleMode()">🌗 Mode</button>
@@ -384,83 +150,10 @@
     </ul>
   </section>
 
-  <section id="discord">
-    <h2>Discord</h2>
-    <p>Join uns auf <a href="https://discord.gg/deinserver" target="_blank" style="color:#0f0;">Discord</a> und quatsch mit der Community!</p>
-  </section>
-
-  <section id="youtube">
-    <h2>YouTube</h2>
-    <p>Schau dir unsere Videos auf <a href="https://youtube.com/deinkanal" target="_blank" style="color:#0f0;">YouTube</a> an.</p>
-  </section>
-
-  <section id="galerie">
-    <h2>Galerie</h2>
-    <p>Hier kommen coole Screenshots und Fanarts rein.</p>
-  </section>
-
-  <section id="clicker">
-    <h2>Clicker Game</h2>
-    <p>Klick den Minecraft Eimer und sammle Punkte!</p>
-    <div id="clicker">
-      <button id="clicker-btn">💧 Eimer klicken</button>
-      <div id="clicker-count">0</div>
-    </div>
-  </section>
-
-  <section id="rechner">
-    <h2>Rechner</h2>
-    <div id="rechner">
-      <div id="rechner-screen"></div>
-      <div id="rechner-buttons">
-        <button onclick="pressBtn('7')">7</button>
-        <button onclick="pressBtn('8')">8</button>
-        <button onclick="pressBtn('9')">9</button>
-        <button onclick="pressBtn('/')">÷</button>
-        <button onclick="pressBtn('4')">4</button>
-        <button onclick="pressBtn('5')">5</button>
-        <button onclick="pressBtn('6')">6</button>
-        <button onclick="pressBtn('*')">×</button>
-        <button onclick="pressBtn('1')">1</button>
-        <button onclick="pressBtn('2')">2</button>
-        <button onclick="pressBtn('3')">3</button>
-        <button onclick="pressBtn('-')">−</button>
-        <button onclick="pressBtn('0')">0</button>
-        <button onclick="pressBtn('.')">.</button>
-        <button onclick="calculate()">=</button>
-        <button onclick="pressBtn('+')">+</button>
-        <button onclick="clearScreen()">C</button>
-      </div>
-    </div>
-  </section>
-
-  <section id="translator">
-    <h2>Übersetzer</h2>
-    <textarea id="translate-input" placeholder="Text eingeben..."></textarea>
-    <select id="language-select">
-      <option value="de">Deutsch</option>
-      <option value="en">Englisch</option>
-      <option value="fr">Französisch</option>
-      <option value="es">Spanisch</option>
-      <option value="it">Italienisch</option>
-      <option value="ru">Russisch</option>
-      <option value="ja">Japanisch</option>
-      <option value="zh">Chinesisch</option>
-      <option value="ko">Koreanisch</option>
-      <option value="ar">Arabisch</option>
-      <!-- Add more if needed -->
-    </select>
-    <button onclick="translateText()">Übersetzen</button>
-    <div id="translation-result"></div>
-  </section>
-
-  <section id="settings">
-    <h2>Settings</h2>
-    <p>Dark/Light Mode toggle und andere Einstellungen.</p>
-  </section>
+  <!-- Add more sections here as you like -->
 
   <script>
-    // Sections switchen
+    // Section switchen
     function showSection(id) {
       document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
       document.getElementById(id).classList.add('active');
@@ -469,75 +162,6 @@
     // Dark/Light Mode toggle
     function toggleMode() {
       document.body.classList.toggle('light-mode');
-    }
-
-    // Clicker Game
-    let clickCount = 0;
-    const clickerBtn = document.getElementById('clicker-btn');
-    const clickerCount = document.getElementById('clicker-count');
-
-    clickerBtn.addEventListener('click', () => {
-      clickCount++;
-      clickerCount.textContent = clickCount;
-      clickerBtn.style.transform = 'scale(1.1)';
-      setTimeout(() => {
-        clickerBtn.style.transform = 'scale(1)';
-      }, 100);
-    });
-
-    // Rechner Logik
-    const screen = document.getElementById('rechner-screen');
-    let currentInput = '';
-
-    function pressBtn(val) {
-      currentInput += val;
-      screen.textContent = currentInput;
-    }
-
-    function calculate() {
-      try {
-        // Sicherheitshalber eval sicher machen
-        const safeInput = currentInput.replace(/[^-()\d/*+.]/g, '');
-        const result = eval(safeInput);
-        screen.textContent = result;
-        currentInput = result.toString();
-      } catch {
-        screen.textContent = 'Error';
-        currentInput = '';
-      }
-    }
-
-    function clearScreen() {
-      currentInput = '';
-      screen.textContent = '';
-    }
-
-    // Übersetzer (offline Simulation)
-    function translateText() {
-      const input = document.getElementById('translate-input').value.trim();
-      const lang = document.getElementById('language-select').value;
-      const resultDiv = document.getElementById('translation-result');
-
-      if(!input) {
-        resultDiv.textContent = 'Bitte Text eingeben!';
-        return;
-      }
-
-      // Nur Fake Übersetzung (zum Flexen)
-      let fakeTranslations = {
-        en: "Translation in English",
-        fr: "Traduction en français",
-        es: "Traducción al español",
-        it: "Traduzione in italiano",
-        ru: "Перевод на русский",
-        ja: "日本語の翻訳",
-        zh: "中文翻译",
-        ko: "한국어 번역",
-        ar: "الترجمة إلى العربية",
-        de: "Übersetzung auf Deutsch"
-      };
-
-      resultDiv.textContent = `${fakeTranslations[lang] || 'Übersetzung'}: ${input}`;
     }
   </script>
 </body>
