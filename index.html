@@ -5,39 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Minecraft Webseite Wezon1164</title>
 
-  <!-- OG & Fonts -->
-  <meta name="description" content="Minecraft Server Wezon1164 – Regeln, Galerie, Discord & YouTube." />
-  <meta name="author" content="Wezon1164" />
-  <meta property="og:title" content="Minecraft Webseite Wezon1164" />
-  <meta property="og:description" content="Trete dem Server bei und entdecke unsere Community!" />
-  <meta property="og:image" content="https://example.com/screenshot.png" />
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 
   <style>
+    /* Basics */
     body {
       margin: 0;
       font-family: 'Press Start 2P', cursive;
-      background-color: #000;
-      color: #fff;
+      background: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png/revision/latest?cb=20200930021101') repeat;
+      background-size: 100px 100px;
+      color: #0f0;
       text-shadow: 0 0 5px #00ff00;
       overflow-x: hidden;
     }
 
     body.light-mode {
-      background-color: #f0f0f0;
+      background: #f0f0f0;
       color: #000;
       text-shadow: none;
-    }
-
-    .rain {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      background-image: url('https://i.imgur.com/NM3F4Vo.gif');
-      opacity: 0.15;
-      z-index: 0;
     }
 
     header {
@@ -49,7 +35,7 @@
       text-shadow: 0 0 10px #0f0;
       animation: glitch 1.5s infinite;
       position: relative;
-      z-index: 2;
+      z-index: 10;
     }
 
     .glitch-button {
@@ -63,7 +49,7 @@
       padding: 6px 12px;
       border-radius: 10px;
       cursor: pointer;
-      z-index: 3;
+      z-index: 11;
     }
 
     nav {
@@ -72,7 +58,7 @@
       justify-content: center;
       background-color: #111;
       padding: 15px;
-      z-index: 2;
+      z-index: 10;
       position: relative;
     }
 
@@ -94,10 +80,19 @@
       animation: glitch 0.3s infinite;
     }
 
+    @keyframes glitch {
+      0% { text-shadow: 2px 0 red; }
+      20% { text-shadow: -2px 0 cyan; }
+      40% { text-shadow: 2px 0 blue; }
+      60% { text-shadow: -2px 0 lime; }
+      80% { text-shadow: 2px 0 magenta; }
+      100% { text-shadow: -2px 0 yellow; }
+    }
+
     section {
       max-width: 900px;
       margin: 25px auto;
-      background: #111;
+      background: rgba(0,0,0,0.8);
       border-radius: 12px;
       padding: 20px;
       box-shadow: 0 0 15px #0f0;
@@ -105,6 +100,8 @@
       width: 90%;
       color: #aaffaa;
       font-size: 0.85em;
+      position: relative;
+      z-index: 12;
     }
 
     section.active {
@@ -217,12 +214,144 @@
       transition: transform 0.5s ease;
     }
 
+    /* Clicker Game */
+    #clicker {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #clicker button {
+      background-color: #004400;
+      border: 2px solid #0f0;
+      color: #aaffaa;
+      font-family: inherit;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #0f0;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    #clicker button:hover {
+      background-color: #0f0;
+      color: #004400;
+    }
+
+    #clicker-count {
+      font-size: 1.5em;
+      margin-top: 10px;
+      color: #0f0;
+      text-shadow: 0 0 8px #00ff00;
+    }
+
+    /* Rechner */
+    #rechner {
+      background: #000;
+      color: #0f0;
+      font-family: 'Press Start 2P', cursive;
+      max-width: 320px;
+      margin: 30px auto 0;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #0f0;
+      padding: 20px;
+    }
+
+    #rechner-screen {
+      background: #111;
+      color: #0f0;
+      height: 50px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      padding: 10px;
+      font-size: 1.2em;
+      text-align: right;
+      box-shadow: inset 0 0 10px #0f0;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    #rechner-buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    #rechner-buttons button {
+      background: #003300;
+      border: 2px solid #0f0;
+      color: #aaffaa;
+      font-family: inherit;
+      font-size: 1.2em;
+      border-radius: 8px;
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+      user-select: none;
+    }
+
+    #rechner-buttons button:hover {
+      background-color: #0f0;
+      color: #003300;
+    }
+
+    /* Übersetzer */
+    #translator {
+      max-width: 700px;
+      margin: 30px auto;
+      background: #111;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 15px #0f0;
+      color: #aaffaa;
+    }
+
+    #translator textarea {
+      width: 100%;
+      height: 100px;
+      background: #000;
+      color: #0f0;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.85em;
+      border-radius: 10px;
+      border: 2px solid #0f0;
+      padding: 10px;
+      resize: vertical;
+    }
+
+    #translator select, #translator button {
+      margin-top: 10px;
+      background: #003300;
+      border: 2px solid #0f0;
+      color: #aaffaa;
+      font-family: inherit;
+      font-size: 1em;
+      border-radius: 8px;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    #translator select:hover, #translator button:hover {
+      background-color: #0f0;
+      color: #003300;
+    }
+
+    #translation-result {
+      margin-top: 20px;
+      background: #000;
+      padding: 15px;
+      border-radius: 10px;
+      min-height: 60px;
+      font-size: 0.9em;
+      box-shadow: inset 0 0 10px #0f0;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
   </style>
 </head>
-
 <body>
-  <div class="rain"></div>
-
   <header>
     Minecraft Webseite Wezon1164
     <button class="glitch-button" onclick="toggleMode()">🌗 Mode</button>
@@ -234,162 +363,182 @@
     <button onclick="showSection('discord')">Discord</button>
     <button onclick="showSection('youtube')">YouTube</button>
     <button onclick="showSection('galerie')">Galerie</button>
+    <button onclick="showSection('clicker')">Clicker Game</button>
+    <button onclick="showSection('rechner')">Rechner</button>
+    <button onclick="showSection('translator')">Übersetzer</button>
     <button onclick="showSection('settings')">⚙️ Settings</button>
   </nav>
 
-  <!-- Startseite -->
   <section id="startseite" class="active">
-    <h2>Willkommen auf dem Server!</h2>
-    <p id="random-quote">Minecraft ist Liebe, Minecraft ist Leben.</p>
-    <div class="ip-copy">
-      <p><strong>Server-IP:</strong> <span id="server-ip">play.wezon1164.de</span></p>
-      <button onclick="copyIP()">IP kopieren</button>
-    </div>
-    <div id="visitor-counter"></div>
+    <h2>Willkommen auf dem Minecraft Server Wezon1164</h2>
+    <p>Check die anderen Tabs für coole Features wie Chat, Galerie, Regeln und mehr.</p>
   </section>
 
-  <!-- Regeln -->
   <section id="regeln">
-    <h2>Regeln auf dem Server</h2>
-    <ul class="rules">
-      <li>Kein Griefing oder Hacken!</li>
-      <li>Sei respektvoll zu anderen Spielern.</li>
-      <li>Kein Spam oder Werbung.</li>
-      <li>Folge den Anweisungen der Admins.</li>
-      <li>Benutze deinen gesunden Menschenverstand.</li>
+    <h2>Server Regeln</h2>
+    <ul>
+      <li>Kein Ragen oder Toxic Verhalten</li>
+      <li>Kein Cheaten oder Exploiten</li>
+      <li>Respektiere alle Spieler</li>
+      <li>Hab Spaß und sei cool</li>
     </ul>
   </section>
 
-  <!-- Discord -->
   <section id="discord">
-    <h2>Discord Server Beitreten</h2>
-    <p><a href="https://discord.gg/xjpRj57cqJ" target="_blank" style="color:#0f0;">Discord Server Link</a></p>
+    <h2>Discord</h2>
+    <p>Join uns auf <a href="https://discord.gg/deinserver" target="_blank" style="color:#0f0;">Discord</a> und quatsch mit der Community!</p>
   </section>
 
-  <!-- YouTube -->
   <section id="youtube">
-    <h2>YouTube Kanal</h2>
-    <p><a href="https://www.youtube.com/@Wezon1164" target="_blank" style="color:#0f0;">Wezon1164 auf YouTube</a></p>
+    <h2>YouTube</h2>
+    <p>Schau dir unsere Videos auf <a href="https://youtube.com/deinkanal" target="_blank" style="color:#0f0;">YouTube</a> an.</p>
   </section>
 
-  <!-- Galerie -->
   <section id="galerie">
-    <h2>Minecraft Galerie</h2>
-    <div class="gallery">
-      <img src="https://crafatar.com/avatars/2da0f9b6-91b9-48cd-851e-03bca07a3c3c?size=160" alt="Technoblade" title="Technoblade">
-      <img src="https://crafatar.com/avatars/dream?size=160" alt="Dream" title="Dream">
-      <img src="https://crafatar.com/avatars/8667ba71-b85a-4004-af54-457a9734eed7?size=160" alt="Qauvis" title="Qauvis">
-      <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png" alt="Creeper" title="Creeper" class="creeper-img" onclick="explodeCreeper(this)">
-    </div>
+    <h2>Galerie</h2>
+    <p>Hier kommen coole Screenshots und Fanarts rein.</p>
+  </section>
 
-    <div id="skin-preview">
-      <h3>Minecraft Skin Preview</h3>
-      <input id="skin-url" type="text" placeholder="Skin URL hier einfügen..." />
-      <div id="skin-head"></div>
-      <button onclick="loadSkin()">Skin laden</button>
+  <section id="clicker">
+    <h2>Clicker Game</h2>
+    <p>Klick den Minecraft Eimer und sammle Punkte!</p>
+    <div id="clicker">
+      <button id="clicker-btn">💧 Eimer klicken</button>
+      <div id="clicker-count">0</div>
     </div>
   </section>
 
-  <!-- Settings / Chat -->
-  <section id="settings">
-    <h2>Community Chat & Settings</h2>
-    <div id="chat-box"></div>
-    <div id="chat-input-container">
-      <input id="chat-input" type="text" placeholder="Schreib was, Digga!" />
-      <button id="chat-send">Senden</button>
+  <section id="rechner">
+    <h2>Rechner</h2>
+    <div id="rechner">
+      <div id="rechner-screen"></div>
+      <div id="rechner-buttons">
+        <button onclick="pressBtn('7')">7</button>
+        <button onclick="pressBtn('8')">8</button>
+        <button onclick="pressBtn('9')">9</button>
+        <button onclick="pressBtn('/')">÷</button>
+        <button onclick="pressBtn('4')">4</button>
+        <button onclick="pressBtn('5')">5</button>
+        <button onclick="pressBtn('6')">6</button>
+        <button onclick="pressBtn('*')">×</button>
+        <button onclick="pressBtn('1')">1</button>
+        <button onclick="pressBtn('2')">2</button>
+        <button onclick="pressBtn('3')">3</button>
+        <button onclick="pressBtn('-')">−</button>
+        <button onclick="pressBtn('0')">0</button>
+        <button onclick="pressBtn('.')">.</button>
+        <button onclick="calculate()">=</button>
+        <button onclick="pressBtn('+')">+</button>
+        <button onclick="clearScreen()">C</button>
+      </div>
     </div>
+  </section>
+
+  <section id="translator">
+    <h2>Übersetzer</h2>
+    <textarea id="translate-input" placeholder="Text eingeben..."></textarea>
+    <select id="language-select">
+      <option value="de">Deutsch</option>
+      <option value="en">Englisch</option>
+      <option value="fr">Französisch</option>
+      <option value="es">Spanisch</option>
+      <option value="it">Italienisch</option>
+      <option value="ru">Russisch</option>
+      <option value="ja">Japanisch</option>
+      <option value="zh">Chinesisch</option>
+      <option value="ko">Koreanisch</option>
+      <option value="ar">Arabisch</option>
+      <!-- Add more if needed -->
+    </select>
+    <button onclick="translateText()">Übersetzen</button>
+    <div id="translation-result"></div>
+  </section>
+
+  <section id="settings">
+    <h2>Settings</h2>
+    <p>Dark/Light Mode toggle und andere Einstellungen.</p>
   </section>
 
   <script>
-    // Abschnitte wechseln
+    // Sections switchen
     function showSection(id) {
-      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id)?.classList.add('active');
+      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
     }
 
-    // IP kopieren
-    function copyIP() {
-      const ip = document.getElementById('server-ip').textContent;
-      navigator.clipboard.writeText(ip).then(() => alert('Server-IP kopiert!'));
-    }
-
-    // Zufälliges Minecraft-Zitat
-    const quotes = [
-      "„Everything not saved will be lost.“ – Nintendo Quit Screen",
-      "„Herobrine is watching you... 👁️“",
-      "„Creepers just want a hug. A deadly one.“",
-      "„Punching trees since 2009.“",
-      "„Don't dig straight down!“"
-    ];
-    document.getElementById("random-quote").textContent = quotes[Math.floor(Math.random() * quotes.length)];
-
-    // Creeper Explosion Easter Egg
-    function explodeCreeper(img) {
-      img.style.transform = "scale(1.5) rotate(360deg)";
-      setTimeout(() => {
-        img.style.transform = "scale(0)";
-        setTimeout(() => {
-          img.style.display = "none";
-          alert("💥 Boom! Creeper explodiert!");
-        }, 300);
-      }, 500);
-    }
-
-    // Dark/Light Mode Toggle
+    // Dark/Light Mode toggle
     function toggleMode() {
       document.body.classList.toggle('light-mode');
     }
 
-    // Besucher-Counter (lokal, fake aber fresh)
-    let visitors = localStorage.getItem('visitors') || 0;
-    visitors++;
-    localStorage.setItem('visitors', visitors);
-    document.getElementById('visitor-counter').textContent = `🔥 Besucher bisher: ${visitors}`;
+    // Clicker Game
+    let clickCount = 0;
+    const clickerBtn = document.getElementById('clicker-btn');
+    const clickerCount = document.getElementById('clicker-count');
 
-    // Minecraft Skin laden
-    function loadSkin() {
-      const url = document.getElementById('skin-url').value.trim();
-      if(!url) return alert('Digga, erst Skin URL reinballern!');
-      const headDiv = document.getElementById('skin-head');
-      // Clear old
-      headDiv.innerHTML = '';
-      // Skin-Avatar von crafatar.com anzeigen
-      // Beispiel URL: https://crafatar.com/avatars/<uuid>?size=160
-      // Hier nehmen wir direkt die eingegebene URL
-      const img = document.createElement('img');
-      img.src = url;
-      img.alt = 'Minecraft Skin Head';
-      img.style.width = '160px';
-      img.style.height = '160px';
-      img.style.borderRadius = '16px';
-      headDiv.appendChild(img);
-    }
-
-    // Einfacher Chat (nur lokal, no server)
-    const chatBox = document.getElementById('chat-box');
-    const chatInput = document.getElementById('chat-input');
-    const chatSend = document.getElementById('chat-send');
-
-    chatSend.addEventListener('click', () => {
-      sendMessage();
+    clickerBtn.addEventListener('click', () => {
+      clickCount++;
+      clickerCount.textContent = clickCount;
+      clickerBtn.style.transform = 'scale(1.1)';
+      setTimeout(() => {
+        clickerBtn.style.transform = 'scale(1)';
+      }, 100);
     });
 
-    chatInput.addEventListener('keydown', e => {
-      if(e.key === 'Enter') sendMessage();
-    });
+    // Rechner Logik
+    const screen = document.getElementById('rechner-screen');
+    let currentInput = '';
 
-    function sendMessage() {
-      const text = chatInput.value.trim();
-      if(!text) return;
-      const msg = document.createElement('div');
-      msg.textContent = `Du: ${text}`;
-      chatBox.appendChild(msg);
-      chatBox.scrollTop = chatBox.scrollHeight;
-      chatInput.value = '';
+    function pressBtn(val) {
+      currentInput += val;
+      screen.textContent = currentInput;
     }
 
-    // Standardmäßig Startseite zeigen
-    showSection('startseite');
+    function calculate() {
+      try {
+        // Sicherheitshalber eval sicher machen
+        const safeInput = currentInput.replace(/[^-()\d/*+.]/g, '');
+        const result = eval(safeInput);
+        screen.textContent = result;
+        currentInput = result.toString();
+      } catch {
+        screen.textContent = 'Error';
+        currentInput = '';
+      }
+    }
+
+    function clearScreen() {
+      currentInput = '';
+      screen.textContent = '';
+    }
+
+    // Übersetzer (offline Simulation)
+    function translateText() {
+      const input = document.getElementById('translate-input').value.trim();
+      const lang = document.getElementById('language-select').value;
+      const resultDiv = document.getElementById('translation-result');
+
+      if(!input) {
+        resultDiv.textContent = 'Bitte Text eingeben!';
+        return;
+      }
+
+      // Nur Fake Übersetzung (zum Flexen)
+      let fakeTranslations = {
+        en: "Translation in English",
+        fr: "Traduction en français",
+        es: "Traducción al español",
+        it: "Traduzione in italiano",
+        ru: "Перевод на русский",
+        ja: "日本語の翻訳",
+        zh: "中文翻译",
+        ko: "한국어 번역",
+        ar: "الترجمة إلى العربية",
+        de: "Übersetzung auf Deutsch"
+      };
+
+      resultDiv.textContent = `${fakeTranslations[lang] || 'Übersetzung'}: ${input}`;
+    }
   </script>
 </body>
 </html>
