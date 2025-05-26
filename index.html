@@ -113,24 +113,19 @@
       font-size: 0.8em;
       padding: 6px;
       margin: 5px;
-    }
-
-    /* Login Form Style */
-    #login input {
-      display: block;
-      width: 80%;
-      max-width: 300px;
-      margin: 8px auto;
-      padding: 8px;
       border-radius: 8px;
       border: 2px solid #0f0;
       background-color: rgba(0,0,0,0.5);
       color: #aaffaa;
-      font-size: 1em;
       text-align: center;
+      display: block;
+      width: 80%;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    #login button {
+    button {
       display: block;
       margin: 12px auto;
       padding: 10px 20px;
@@ -140,18 +135,22 @@
       color: #aaffaa;
       border-radius: 10px;
       cursor: pointer;
+      font-family: inherit;
+      text-align: center;
     }
 
-    #login button:hover {
+    button:hover {
       background-color: #0f0;
       color: #003300;
       animation: glitch 0.3s infinite;
     }
 
-    #loginMessage {
+    #message {
       text-align: center;
       margin-top: 10px;
       font-weight: bold;
+      font-size: 1em;
+      min-height: 1.5em;
     }
   </style>
 </head>
@@ -162,157 +161,185 @@
     <button class="glitch-button" onclick="toggleMode()">🌗 Mode</button>
   </header>
 
-<nav>
-  <button onclick="showSection('startseite')">Startseite</button>
-  <button onclick="showSection('regeln')">Regeln</button>
-  <button onclick="showSection('discord')">Discord</button>
-  <button onclick="showSection('youtube')">YouTube</button>
-  <button onclick="showSection('galerie')">Galerie</button>
-  <button onclick="showSection('clicker')">Clicker Game</button>
-  <button onclick="showSection('rechner')">Rechner</button>
-  <button onclick="showSection('translator')">Übersetzer</button>
-  <button onclick="showSection('settings')">⚙️ Settings</button>
-  <button onclick="showSection('karte')">🗺️ Karte</button>
-  <!-- Login-Button hinzugefügt -->
-  <button onclick="showSection('login')">🔐 Login</button>
-</nav>
+  <nav>
+    <button onclick="showSection('startseite')">Startseite</button>
+    <button onclick="showSection('regeln')">Regeln</button>
+    <button onclick="showSection('discord')">Discord</button>
+    <button onclick="showSection('youtube')">YouTube</button>
+    <button onclick="showSection('galerie')">Galerie</button>
+    <button onclick="showSection('clicker')">Clicker Game</button>
+    <button onclick="showSection('rechner')">Rechner</button>
+    <button onclick="showSection('translator')">Übersetzer</button>
+    <button onclick="showSection('settings')">⚙️ Settings</button>
+    <button onclick="showSection('karte')">🗺️ Karte</button>
+  </nav>
 
-<section id="karte">
-  <h2>🗺️ Minecraft Karte</h2>
-  <p>Hier kannst du die Map vom Server sehen – check die Dörfer, Biome und alles!</p>
-  <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/7b/Minecraft_map_item.png" 
-       alt="Minecraft Map" 
-       style="display:block; margin: 0 auto; max-width: 100%; border: 3px solid #0f0; border-radius: 12px;">
-</section>
+  <section id="startseite" class="active">
+    <h2>Melden Sie sich jetzt an</h2>
 
-<section id="regeln">
-  <h2>Server Regeln</h2>
-  <ul>
-    <li>Kein Ragen oder Toxic Verhalten</li>
-    <li>Kein Cheaten oder Exploiten</li>
-    <li>Respektiere alle Spieler</li>
-    <li>Hab Spaß und sei cool</li>
-  </ul>
-</section>
+    <!-- Login Formular -->
+    <h3>Schon registriert? Anmelden</h3>
+    <form id="loginForm" onsubmit="event.preventDefault(); loginUser();">
+      <input type="email" id="loginEmail" placeholder="E-Mail Adresse" required />
+      <input type="password" id="loginPassword" placeholder="Passwort" required />
+      <button type="submit">Anmelden</button>
+    </form>
 
-<section id="discord">
-  <h2>Unser Discord Server</h2>
-  <p>Join uns auf Discord: <a href="https://discord.gg/deinserver" target="_blank">discord.gg/deinserver</a></p>
-</section>
+    <hr style="border: 1px solid #0f0; margin: 20px 0; max-width: 300px; margin-left:auto; margin-right:auto;">
 
-<section id="youtube">
-  <h2>YouTube Channel</h2>
-  <p>Abonnier uns auf YouTube: <a href="https://youtube.com/@deinChannel" target="_blank">@deinChannel</a></p>
-</section>
+    <!-- Registrierung Formular -->
+    <h3>Neu hier? Registrieren</h3>
+    <form id="registerForm" onsubmit="event.preventDefault(); registerUser();">
+      <input type="email" id="registerEmail" placeholder="E-Mail Adresse" required />
+      <input type="password" id="registerPassword" placeholder="Passwort erstellen" required />
+      <button type="submit">Registrieren</button>
+    </form>
 
-<section id="galerie">
-  <h2>Galerie</h2>
-  <p>Bilder von coolen Momenten auf dem Server!</p>
-  <img src="https://i.imgur.com/Ot5DWAW.png" alt="Minecraft Screenshot" width="100%">
-</section>
+    <div id="message"></div>
+  </section>
 
-<section id="clicker">
-  <h2>Clicker Game</h2>
-  <div id="clickCount">0</div>
-  <button onclick="clickMe()">Click mich!</button>
-</section>
+  <section id="karte">
+    <h2>🗺️ Minecraft Karte</h2>
+    <p>Hier kannst du die Map vom Server sehen – check die Dörfer, Biome und alles!</p>
+    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/7b/Minecraft_map_item.png" 
+         alt="Minecraft Map" 
+         style="display:block; margin: 0 auto; max-width: 100%; border: 3px solid #0f0; border-radius: 12px;">
+  </section>
 
-<section id="rechner">
-  <h2>Rechner</h2>
-  <input type="number" id="zahl1" placeholder="Zahl 1">
-  <input type="number" id="zahl2" placeholder="Zahl 2">
-  <select id="operation">
-    <option value="+">+</option>
-    <option value="-">-</option>
-    <option value="*">*</option>
-    <option value="/">/</option>
-  </select>
-  <button onclick="rechnen()">Berechnen</button>
-  <div id="ergebnis"></div>
-</section>
+  <section id="regeln">
+    <h2>Server Regeln</h2>
+    <ul>
+      <li>Kein Ragen oder Toxic Verhalten</li>
+      <li>Kein Cheaten oder Exploiten</li>
+      <li>Respektiere alle Spieler</li>
+      <li>Hab Spaß und sei cool</li>
+    </ul>
+  </section>
 
-<section id="translator">
-  <h2>Übersetzer (Mini-Version)</h2>
-  <input type="text" id="textToTranslate" placeholder="Text auf Deutsch">
-  <button onclick="translate()">Englisch</button>
-  <div id="translatedText"></div>
-</section>
+  <section id="discord">
+    <h2>Unser Discord Server</h2>
+    <p>Join uns auf Discord: <a href="https://discord.gg/deinserver" target="_blank">discord.gg/deinserver</a></p>
+  </section>
 
-<section id="settings">
-  <h2>Settings</h2>
-  <p>Hier kannst du später Optionen ändern. Aktuell nur Dark/Light Mode.</p>
-</section>
+  <section id="youtube">
+    <h2>YouTube Channel</h2>
+    <p>Abonnier uns auf YouTube: <a href="https://youtube.com/@deinChannel" target="_blank">@deinChannel</a></p>
+  </section>
 
-<!-- Login Section -->
-<section id="login">
-  <h2>🔐 Login</h2>
-  <input type="text" id="username" placeholder="Username">
-  <input type="password" id="password" placeholder="Passwort">
-  <button onclick="login()">Einloggen</button>
-  <div id="loginMessage"></div>
-</section>
+  <section id="galerie">
+    <h2>Galerie</h2>
+    <p>Bilder von coolen Momenten auf dem Server!</p>
+    <img src="https://i.imgur.com/Ot5DWAW.png" alt="Minecraft Screenshot" width="100%">
+  </section>
 
-<script>
-  function showSection(id) {
-    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-  }
+  <section id="clicker">
+    <h2>Clicker Game</h2>
+    <div id="clickCount">0</div>
+    <button onclick="clickMe()">Click mich!</button>
+  </section>
 
-  function toggleMode() {
-    document.body.classList.toggle('light-mode');
-  }
+  <section id="rechner">
+    <h2>Rechner</h2>
+    <input type="number" id="zahl1" placeholder="Zahl 1">
+    <input type="number" id="zahl2" placeholder="Zahl 2">
+    <select id="operation">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+    </select>
+    <button onclick="rechnen()">Berechnen</button>
+    <div id="ergebnis"></div>
+  </section>
 
-  let count = 0;
-  function clickMe() {
-    count++;
-    document.getElementById("clickCount").innerText = count;
-  }
+  <section id="translator">
+    <h2>Übersetzer (Mini-Version)</h2>
+    <input type="text" id="textToTranslate" placeholder="Text auf Deutsch">
+    <button onclick="translate()">Englisch</button>
+    <div id="translatedText"></div>
+  </section>
 
-  function rechnen() {
-    const a = parseFloat(document.getElementById("zahl1").value);
-    const b = parseFloat(document.getElementById("zahl2").value);
-    const op = document.getElementById("operation").value;
-    let result;
-    if (!isNaN(a) && !isNaN(b)) {
-      switch (op) {
-        case '+': result = a + b; break;
-        case '-': result = a - b; break;
-        case '*': result = a * b; break;
-        case '/': result = b !== 0 ? a / b : "Fehler: Division durch 0"; break;
+  <section id="settings">
+    <h2>Settings</h2>
+    <p>Hier kannst du später Optionen ändern. Aktuell nur Dark/Light Mode.</p>
+  </section>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function toggleMode() {
+      document.body.classList.toggle('light-mode');
+    }
+
+    let count = 0;
+    function clickMe() {
+      count++;
+      document.getElementById("clickCount").innerText = count;
+    }
+
+    function rechnen() {
+      const a = parseFloat(document.getElementById("zahl1").value);
+      const b = parseFloat(document.getElementById("zahl2").value);
+      const op = document.getElementById("operation").value;
+      let result;
+      if (!isNaN(a) && !isNaN(b)) {
+        switch (op) {
+          case '+': result = a + b; break;
+          case '-': result = a - b; break;
+          case '*': result = a * b; break;
+          case '/': result = b !== 0 ? a / b : "Fehler: Division durch 0"; break;
+        }
+        document.getElementById("ergebnis").innerText = "Ergebnis: " + result;
       }
-      document.getElementById("ergebnis").innerText = "Ergebnis: " + result;
     }
-  }
 
-  function translate() {
-    const text = document.getElementById("textToTranslate").value.toLowerCase();
-    const words = {
-      "hallo": "hello",
-      "welt": "world",
-      "spieler": "player",
-      "minecraft": "minecraft"
-    };
-    const translated = text.split(" ").map(word => words[word] || word).join(" ");
-    document.getElementById("translatedText").innerText = translated;
-  }
-
-  // Login Funktion
-  function login() {
-    const user = document.getElementById("username").value.trim();
-    const pass = document.getElementById("password").value.trim();
-    const msg = document.getElementById("loginMessage");
-
-    if(user === "admin" && pass === "1234") {
-      msg.style.color = "#0f0";
-      msg.innerText = "✔️ Login erfolgreich! Willkommen, " + user + "!";
-    } else {
-      msg.style.color = "#f00";
-      msg.innerText = "❌ Falscher Benutzername oder Passwort!";
+    function translate() {
+      const text = document.getElementById("textToTranslate").value.toLowerCase();
+      const words = {
+        "hallo": "hello",
+        "welt": "world",
+        "spieler": "player",
+        "minecraft": "minecraft"
+      };
+      const translated = text.split(" ").map(word => words[word] || word).join(" ");
+      document.getElementById("translatedText").innerText = translated;
     }
-  }
 
-  // Zeige Startseite standardmäßig
-  showSection('startseite');
-</script>
+    function loginUser() {
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+      const msg = document.getElementById('message');
+
+      if(email && password) {
+        // Demo: Nur ne Erfolgsmeldung, kein echtes Login
+        msg.style.color = "#0f0";
+        msg.innerText = `✔️ ${email} erfolgreich angemeldet!`;
+      } else {
+        msg.style.color = "#f00";
+        msg.innerText = "❌ Bitte E-Mail und Passwort ausfüllen!";
+      }
+    }
+
+    function registerUser() {
+      const email = document.getElementById('registerEmail').value.trim();
+      const password = document.getElementById('registerPassword').value.trim();
+      const msg = document.getElementById('message');
+
+      if(email && password) {
+        // Demo: Nur ne Erfolgsmeldung, kein echtes Register
+        msg.style.color = "#0f0";
+        msg.innerText = `✔️ Account für ${email} erstellt!`;
+      } else {
+        msg.style.color = "#f00";
+        msg.innerText = "❌ Bitte E-Mail und Passwort ausfüllen!";
+      }
+    }
+
+    // Zeige Startseite standardmäßig
+    showSection('startseite');
+  </script>
 </body>
 </html>
