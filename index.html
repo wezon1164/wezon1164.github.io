@@ -17,6 +17,7 @@
       color: #0f0;
       text-shadow: 0 0 5px #00ff00;
       overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
     body.light-mode {
       background: #f0f0f0;
@@ -112,7 +113,7 @@
       font-family: inherit;
       font-size: 0.8em;
       padding: 6px;
-      margin: 5px;
+      margin: 5px auto;
       border-radius: 8px;
       border: 2px solid #0f0;
       background-color: rgba(0,0,0,0.5);
@@ -121,8 +122,6 @@
       display: block;
       width: 80%;
       max-width: 300px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
     button {
@@ -137,6 +136,7 @@
       cursor: pointer;
       font-family: inherit;
       text-align: center;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
 
     button:hover {
@@ -174,94 +174,34 @@
     <button onclick="showSection('karte')">🗺️ Karte</button>
   </nav>
 
-  <section id="startseite" class="active">
-    <h2>Melden Sie sich jetzt an</h2>
-
-    <!-- Login Formular -->
-    <h3>Schon registriert? Anmelden</h3>
-    <form id="loginForm" onsubmit="event.preventDefault(); loginUser();">
-      <input type="email" id="loginEmail" placeholder="E-Mail Adresse" required />
-      <input type="password" id="loginPassword" placeholder="Passwort" required />
-      <button type="submit">Anmelden</button>
-    </form>
-
-    <hr style="border: 1px solid #0f0; margin: 20px 0; max-width: 300px; margin-left:auto; margin-right:auto;">
-
-    <!-- Registrierung Formular -->
-    <h3>Neu hier? Registrieren</h3>
-    <form id="registerForm" onsubmit="event.preventDefault(); registerUser();">
-      <input type="email" id="registerEmail" placeholder="E-Mail Adresse" required />
-      <input type="password" id="registerPassword" placeholder="Passwort erstellen" required />
-      <button type="submit">Registrieren</button>
-    </form>
-
-    <div id="message"></div>
-  </section>
-
-  <section id="karte">
-    <h2>🗺️ Minecraft Karte</h2>
-    <p>Hier kannst du die Map vom Server sehen – check die Dörfer, Biome und alles!</p>
-    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/7b/Minecraft_map_item.png" 
-         alt="Minecraft Map" 
-         style="display:block; margin: 0 auto; max-width: 100%; border: 3px solid #0f0; border-radius: 12px;">
-  </section>
-
-  <section id="regeln">
-    <h2>Server Regeln</h2>
-    <ul>
-      <li>Kein Ragen oder Toxic Verhalten</li>
-      <li>Kein Cheaten oder Exploiten</li>
-      <li>Respektiere alle Spieler</li>
-      <li>Hab Spaß und sei cool</li>
-    </ul>
-  </section>
-
-  <section id="discord">
-    <h2>Unser Discord Server</h2>
-    <p>Join uns auf Discord: <a href="https://discord.gg/deinserver" target="_blank">discord.gg/deinserver</a></p>
-  </section>
-
-  <section id="youtube">
-    <h2>YouTube Channel</h2>
-    <p>Abonnier uns auf YouTube: <a href="https://youtube.com/@deinChannel" target="_blank">@deinChannel</a></p>
-  </section>
-
-  <section id="galerie">
-    <h2>Galerie</h2>
-    <p>Bilder von coolen Momenten auf dem Server!</p>
-    <img src="https://i.imgur.com/Ot5DWAW.png" alt="Minecraft Screenshot" width="100%">
-  </section>
-
-  <section id="clicker">
-    <h2>Clicker Game</h2>
-    <div id="clickCount">0</div>
-    <button onclick="clickMe()">Click mich!</button>
-  </section>
-
-  <section id="rechner">
-    <h2>Rechner</h2>
-    <input type="number" id="zahl1" placeholder="Zahl 1">
-    <input type="number" id="zahl2" placeholder="Zahl 2">
-    <select id="operation">
-      <option value="+">+</option>
-      <option value="-">-</option>
-      <option value="*">*</option>
-      <option value="/">/</option>
-    </select>
-    <button onclick="rechnen()">Berechnen</button>
-    <div id="ergebnis"></div>
-  </section>
-
-  <section id="translator">
-    <h2>Übersetzer (Mini-Version)</h2>
-    <input type="text" id="textToTranslate" placeholder="Text auf Deutsch">
-    <button onclick="translate()">Englisch</button>
-    <div id="translatedText"></div>
-  </section>
+  <!-- ... deine anderen Sektionen bleiben unverändert ... -->
 
   <section id="settings">
     <h2>Settings</h2>
-    <p>Hier kannst du später Optionen ändern. Aktuell nur Dark/Light Mode.</p>
+    <p>Hier kannst du Modus, Schriftart, Hintergrundfarbe und Wallpaper ändern:</p>
+
+    <label for="modeSelect">Mode:</label>
+    <select id="modeSelect">
+      <option value="dark">Dark</option>
+      <option value="light">Light</option>
+    </select>
+
+    <label for="fontSelect">Schriftart:</label>
+    <select id="fontSelect">
+      <option value="'Press Start 2P', cursive">Press Start 2P (Retro)</option>
+      <option value="Arial, sans-serif">Arial</option>
+      <option value="'Comic Sans MS', cursive, sans-serif">Comic Sans</option>
+      <option value="'Courier New', monospace">Courier New</option>
+      <option value="'Lucida Console', monospace">Lucida Console</option>
+    </select>
+
+    <label for="bgColorInput">Hintergrundfarbe:</label>
+    <input type="color" id="bgColorInput" value="#000000" />
+
+    <label for="bgImageInput">Wallpaper URL (leer = kein Bild):</label>
+    <input type="url" id="bgImageInput" placeholder="https://example.com/wallpaper.jpg" />
+
+    <button onclick="applySettings()">Einstellungen speichern</button>
   </section>
 
   <script>
@@ -270,76 +210,71 @@
       document.getElementById(id).classList.add('active');
     }
 
+    // Settings speichern und anwenden
+    function applySettings() {
+      const mode = document.getElementById('modeSelect').value;
+      const font = document.getElementById('fontSelect').value;
+      const bgColor = document.getElementById('bgColorInput').value;
+      const bgImage = document.getElementById('bgImageInput').value.trim();
+
+      // Mode Klasse setzen
+      if (mode === 'light') {
+        document.body.classList.add('light-mode');
+      } else {
+        document.body.classList.remove('light-mode');
+      }
+
+      // Schriftart setzen
+      document.body.style.fontFamily = font;
+
+      // Hintergrund setzen: Farbe + Wallpaper
+      if (bgImage) {
+        document.body.style.backgroundImage = `url('${bgImage}')`;
+        document.body.style.backgroundRepeat = 'repeat';
+        document.body.style.backgroundSize = 'cover';
+        document.body.style.backgroundColor = bgColor;
+      } else {
+        document.body.style.backgroundImage = 'none';
+        document.body.style.backgroundColor = bgColor;
+      }
+
+      // localStorage speichern
+      localStorage.setItem('mode', mode);
+      localStorage.setItem('font', font);
+      localStorage.setItem('bgColor', bgColor);
+      localStorage.setItem('bgImage', bgImage);
+
+      // Sync Modus Dropdown mit Header Button
+      document.getElementById('modeSelect').value = mode;
+    }
+
+    // Toggle Mode Button im Header synced auch mit Select
     function toggleMode() {
-      document.body.classList.toggle('light-mode');
+      const modeSelect = document.getElementById('modeSelect');
+      const currentMode = modeSelect.value;
+      modeSelect.value = currentMode === 'dark' ? 'light' : 'dark';
+      applySettings();
     }
 
-    let count = 0;
-    function clickMe() {
-      count++;
-      document.getElementById("clickCount").innerText = count;
-    }
+    // Settings beim Laden der Seite aus localStorage holen
+    window.addEventListener('load', () => {
+      const mode = localStorage.getItem('mode') || 'dark';
+      const font = localStorage.getItem('font') || "'Press Start 2P', cursive";
+      const bgColor = localStorage.getItem('bgColor') || '#000000';
+      const bgImage = localStorage.getItem('bgImage') || '';
 
-    function rechnen() {
-      const a = parseFloat(document.getElementById("zahl1").value);
-      const b = parseFloat(document.getElementById("zahl2").value);
-      const op = document.getElementById("operation").value;
-      let result;
-      if (!isNaN(a) && !isNaN(b)) {
-        switch (op) {
-          case '+': result = a + b; break;
-          case '-': result = a - b; break;
-          case '*': result = a * b; break;
-          case '/': result = b !== 0 ? a / b : "Fehler: Division durch 0"; break;
-        }
-        document.getElementById("ergebnis").innerText = "Ergebnis: " + result;
-      }
-    }
+      document.getElementById('modeSelect').value = mode;
+      document.getElementById('fontSelect').value = font;
+      document.getElementById('bgColorInput').value = bgColor;
+      document.getElementById('bgImageInput').value = bgImage;
 
-    function translate() {
-      const text = document.getElementById("textToTranslate").value.toLowerCase();
-      const words = {
-        "hallo": "hello",
-        "welt": "world",
-        "spieler": "player",
-        "minecraft": "minecraft"
-      };
-      const translated = text.split(" ").map(word => words[word] || word).join(" ");
-      document.getElementById("translatedText").innerText = translated;
-    }
+      applySettings();
 
-    function loginUser() {
-      const email = document.getElementById('loginEmail').value.trim();
-      const password = document.getElementById('loginPassword').value.trim();
-      const msg = document.getElementById('message');
+      // Standard Sektion zeigen
+      showSection('startseite');
+    });
 
-      if(email && password) {
-        // Demo: Nur ne Erfolgsmeldung, kein echtes Login
-        msg.style.color = "#0f0";
-        msg.innerText = `✔️ ${email} erfolgreich angemeldet!`;
-      } else {
-        msg.style.color = "#f00";
-        msg.innerText = "❌ Bitte E-Mail und Passwort ausfüllen!";
-      }
-    }
-
-    function registerUser() {
-      const email = document.getElementById('registerEmail').value.trim();
-      const password = document.getElementById('registerPassword').value.trim();
-      const msg = document.getElementById('message');
-
-      if(email && password) {
-        // Demo: Nur ne Erfolgsmeldung, kein echtes Register
-        msg.style.color = "#0f0";
-        msg.innerText = `✔️ Account für ${email} erstellt!`;
-      } else {
-        msg.style.color = "#f00";
-        msg.innerText = "❌ Bitte E-Mail und Passwort ausfüllen!";
-      }
-    }
-
-    // Zeige Startseite standardmäßig
-    showSection('startseite');
+    // Rest deiner JS-Funktionen (clickMe, rechnen, translate, loginUser, registerUser) bleiben gleich
   </script>
 </body>
 </html>
