@@ -26,8 +26,11 @@ function rechnen() {
       case '-': result = a - b; break;
       case '*': result = a * b; break;
       case '/': result = b !== 0 ? a / b : "Fehler: Division durch 0"; break;
+      default: result = "Ungültige Operation"; 
     }
     document.getElementById("ergebnis").innerText = "Ergebnis: " + result;
+  } else {
+    document.getElementById("ergebnis").innerText = "Bitte Zahlen eingeben!";
   }
 }
 
@@ -47,17 +50,6 @@ function registerUser() {
   const email = document.getElementById('registerEmail').value.trim();
   const password = document.getElementById('registerPassword').value.trim();
   const msg = document.getElementById('message');
-
-<!-- Registrierung Formular -->
-<h3>Neu hier? Registrieren</h3>
-<form id="registerForm" onsubmit="event.preventDefault(); registerUser();">
-  <input type="email" id="registerEmail" placeholder="E-Mail Adresse" required />
-  <input type="password" id="registerPassword" placeholder="Passwort erstellen" required />
-  <button type="submit">Registrieren</button>
-</form>
-
-<div id="message"></div>
-
 
   if(email && password) {
     if(users[email]) {
@@ -90,13 +82,12 @@ function loginUser() {
 
 showSection('startseite');
 
-// Wenn jemand auf den Spendenlink klickt – Log + optional Animation
 document.addEventListener('DOMContentLoaded', () => {
   const paypalBtn = document.querySelector('.paypal-button-glitch');
   if (paypalBtn) {
     paypalBtn.addEventListener('click', () => {
       console.log("User will spenden, Respekt!");
-      // Du könntest hier auch später was wie `fetch('/api/trackDonationClick')` machen
+      // Hier kann später noch Tracking oder Animation rein
     });
   }
 });
