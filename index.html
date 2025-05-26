@@ -5,154 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Minecraft Webseite Wezon1164</title>
 
-  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Press Start 2P', cursive;
-      background: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png') repeat;
-      background-size: 100px 100px;
-      color: #0f0;
-      text-shadow: 0 0 5px #00ff00;
-      overflow-x: hidden;
-    }
-    body.light-mode {
-      background: #f0f0f0;
-      color: #000;
-      text-shadow: none;
-    }
-
-    header {
-      background-color: #111;
-      color: #0f0;
-      text-align: center;
-      padding: 25px;
-      font-size: 1.5em;
-      animation: glitch 1.5s infinite;
-      position: relative;
-    }
-
-    .glitch-button {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      background: #003300;
-      border: 2px solid #0f0;
-      color: #aaffaa;
-      padding: 6px 12px;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      background-color: #111;
-      padding: 15px;
-    }
-
-    nav button {
-      background-color: #003300;
-      border: 2px solid #0f0;
-      color: #aaffaa;
-      margin: 6px;
-      padding: 10px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-family: inherit;
-    }
-
-    nav button:hover {
-      background-color: #0f0;
-      color: #003300;
-      animation: glitch 0.3s infinite;
-    }
-
-    @keyframes glitch {
-      0% { text-shadow: 2px 0 red; }
-      20% { text-shadow: -2px 0 cyan; }
-      40% { text-shadow: 2px 0 blue; }
-      60% { text-shadow: -2px 0 lime; }
-      80% { text-shadow: 2px 0 magenta; }
-      100% { text-shadow: -2px 0 yellow; }
-    }
-
-    section {
-      max-width: 900px;
-      margin: 25px auto;
-      background: rgba(0,0,0,0.8);
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 0 15px #0f0;
-      display: none;
-      color: #aaffaa;
-      font-size: 0.85em;
-    }
-
-    section.active {
-      display: block;
-    }
-
-    h2 {
-      color: #0f0;
-      text-align: center;
-      margin-bottom: 15px;
-    }
-
-    #clickCount {
-      font-size: 2em;
-      text-align: center;
-      margin: 10px;
-    }
-
-    input, select {
-      font-family: inherit;
-      font-size: 0.8em;
-      padding: 6px;
-      margin: 5px;
-      border-radius: 8px;
-      border: 2px solid #0f0;
-      background-color: rgba(0,0,0,0.5);
-      color: #aaffaa;
-      text-align: center;
-      display: block;
-      width: 80%;
-      max-width: 300px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    button {
-      display: block;
-      margin: 12px auto;
-      padding: 10px 20px;
-      font-size: 1em;
-      background-color: #003300;
-      border: 2px solid #0f0;
-      color: #aaffaa;
-      border-radius: 10px;
-      cursor: pointer;
-      font-family: inherit;
-      text-align: center;
-    }
-
-    button:hover {
-      background-color: #0f0;
-      color: #003300;
-      animation: glitch 0.3s infinite;
-    }
-
-    #message {
-      text-align: center;
-      margin-top: 10px;
-      font-weight: bold;
-      font-size: 1em;
-      min-height: 1.5em;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -174,56 +29,32 @@
     <button onclick="showSection('karte')">🗺️ Karte</button>
   </nav>
 
+  <!-- PAYPAL BUTTON - sichtbar auf jeder Seite -->
+  <div id="paypal-bar">
+    <a href="https://www.paypal.com/donate/?hosted_button_id=DR8K26NSLSQPU" target="_blank" class="paypal-button-glitch">
+      💸 Spende mit PayPal
+    </a>
+  </div>
+
+  <!-- Sektionen -->
   <section id="startseite" class="active">
     <h2>Melden Sie sich jetzt an</h2>
 
-    <!-- Login Formular -->
     <h3>Schon registriert? Anmelden</h3>
-    <form id="loginForm" onsubmit="event.preventDefault(); loginUser();">
+    <form id="loginForm">
       <input type="email" id="loginEmail" placeholder="E-Mail Adresse" required />
       <input type="password" id="loginPassword" placeholder="Passwort" required />
       <button type="submit">Anmelden</button>
     </form>
 
-    <hr style="border: 1px solid #0f0; margin: 20px 0; max-width: 300px; margin-left:auto; margin-right:auto;">
-
-    <!-- Registrierung Formular -->
     <h3>Neu hier? Registrieren</h3>
-    <form id="registerForm" onsubmit="event.preventDefault(); registerUser();">
+    <form id="registerForm">
       <input type="email" id="registerEmail" placeholder="E-Mail Adresse" required />
       <input type="password" id="registerPassword" placeholder="Passwort erstellen" required />
       <button type="submit">Registrieren</button>
     </form>
 
-    <!-- Registrierung Formular -->
-<h3>Neu hier? Registrieren</h3>
-<form id="registerForm" onsubmit="event.preventDefault(); registerUser();">
-  <input type="email" id="registerEmail" placeholder="E-Mail Adresse" required />
-  <input type="password" id="registerPassword" placeholder="Passwort erstellen" required />
-  <button type="submit">Registrieren</button>
-</form>
-
-<!-- PAYPAL BUTTON -->
-<div style="text-align: center; margin-top: 30px;">
-  <h3>Unterstütze den Server</h3>
-  <a href="https://www.paypal.com/donate/?hosted_button_id=DR8K26NSLSQPU" target="_blank" 
-     class="paypal-button-glitch">
-    Spenden mit PayPal
-  </a>
-</div>
-
-<div id="message"></div>
-
-    
     <div id="message"></div>
-  </section>
-
-  <section id="karte">
-    <h2>🗺️ Minecraft Karte</h2>
-    <p>Hier kannst du die Map vom Server sehen – check die Dörfer, Biome und alles!</p>
-    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/7b/Minecraft_map_item.png" 
-         alt="Minecraft Map" 
-         style="display:block; margin: 0 auto; max-width: 100%; border: 3px solid #0f0; border-radius: 12px;">
   </section>
 
   <section id="regeln">
@@ -248,7 +79,6 @@
 
   <section id="galerie">
     <h2>Galerie</h2>
-    <p>Bilder von coolen Momenten auf dem Server!</p>
     <img src="https://i.imgur.com/Ot5DWAW.png" alt="Minecraft Screenshot" width="100%">
   </section>
 
@@ -273,115 +103,25 @@
   </section>
 
   <section id="translator">
-    <h2>Übersetzer (Mini-Version)</h2>
+    <h2>Übersetzer</h2>
     <input type="text" id="textToTranslate" placeholder="Text auf Deutsch">
-    <button onclick="translate()">Englisch</button>
+    <button onclick="translate()">Übersetzen</button>
     <div id="translatedText"></div>
   </section>
 
   <section id="settings">
     <h2>Settings</h2>
-    <p>Hier kannst du später Optionen ändern. Aktuell nur Dark/Light Mode.</p>
+    <p>Dark/Light Mode ist aktuell die einzige Einstellung 🌓</p>
   </section>
 
-  <script>
-    function showSection(id) {
-      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
+  <section id="karte">
+    <h2>🗺️ Minecraft Karte</h2>
+    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/7b/Minecraft_map_item.png" 
+         alt="Minecraft Map" 
+         style="display:block; margin: 0 auto; max-width: 100%; border: 3px solid #0f0; border-radius: 12px;">
+  </section>
 
-    function toggleMode() {
-      document.body.classList.toggle('light-mode');
-    }
-
-    let count = 0;
-    function clickMe() {
-      count++;
-      document.getElementById("clickCount").innerText = count;
-    }
-
-    function rechnen() {
-      const a = parseFloat(document.getElementById("zahl1").value);
-      const b = parseFloat(document.getElementById("zahl2").value);
-      const op = document.getElementById("operation").value;
-      let result;
-      if (!isNaN(a) && !isNaN(b)) {
-        switch (op) {
-          case '+': result = a + b; break;
-          case '-': result = a - b; break;
-          case '*': result = a * b; break;
-          case '/': result = b !== 0 ? a / b : "Fehler: Division durch 0"; break;
-        }
-        document.getElementById("ergebnis").innerText = "Ergebnis: " + result;
-      }
-    }
-
-    function translate() {
-      const text = document.getElementById("textToTranslate").value.toLowerCase();
-      const words = {
-        "hallo": "hello",
-        "welt": "world",
-        "spieler": "player",
-        "minecraft": "minecraft"
-      };
-      const translated = text.split(" ").map(word => words[word] || word).join(" ");
-      document.getElementById("translatedText").innerText = translated;
-    }
-
-    function loginUser() {
-      const email = document.getElementById('loginEmail').value.trim();
-      const password = document.getElementById('loginPassword').value.trim();
-      const msg = document.getElementById('message');
-
-      if(email && password) {
-        // Demo: Nur ne Erfolgsmeldung, kein echtes Login
-        msg.style.color = "#0f0";
-        msg.innerText = `✔️ ${email} erfolgreich angemeldet!`;
-      } else {
-        msg.style.color = "#f00";
-        msg.innerText = "❌ Bitte E-Mail und Passwort ausfüllen!";
-      }
-    }
-
-    function registerUser() {
-      const email = document.getElementById('registerEmail').value.trim();
-      const password = document.getElementById('registerPassword').value.trim();
-      const msg = document.getElementById('message');
-
-      if(email && password) {
-        // Demo: Nur ne Erfolgsmeldung, kein echtes Register
-        msg.style.color = "#0f0";
-        msg.innerText = `✔️ Account für ${email} erstellt!`;
-      } else {
-        msg.style.color = "#f00";
-        msg.innerText = "❌ Bitte E-Mail und Passwort ausfüllen!";
-      }
-    }
-
-    .paypal-button-glitch {
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: #003300;
-  border: 2px solid #0f0;
-  border-radius: 10px;
-  color: #aaffaa;
-  font-family: 'Press Start 2P', cursive;
-  text-decoration: none;
-  box-shadow: 0 0 8px #0f0;
-  margin-top: 15px;
-  animation: glitch 1.5s infinite;
-}
-
-.paypal-button-glitch:hover {
-  background-color: #0f0;
-  color: #003300;
-}
-
-    
-    // Zeige Startseite standardmäßig
-    showSection('startseite');
-  </script>
+  <!-- JavaScript einbinden -->
+  <script src="main.js"></script>
 </body>
 </html>
-
-<script src="js/main.js"></script>
