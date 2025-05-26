@@ -56,15 +56,6 @@ function registerUser() {
   <button type="submit">Registrieren</button>
 </form>
 
-<!-- PAYPAL BUTTON -->
-<div style="text-align: center; margin-top: 30px;">
-  <h3>Unterstütze den Server</h3>
-  <a href="https://www.paypal.com/donate/?hosted_button_id=DR8K26NSLSQPU" target="_blank" 
-     class="paypal-button-glitch">
-    Spenden mit PayPal
-  </a>
-</div>
-
 <div id="message"></div>
 
 
