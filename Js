@@ -1,0 +1,80 @@
+const users = {}; // Nutzer-Speicher
+
+function showSection(id) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function toggleMode() {
+  document.body.classList.toggle('light-mode');
+}
+
+let count = 0;
+function clickMe() {
+  count++;
+  document.getElementById("clickCount").innerText = count;
+}
+
+function rechnen() {
+  const a = parseFloat(document.getElementById("zahl1").value);
+  const b = parseFloat(document.getElementById("zahl2").value);
+  const op = document.getElementById("operation").value;
+  let result;
+  if (!isNaN(a) && !isNaN(b)) {
+    switch (op) {
+      case '+': result = a + b; break;
+      case '-': result = a - b; break;
+      case '*': result = a * b; break;
+      case '/': result = b !== 0 ? a / b : "Fehler: Division durch 0"; break;
+    }
+    document.getElementById("ergebnis").innerText = "Ergebnis: " + result;
+  }
+}
+
+function translate() {
+  const text = document.getElementById("textToTranslate").value.toLowerCase();
+  const words = {
+    "hallo": "hello",
+    "welt": "world",
+    "spieler": "player",
+    "minecraft": "minecraft"
+  };
+  const translated = text.split(" ").map(word => words[word] || word).join(" ");
+  document.getElementById("translatedText").innerText = translated;
+}
+
+function registerUser() {
+  const email = document.getElementById('registerEmail').value.trim();
+  const password = document.getElementById('registerPassword').value.trim();
+  const msg = document.getElementById('message');
+
+  if(email && password) {
+    if(users[email]) {
+      msg.style.color = "#f00";
+      msg.innerText = "❌ Diese E-Mail ist schon registriert!";
+    } else {
+      users[email] = password;
+      msg.style.color = "#0f0";
+      msg.innerText = `✔️ Account für ${email} erstellt!`;
+    }
+  } else {
+    msg.style.color = "#f00";
+    msg.innerText = "❌ Bitte E-Mail und Passwort ausfüllen!";
+  }
+}
+
+function loginUser() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value.trim();
+  const msg = document.getElementById('message');
+
+  if(users[email] && users[email] === password) {
+    msg.style.color = "#0f0";
+    msg.innerText = `✔️ ${email} erfolgreich angemeldet!`;
+  } else {
+    msg.style.color = "#f00";
+    msg.innerText = "❌ Falsche E-Mail oder Passwort!";
+  }
+}
+
+showSection('startseite');
