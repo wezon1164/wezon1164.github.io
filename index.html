@@ -195,6 +195,26 @@
       <button type="submit">Registrieren</button>
     </form>
 
+    <!-- Registrierung Formular -->
+<h3>Neu hier? Registrieren</h3>
+<form id="registerForm" onsubmit="event.preventDefault(); registerUser();">
+  <input type="email" id="registerEmail" placeholder="E-Mail Adresse" required />
+  <input type="password" id="registerPassword" placeholder="Passwort erstellen" required />
+  <button type="submit">Registrieren</button>
+</form>
+
+<!-- PAYPAL BUTTON -->
+<div style="text-align: center; margin-top: 30px;">
+  <h3>Unterstütze den Server</h3>
+  <a href="https://www.paypal.com/donate/?hosted_button_id=DR8K26NSLSQPU" target="_blank" 
+     class="paypal-button-glitch">
+    Spenden mit PayPal
+  </a>
+</div>
+
+<div id="message"></div>
+
+    
     <div id="message"></div>
   </section>
 
@@ -338,6 +358,26 @@
       }
     }
 
+    .paypal-button-glitch {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #003300;
+  border: 2px solid #0f0;
+  border-radius: 10px;
+  color: #aaffaa;
+  font-family: 'Press Start 2P', cursive;
+  text-decoration: none;
+  box-shadow: 0 0 8px #0f0;
+  margin-top: 15px;
+  animation: glitch 1.5s infinite;
+}
+
+.paypal-button-glitch:hover {
+  background-color: #0f0;
+  color: #003300;
+}
+
+    
     // Zeige Startseite standardmäßig
     showSection('startseite');
   </script>
