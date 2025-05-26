@@ -48,6 +48,26 @@ function registerUser() {
   const password = document.getElementById('registerPassword').value.trim();
   const msg = document.getElementById('message');
 
+<!-- Registrierung Formular -->
+<h3>Neu hier? Registrieren</h3>
+<form id="registerForm" onsubmit="event.preventDefault(); registerUser();">
+  <input type="email" id="registerEmail" placeholder="E-Mail Adresse" required />
+  <input type="password" id="registerPassword" placeholder="Passwort erstellen" required />
+  <button type="submit">Registrieren</button>
+</form>
+
+<!-- PAYPAL BUTTON -->
+<div style="text-align: center; margin-top: 30px;">
+  <h3>Unterstütze den Server</h3>
+  <a href="https://www.paypal.com/donate/?hosted_button_id=DR8K26NSLSQPU" target="_blank" 
+     class="paypal-button-glitch">
+    Spenden mit PayPal
+  </a>
+</div>
+
+<div id="message"></div>
+
+
   if(email && password) {
     if(users[email]) {
       msg.style.color = "#f00";
