@@ -89,3 +89,14 @@ function loginUser() {
 }
 
 showSection('startseite');
+
+// Wenn jemand auf den Spendenlink klickt – Log + optional Animation
+document.addEventListener('DOMContentLoaded', () => {
+  const paypalBtn = document.querySelector('.paypal-button-glitch');
+  if (paypalBtn) {
+    paypalBtn.addEventListener('click', () => {
+      console.log("User will spenden, Respekt!");
+      // Du könntest hier auch später was wie `fetch('/api/trackDonationClick')` machen
+    });
+  }
+});
