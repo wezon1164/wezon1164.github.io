@@ -174,7 +174,28 @@
     <button onclick="showSection('karte')">🗺️ Karte</button>
   </nav>
 
-  <!-- ... deine anderen Sektionen bleiben unverändert ... -->
+  <section id="startseite" class="active">
+    <h2>Willkommen bei Wezon1164!</h2>
+    <p>Hier kannst du dich anmelden oder registrieren:</p>
+
+    <h3>Schon registriert? Anmelden</h3>
+    <form id="loginForm" onsubmit="event.preventDefault(); loginUser();">
+      <input type="email" id="loginEmail" placeholder="E-Mail Adresse" required />
+      <input type="password" id="loginPassword" placeholder="Passwort" required />
+      <button type="submit">Anmelden</button>
+    </form>
+
+    <h3>Neu hier? Registrieren</h3>
+    <form id="registerForm" onsubmit="event.preventDefault(); registerUser();">
+      <input type="email" id="registerEmail" placeholder="E-Mail Adresse" required />
+      <input type="password" id="registerPassword" placeholder="Passwort" required />
+      <button type="submit">Registrieren</button>
+    </form>
+
+    <div id="message"></div>
+  </section>
+
+  <!-- Andere Sektionen, z.B. Regeln, Discord ... hier hinzufügen -->
 
   <section id="settings">
     <h2>Settings</h2>
@@ -205,29 +226,35 @@
   </section>
 
   <script>
+    // Sektionen wechseln
     function showSection(id) {
       document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
       document.getElementById(id).classList.add('active');
     }
 
-    // Settings speichern und anwenden
+    // Mode umschalten
+    function toggleMode() {
+      const modeSelect = document.getElementById('modeSelect');
+      const currentMode = modeSelect.value;
+      modeSelect.value = currentMode === 'dark' ? 'light' : 'dark';
+      applySettings();
+    }
+
+    // Einstellungen speichern & anwenden
     function applySettings() {
       const mode = document.getElementById('modeSelect').value;
       const font = document.getElementById('fontSelect').value;
       const bgColor = document.getElementById('bgColorInput').value;
       const bgImage = document.getElementById('bgImageInput').value.trim();
 
-      // Mode Klasse setzen
       if (mode === 'light') {
         document.body.classList.add('light-mode');
       } else {
         document.body.classList.remove('light-mode');
       }
 
-      // Schriftart setzen
       document.body.style.fontFamily = font;
 
-      // Hintergrund setzen: Farbe + Wallpaper
       if (bgImage) {
         document.body.style.backgroundImage = `url('${bgImage}')`;
         document.body.style.backgroundRepeat = 'repeat';
@@ -238,25 +265,15 @@
         document.body.style.backgroundColor = bgColor;
       }
 
-      // localStorage speichern
       localStorage.setItem('mode', mode);
       localStorage.setItem('font', font);
       localStorage.setItem('bgColor', bgColor);
       localStorage.setItem('bgImage', bgImage);
 
-      // Sync Modus Dropdown mit Header Button
       document.getElementById('modeSelect').value = mode;
     }
 
-    // Toggle Mode Button im Header synced auch mit Select
-    function toggleMode() {
-      const modeSelect = document.getElementById('modeSelect');
-      const currentMode = modeSelect.value;
-      modeSelect.value = currentMode === 'dark' ? 'light' : 'dark';
-      applySettings();
-    }
-
-    // Settings beim Laden der Seite aus localStorage holen
+    // Beim Laden Settings holen
     window.addEventListener('load', () => {
       const mode = localStorage.getItem('mode') || 'dark';
       const font = localStorage.getItem('font') || "'Press Start 2P', cursive";
@@ -270,11 +287,42 @@
 
       applySettings();
 
-      // Standard Sektion zeigen
       showSection('startseite');
     });
 
-    // Rest deiner JS-Funktionen (clickMe, rechnen, translate, loginUser, registerUser) bleiben gleich
+    // Fake Login Funktion
+    function loginUser() {
+      const email = document.getElementById('loginEmail').value;
+      const pass = document.getElementById('loginPassword').value;
+      const message = document.getElementById('message');
+
+      // Hier kann man natürlich echte Login-Logik machen, für Demo einfach so:
+      if(email && pass) {
+        message.style.color = '#0f0';
+        message.textContent = `Yo, ${email} erfolgreich angemeldet! 🔥`;
+      } else {
+        message.style.color = '#f00';
+        message.textContent = 'Ey, du musst E-Mail und Passwort eingeben!';
+      }
+    }
+
+    // Fake Registrierung Funktion
+    function registerUser() {
+      const email = document.getElementById('registerEmail').value;
+      const pass = document.getElementById('registerPassword').value;
+      const message = document.getElementById('message');
+
+      if(email && pass) {
+        message.style.color = '#0f0';
+        message.textContent = `Nice, ${email} wurde registriert! 🚀 Du kannst dich jetzt anmelden.`;
+        // Formular leeren
+        document.getElementById('registerForm').reset();
+      } else {
+        message.style.color = '#f00';
+        message.textContent = 'Ey, du musst E-Mail und Passwort eingeben!';
+      }
+    }
   </script>
+
 </body>
 </html>
