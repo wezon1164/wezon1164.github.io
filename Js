@@ -20,6 +20,7 @@ function rechnen() {
   const b = parseFloat(document.getElementById("zahl2").value);
   const op = document.getElementById("operation").value;
   let result;
+
   if (!isNaN(a) && !isNaN(b)) {
     switch (op) {
       case '+': result = a + b; break;
@@ -79,4 +80,3 @@ function loginUser() {
     msg.innerText = "❌ Falsche E-Mail oder Passwort!";
   }
 }
-
