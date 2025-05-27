@@ -1,82 +1,21 @@
-const users = {}; // Nutzer-Speicher
+<section id="startseite" class="active">
+  <h2>Melden Sie sich jetzt an</h2>
 
-function showSection(id) {
-  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
+  <h3>Schon registriert? Anmelden</h3>
+  <form onsubmit="event.preventDefault(); loginUser();">
+    <input type="email" id="loginEmail" placeholder="E-Mail Adresse" required />
+    <input type="password" id="loginPassword" placeholder="Passwort" required />
+    <button type="submit">Anmelden</button>
+  </form>
 
-function toggleMode() {
-  document.body.classList.toggle('light-mode');
-}
+  <hr style="border: 1px solid #0f0; margin: 20px auto; max-width: 300px;">
 
-let count = 0;
-function clickMe() {
-  count++;
-  document.getElementById("clickCount").innerText = count;
-}
+  <h3>Neu hier? Registrieren</h3>
+  <form onsubmit="event.preventDefault(); registerUser();">
+    <input type="email" id="registerEmail" placeholder="E-Mail Adresse" required />
+    <input type="password" id="registerPassword" placeholder="Passwort erstellen" required />
+    <button type="submit">Registrieren</button>
+  </form>
 
-function rechnen() {
-  const a = parseFloat(document.getElementById("zahl1").value);
-  const b = parseFloat(document.getElementById("zahl2").value);
-  const op = document.getElementById("operation").value;
-  let result;
-
-  if (!isNaN(a) && !isNaN(b)) {
-    switch (op) {
-      case '+': result = a + b; break;
-      case '-': result = a - b; break;
-      case '*': result = a * b; break;
-      case '/': result = b !== 0 ? a / b : "Fehler: Division durch 0"; break;
-      default: result = "Ungültige Operation"; 
-    }
-    document.getElementById("ergebnis").innerText = "Ergebnis: " + result;
-  } else {
-    document.getElementById("ergebnis").innerText = "Bitte Zahlen eingeben!";
-  }
-}
-
-function translate() {
-  const text = document.getElementById("textToTranslate").value.toLowerCase();
-  const words = {
-    "hallo": "hello",
-    "welt": "world",
-    "spieler": "player",
-    "minecraft": "minecraft"
-  };
-  const translated = text.split(" ").map(word => words[word] || word).join(" ");
-  document.getElementById("translatedText").innerText = translated;
-}
-
-function registerUser() {
-  const email = document.getElementById('registerEmail').value.trim();
-  const password = document.getElementById('registerPassword').value.trim();
-  const msg = document.getElementById('message');
-
-  if(email && password) {
-    if(users[email]) {
-      msg.style.color = "#f00";
-      msg.innerText = "❌ Diese E-Mail ist schon registriert!";
-    } else {
-      users[email] = password;
-      msg.style.color = "#0f0";
-      msg.innerText = `✔️ Account für ${email} erstellt!`;
-    }
-  } else {
-    msg.style.color = "#f00";
-    msg.innerText = "❌ Bitte E-Mail und Passwort ausfüllen!";
-  }
-}
-
-function loginUser() {
-  const email = document.getElementById('loginEmail').value.trim();
-  const password = document.getElementById('loginPassword').value.trim();
-  const msg = document.getElementById('message');
-
-  if(users[email] && users[email] === password) {
-    msg.style.color = "#0f0";
-    msg.innerText = `✔️ ${email} erfolgreich angemeldet!`;
-  } else {
-    msg.style.color = "#f00";
-    msg.innerText = "❌ Falsche E-Mail oder Passwort!";
-  }
-}
+  <div id="message"></div>
+</section>
