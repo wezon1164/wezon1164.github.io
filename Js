@@ -80,14 +80,3 @@ function loginUser() {
   }
 }
 
-showSection('startseite');
-
-document.addEventListener('DOMContentLoaded', () => {
-  const paypalBtn = document.querySelector('.paypal-button-glitch');
-  if (paypalBtn) {
-    paypalBtn.addEventListener('click', () => {
-      console.log("User will spenden, Respekt!");
-      // Hier kann später noch Tracking oder Animation rein
-    });
-  }
-});
