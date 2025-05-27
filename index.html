@@ -1,140 +1,428 @@
-<!-- GARANTIERT KEIN PAYPAL -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Wezon1164 Tools</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minecraft Webseite Wezon1164</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron&family=Roboto+Mono&family=Anton&family=Fredoka+One&family=Monoton&display=swap" rel="stylesheet" />
   <style>
     body {
+      margin: 0;
+      font-family: 'Press Start 2P', cursive;
+      background: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png') repeat;
+      background-size: 100px 100px;
+      color: #0f0;
+      text-shadow: 0 0 5px #00ff00;
+      overflow-x: hidden;
+      transition: background 0.5s ease, color 0.5s ease, font-family 0.5s ease;
+    }
+    body.light-mode {
+      background: #f0f0f0;
+      color: #000;
+      text-shadow: none;
+    }
+    header {
       background-color: #111;
       color: #0f0;
-      font-family: monospace;
       text-align: center;
-      padding: 20px;
+      padding: 25px;
+      font-size: 1.5em;
+      animation: glitch 1.5s infinite;
+      position: relative;
     }
-    input, button, select {
-      margin: 8px;
-      padding: 10px;
-      border-radius: 6px;
+    .glitch-button {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      background: #003300;
       border: 2px solid #0f0;
-      background: #222;
-      color: #0f0;
+      color: #aaffaa;
+      padding: 6px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background-color: #111;
+      padding: 15px;
+    }
+    nav button {
+      background-color: #003300;
+      border: 2px solid #0f0;
+      color: #aaffaa;
+      margin: 6px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    nav button:hover {
+      background-color: #0f0;
+      color: #003300;
+      animation: glitch 0.3s infinite;
+    }
+    @keyframes glitch {
+      0% { text-shadow: 2px 0 red; }
+      20% { text-shadow: -2px 0 cyan; }
+      40% { text-shadow: 2px 0 blue; }
+      60% { text-shadow: -2px 0 lime; }
+      80% { text-shadow: 2px 0 magenta; }
+      100% { text-shadow: -2px 0 yellow; }
     }
     section {
-      margin-top: 30px;
-    }
-    .hidden {
+      max-width: 900px;
+      margin: 25px auto;
+      background: rgba(0,0,0,0.8);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 15px #0f0;
       display: none;
+      color: #aaffaa;
+      font-size: 0.85em;
+    }
+    section.active {
+      display: block;
+    }
+    h2 {
+      color: #0f0;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    #clickCount {
+      font-size: 2em;
+      text-align: center;
+      margin: 10px;
+    }
+    input, select {
+      font-family: inherit;
+      font-size: 0.8em;
+      padding: 6px;
+      margin: 5px auto;
+      border-radius: 8px;
+      border: 2px solid #0f0;
+      background-color: rgba(0,0,0,0.5);
+      color: #aaffaa;
+      text-align: center;
+      display: block;
+      width: 80%;
+      max-width: 300px;
+    }
+    button {
+      display: block;
+      margin: 12px auto;
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #003300;
+      border: 2px solid #0f0;
+      color: #aaffaa;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: inherit;
+      text-align: center;
+    }
+    button:hover {
+      background-color: #0f0;
+      color: #003300;
+      animation: glitch 0.3s infinite;
+    }
+    #message {
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 1em;
+      min-height: 1.5em;
+    }
+    /* Settings specific styles */
+    #settings label {
+      display: block;
+      margin: 15px auto 5px;
+      max-width: 300px;
+      text-align: center;
+      font-weight: bold;
+      color: #0f0;
+    }
+    #settings select {
+      cursor: pointer;
     }
   </style>
 </head>
-<body>
 
-  <h1>🟢 Wezon1164 Webtools (No PayPal 👌)</h1>
+<body>
+  <header>
+    Minecraft Webseite Wezon1164
+    <button class="glitch-button" onclick="toggleMode()">🌗 Mode</button>
+  </header>
 
   <nav>
-    <button onclick="show('login')">🔐 Login</button>
-    <button onclick="show('clicker')">🖱️ Clicker</button>
-    <button onclick="show('rechner')">🧮 Rechner</button>
-    <button onclick="show('translate')">🌐 Übersetzer</button>
+    <button onclick="showSection('startseite')">Startseite</button>
+    <button onclick="showSection('regeln')">Regeln</button>
+    <button onclick="showSection('discord')">Discord</button>
+    <button onclick="showSection('youtube')">YouTube</button>
+    <button onclick="showSection('galerie')">Galerie</button>
+    <button onclick="showSection('clicker')">Clicker Game</button>
+    <button onclick="showSection('rechner')">Rechner</button>
+    <button onclick="showSection('translator')">Übersetzer</button>
+    <button onclick="showSection('settings')">⚙️ Settings</button>
+    <button onclick="showSection('karte')">🗺️ Karte</button>
   </nav>
 
-  <section id="login">
-    <h2>Login/Register</h2>
-    <input id="loginEmail" placeholder="E-Mail">
-    <input id="loginPw" type="password" placeholder="Passwort">
-    <br>
-    <button onclick="login()">Login</button>
-    <button onclick="register()">Registrieren</button>
-    <div id="loginMsg"></div>
+  <section id="startseite" class="active">
+    <h2>Melden Sie sich jetzt an</h2>
+
+    <h3>Schon registriert? Anmelden</h3>
+    <form onsubmit="event.preventDefault(); loginUser();">
+      <input type="email" id="loginEmail" placeholder="E-Mail Adresse" required />
+      <input type="password" id="loginPassword" placeholder="Passwort" required />
+      <button type="submit">Anmelden</button>
+    </form>
+
+    <hr style="border: 1px solid #0f0; margin: 20px auto; max-width: 300px;">
+
+    <h3>Neu hier? Registrieren</h3>
+    <form onsubmit="event.preventDefault(); registerUser();">
+      <input type="email" id="registerEmail" placeholder="E-Mail Adresse" required />
+      <input type="password" id="registerPassword" placeholder="Passwort erstellen" required />
+      <button type="submit">Registrieren</button>
+    </form>
+
+    <div id="message"></div>
   </section>
 
-  <section id="clicker" class="hidden">
-    <h2>Clicker</h2>
-    <button onclick="clickCount++ ; updateClick()">Click mich!</button>
-    <p>Clicks: <span id="clicks">0</span></p>
+  <section id="karte">
+    <h2>🗺️ Minecraft Karte</h2>
+    <p>Hier kannst du die Map vom Server sehen – check die Dörfer, Biome und alles!</p>
+    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/7b/Minecraft_map_item.png" alt="Minecraft Map" style="display:block; margin:auto; max-width:100%; border: 3px solid #0f0; border-radius: 12px;">
   </section>
 
-  <section id="rechner" class="hidden">
+  <section id="regeln">
+    <h2>Server Regeln</h2>
+    <ul>
+      <li>Kein Ragen oder Toxic Verhalten</li>
+      <li>Kein Cheaten oder Exploiten</li>
+      <li>Respektiere alle Spieler</li>
+      <li>Hab Spaß und sei cool</li>
+    </ul>
+  </section>
+
+  <section id="discord">
+    <h2>Unser Discord Server</h2>
+    <p>Join uns auf Discord: <a href="https://discord.gg/deinserver" target="_blank" rel="noopener noreferrer">discord.gg/deinserver</a></p>
+  </section>
+
+  <section id="youtube">
+    <h2>YouTube Channel</h2>
+    <p>Abonnier uns auf YouTube: <a href="https://youtube.com/@deinChannel" target="_blank" rel="noopener noreferrer">@deinChannel</a></p>
+  </section>
+
+  <section id="galerie">
+    <h2>Galerie</h2>
+    <p>Bilder von coolen Momenten auf dem Server!</p>
+    <img src="https://i.imgur.com/Ot5DWAW.png" alt="Minecraft Screenshot" width="100%">
+  </section>
+
+  <section id="clicker">
+    <h2>Clicker Game</h2>
+    <div id="clickCount">0</div>
+    <button onclick="clickMe()">Click mich!</button>
+  </section>
+
+  <section id="rechner">
     <h2>Rechner</h2>
-    <input id="num1" type="number" placeholder="Zahl 1">
-    <input id="num2" type="number" placeholder="Zahl 2">
-    <select id="op">
-      <option>+</option><option>-</option><option>*</option><option>/</option>
+    <input type="number" id="zahl1" placeholder="Zahl 1" />
+    <input type="number" id="zahl2" placeholder="Zahl 2" />
+    <select id="operation">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
     </select>
-    <br>
-    <button onclick="calculate()">=</button>
-    <p id="calcResult">Ergebnis: ...</p>
+    <button onclick="rechnen()">Berechnen</button>
+    <div id="ergebnis"></div>
   </section>
 
-  <section id="translate" class="hidden">
-    <h2>Übersetzer DE ➤ EN</h2>
-    <input id="germanText" placeholder="z.B. Hallo Welt">
-    <button onclick="translate()">Übersetzen</button>
-    <p id="translated">Englisch: ...</p>
+  <section id="translator">
+    <h2>Übersetzer</h2>
+    <input type="text" id="textToTranslate" placeholder="Text auf Deutsch" />
+    <button onclick="translate()">Englisch</button>
+    <div id="translatedText"></div>
+  </section>
+
+  <section id="settings">
+    <h2>Settings</h2>
+    <label for="bgSelect">🌄 Hintergrund auswählen</label>
+    <select id="bgSelect">
+      <option value="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png">Creeper</option>
+      <option value="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80">Wald</option>
+      <option value="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=800&q=80">Berge</option>
+      <option value="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=800&q=80">Sternenhimmel</option>
+      <option value="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=800&q=80">Ozean</option>
+      <option value="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=80">Wüste</option>
+      <option value="https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=800&q=80">Blumenwiese</option>
+    </select>
+
+    <label for="fontSelect">✍️ Schriftart auswählen</label>
+    <select id="fontSelect">
+      <option value="'Press Start 2P', cursive">Press Start 2P (default)</option>
+      <option value="'Orbitron', sans-serif">Orbitron</option>
+      <option value="'Roboto Mono', monospace">Roboto Mono</option>
+      <option value="'Anton', sans-serif">Anton</option>
+      <option value="'Fredoka One', cursive">Fredoka One</option>
+      <option value="'Monoton', cursive">Monoton</option>
+    </select>
+
+    <label for="colorSelect">🎨 Schriftfarbe</label>
+    <input type="color" id="colorSelect" value="#00ff00" />
+
+    <button onclick="applySettings()">Speichern & Anwenden</button>
   </section>
 
   <script>
-    let users = {};
-    let clickCount = 0;
+    const users = {};
 
-    function show(id) {
-      document.querySelectorAll("section").forEach(sec => sec.classList.add("hidden"));
-      document.getElementById(id).classList.remove("hidden");
+    // Show section
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
     }
 
-    function login() {
-      const mail = loginEmail.value.trim();
-      const pw = loginPw.value;
-      if (users[mail] === pw) {
-        loginMsg.innerText = "✅ Willkommen zurück, " + mail;
-      } else {
-        loginMsg.innerText = "❌ Falsche Daten!";
-      }
+    // Dark / Light Mode toggle
+    function toggleMode() {
+      document.body.classList.toggle('light-mode');
+      saveSettings();
     }
 
-    function register() {
-      const mail = loginEmail.value.trim();
-      const pw = loginPw.value;
-      if (!users[mail]) {
-        users[mail] = pw;
-        loginMsg.innerText = "✅ Registriert: " + mail;
-      } else {
-        loginMsg.innerText = "⚠️ Nutzer existiert schon";
-      }
+    // Clicker Game
+    let count = 0;
+    function clickMe() {
+      count++;
+      document.getElementById("clickCount").innerText = count;
     }
 
-    function updateClick() {
-      document.getElementById("clicks").innerText = clickCount;
-    }
-
-    function calculate() {
-      let a = parseFloat(num1.value);
-      let b = parseFloat(num2.value);
-      let op = op.value;
+    // Rechner
+    function rechnen() {
+      const a = parseFloat(document.getElementById("zahl1").value);
+      const b = parseFloat(document.getElementById("zahl2").value);
+      const op = document.getElementById("operation").value;
       let result;
-      switch (op) {
-        case "+": result = a + b; break;
-        case "-": result = a - b; break;
-        case "*": result = a * b; break;
-        case "/": result = b ? (a / b) : "Fehler: /0"; break;
+      if (!isNaN(a) && !isNaN(b)) {
+        switch (op) {
+          case '+': result = a + b; break;
+          case '-': result = a - b; break;
+          case '*': result = a * b; break;
+          case '/': result = b !== 0 ? a / b : "Fehler: Division durch 0"; break;
+          default: result = "Ungültige Operation";
+        }
+        document.getElementById("ergebnis").innerText = "Ergebnis: " + result;
+      } else {
+        document.getElementById("ergebnis").innerText = "Bitte Zahlen eingeben!";
       }
-      calcResult.innerText = "Ergebnis: " + result;
     }
 
+    // Übersetzer
     function translate() {
-      let text = germanText.value.toLowerCase();
-      const dict = {
+      const text = document.getElementById("textToTranslate").value.toLowerCase();
+      const words = {
         "hallo": "hello",
         "welt": "world",
-        "ich": "i",
-        "liebe": "love",
+        "spieler": "player",
         "minecraft": "minecraft"
       };
-      let result = text.split(" ").map(w => dict[w] || w).join(" ");
-      translated.innerText = "Englisch: " + result;
+      const translated = text.split(" ").map(word => words[word] || word).join(" ");
+      document.getElementById("translatedText").innerText = translated;
     }
-  </script>
 
+    // User Registrierung & Login
+    function registerUser() {
+      const email = document.getElementById('registerEmail').value.trim();
+      const password = document.getElementById('registerPassword').value.trim();
+      const msg = document.getElementById('message');
+      if(email && password) {
+        if(users[email]) {
+          msg.style.color = "#f00";
+          msg.innerText = "❌ Diese E-Mail ist schon registriert!";
+        } else {
+          users[email] = password;
+          msg.style.color = "#0f0";
+          msg.innerText = `✔️ Account für ${email} erstellt!`;
+        }
+      } else {
+        msg.style.color = "#f00";
+        msg.innerText = "❌ Bitte E-Mail und Passwort ausfüllen!";
+      }
+    }
+
+    function loginUser() {
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+      const msg = document.getElementById('message');
+      if(users[email] && users[email] === password) {
+        msg.style.color = "#0f0";
+        msg.innerText = `✔️ ${email} erfolgreich angemeldet!`;
+      } else {
+        msg.style.color = "#f00";
+        msg.innerText = "❌ Falsche E-Mail oder Passwort!";
+      }
+    }
+
+    // SETTINGS: apply & save in localStorage
+    function applySettings() {
+      const bgUrl = document.getElementById('bgSelect').value;
+      const font = document.getElementById('fontSelect').value;
+      const color = document.getElementById('colorSelect').value;
+
+      document.body.style.backgroundImage = `url('${bgUrl}')`;
+      document.body.style.backgroundRepeat = 'repeat';
+      document.body.style.backgroundSize = '100px 100px';
+      document.body.style.color = color;
+      document.body.style.fontFamily = font;
+      document.body.style.textShadow = `0 0 5px ${color}`;
+
+      // Save settings to localStorage
+      const settings = { bgUrl, font, color };
+      localStorage.setItem('userSettings', JSON.stringify(settings));
+    }
+
+    // Load settings from localStorage on page load
+    function loadSettings() {
+      const settings = JSON.parse(localStorage.getItem('userSettings'));
+      if(settings) {
+        document.getElementById('bgSelect').value = settings.bgUrl;
+        document.getElementById('fontSelect').value = settings.font;
+        document.getElementById('colorSelect').value = settings.color;
+
+        document.body.style.backgroundImage = `url('${settings.bgUrl}')`;
+        document.body.style.backgroundRepeat = 'repeat';
+        document.body.style.backgroundSize = '100px 100px';
+        document.body.style.color = settings.color;
+        document.body.style.fontFamily = settings.font;
+        document.body.style.textShadow = `0 0 5px ${settings.color}`;
+      }
+    }
+
+    // Save dark/light mode in localStorage
+    function saveSettings() {
+      const darkMode = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+      const settings = JSON.parse(localStorage.getItem('userSettings')) || {};
+      settings.mode = darkMode;
+      localStorage.setItem('userSettings', JSON.stringify(settings));
+    }
+
+    // Load dark/light mode on page load
+    function loadMode() {
+      const settings = JSON.parse(localStorage.getItem('userSettings'));
+      if(settings && settings.mode === 'light') {
+        document.body.classList.add('light-mode');
+      }
+    }
+
+    // Init on load
+    window.onload = () => {
+      loadSettings();
+      loadMode();
+    };
+  </script>
 </body>
 </html>
