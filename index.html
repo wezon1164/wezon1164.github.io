@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
@@ -226,46 +226,41 @@
   <section id="clicker">
     <h2>Clicker Game</h2>
     <div id="clickCount">0</div>
-    <button onclick="clickMe()">Click mich!</button>
+    <button onclick="clickMe()">Klick mich!</button>
   </section>
 
   <section id="rechner">
     <h2>Rechner</h2>
-    <input type="number" id="zahl1" placeholder="Zahl 1" />
-    <input type="number" id="zahl2" placeholder="Zahl 2" />
-    <select id="operation">
-      <option value="+">+</option>
-      <option value="-">-</option>
-      <option value="*">*</option>
-      <option value="/">/</option>
-    </select>
-    <button onclick="rechnen()">Berechnen</button>
-    <div id="ergebnis"></div>
+    <input type="number" id="num1" placeholder="Zahl 1" />
+    <input type="number" id="num2" placeholder="Zahl 2" />
+    <button onclick="calculate()">Berechnen</button>
+    <div id="calcResult"></div>
   </section>
 
   <section id="translator">
     <h2>Übersetzer</h2>
-    <input type="text" id="textToTranslate" placeholder="Text auf Deutsch" />
-    <button onclick="translate()">Englisch</button>
-    <div id="translatedText"></div>
+    <textarea id="translateInput" rows="4" placeholder="Text hier eingeben..."></textarea>
+    <button onclick="translateText()">Übersetzen</button>
+    <div id="translateOutput"></div>
   </section>
 
   <section id="settings">
-    <h2>Settings</h2>
-    <label for="bgSelect">🌄 Hintergrund auswählen</label>
-    <select id="bgSelect">
+    <h2>⚙️ Einstellungen</h2>
+
+    <label for="backgroundSelect">Hintergrundbild wählen:</label>
+    <select id="backgroundSelect">
       <option value="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png">Creeper</option>
-      <option value="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80">Wald</option>
-      <option value="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=800&q=80">Berge</option>
-      <option value="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=800&q=80">Sternenhimmel</option>
-      <option value="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=800&q=80">Ozean</option>
-      <option value="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=80">Wüste</option>
-      <option value="https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=800&q=80">Blumenwiese</option>
+      <option value="https://i.imgur.com/8Rg2zQF.png">Blauer Himmel</option>
+      <option value="https://i.imgur.com/RHkntVG.png">Minecraft Steine</option>
+      <option value="https://i.imgur.com/1jAqOjG.png">Dschungel</option>
+      <option value="https://i.imgur.com/JwWNSqK.png">Nether</option>
+      <option value="https://i.imgur.com/QeVWQ6S.png">End</option>
+      <option value="https://i.imgur.com/GxB7gFE.png">Diamanten</option>
     </select>
 
-    <label for="fontSelect">✍️ Schriftart auswählen</label>
+    <label for="fontSelect">Schriftart wählen:</label>
     <select id="fontSelect">
-      <option value="'Press Start 2P', cursive">Press Start 2P (default)</option>
+      <option value="'Press Start 2P', cursive">Press Start 2P</option>
       <option value="'Orbitron', sans-serif">Orbitron</option>
       <option value="'Roboto Mono', monospace">Roboto Mono</option>
       <option value="'Anton', sans-serif">Anton</option>
@@ -273,156 +268,163 @@
       <option value="'Monoton', cursive">Monoton</option>
     </select>
 
-    <label for="colorSelect">🎨 Schriftfarbe</label>
-    <input type="color" id="colorSelect" value="#00ff00" />
+    <label for="colorSelect">Textfarbe wählen:</label>
+    <select id="colorSelect">
+      <option value="#0f0">Grün (Classic)</option>
+      <option value="#00f">Blau</option>
+      <option value="#f00">Rot</option>
+      <option value="#ff0">Gelb</option>
+      <option value="#0ff">Cyan</option>
+      <option value="#fff">Weiß</option>
+      <option value="#f0f">Magenta</option>
+    </select>
 
-    <button onclick="applySettings()">Speichern & Anwenden</button>
+    <button onclick="saveSettings()">Speichern</button>
+    <div id="settingsMessage"></div>
   </section>
 
   <script>
-    const users = {};
-
-    // Show section
-    function showSection(id) {
+    // Navigation Section Switch
+    function showSection(sectionId) {
       document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
-
-    // Dark / Light Mode toggle
-    function toggleMode() {
-      document.body.classList.toggle('light-mode');
-      saveSettings();
+      const sec = document.getElementById(sectionId);
+      if(sec) sec.classList.add('active');
     }
 
     // Clicker Game
-    let count = 0;
+    let clicks = 0;
+    const clickCountElem = document.getElementById('clickCount');
     function clickMe() {
-      count++;
-      document.getElementById("clickCount").innerText = count;
+      clicks++;
+      clickCountElem.textContent = clicks;
     }
 
     // Rechner
-    function rechnen() {
-      const a = parseFloat(document.getElementById("zahl1").value);
-      const b = parseFloat(document.getElementById("zahl2").value);
-      const op = document.getElementById("operation").value;
-      let result;
-      if (!isNaN(a) && !isNaN(b)) {
-        switch (op) {
-          case '+': result = a + b; break;
-          case '-': result = a - b; break;
-          case '*': result = a * b; break;
-          case '/': result = b !== 0 ? a / b : "Fehler: Division durch 0"; break;
-          default: result = "Ungültige Operation";
-        }
-        document.getElementById("ergebnis").innerText = "Ergebnis: " + result;
-      } else {
-        document.getElementById("ergebnis").innerText = "Bitte Zahlen eingeben!";
+    function calculate() {
+      const n1 = parseFloat(document.getElementById('num1').value);
+      const n2 = parseFloat(document.getElementById('num2').value);
+      const resElem = document.getElementById('calcResult');
+      if (isNaN(n1) || isNaN(n2)) {
+        resElem.textContent = "Bitte zwei gültige Zahlen eingeben.";
+        return;
       }
+      resElem.textContent = `Summe: ${n1 + n2}, Differenz: ${n1 - n2}, Produkt: ${n1 * n2}, Quotient: ${n2 !== 0 ? (n1 / n2).toFixed(2) : '∞'}`;
     }
 
-    // Übersetzer
-    function translate() {
-      const text = document.getElementById("textToTranslate").value.toLowerCase();
-      const words = {
-        "hallo": "hello",
-        "welt": "world",
-        "spieler": "player",
-        "minecraft": "minecraft"
-      };
-      const translated = text.split(" ").map(word => words[word] || word).join(" ");
-      document.getElementById("translatedText").innerText = translated;
+    // Übersetzer (Dummy)
+    function translateText() {
+      const input = document.getElementById('translateInput').value.trim();
+      const output = document.getElementById('translateOutput');
+      if(!input) {
+        output.textContent = "Bitte Text eingeben.";
+        return;
+      }
+      // Hier dummy Übersetzung: Einfach rückwärts
+      output.textContent = input.split('').reverse().join('');
     }
 
-    // User Registrierung & Login
+    // Dark/Light Mode Toggle
+    function toggleMode() {
+      document.body.classList.toggle('light-mode');
+      // Save mode in LS
+      localStorage.setItem('mode', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    }
+
+    // User Registration & Login (fake, nur Demo)
     function registerUser() {
       const email = document.getElementById('registerEmail').value.trim();
       const password = document.getElementById('registerPassword').value.trim();
-      const msg = document.getElementById('message');
-      if(email && password) {
-        if(users[email]) {
-          msg.style.color = "#f00";
-          msg.innerText = "❌ Diese E-Mail ist schon registriert!";
-        } else {
-          users[email] = password;
-          msg.style.color = "#0f0";
-          msg.innerText = ✔️ Account für ${email} erstellt!;
-        }
-      } else {
-        msg.style.color = "#f00";
-        msg.innerText = "❌ Bitte E-Mail und Passwort ausfüllen!";
+      if(!email || !password) {
+        setMessage("Bitte alle Felder ausfüllen.");
+        return;
       }
+      // Fake speichern im LS
+      localStorage.setItem('userEmail', email);
+      localStorage.setItem('userPassword', password);
+      setMessage("Registrierung erfolgreich! Jetzt anmelden.");
+      // Reset form
+      document.getElementById('registerEmail').value = '';
+      document.getElementById('registerPassword').value = '';
     }
 
     function loginUser() {
       const email = document.getElementById('loginEmail').value.trim();
       const password = document.getElementById('loginPassword').value.trim();
-      const msg = document.getElementById('message');
-      if(users[email] && users[email] === password) {
-        msg.style.color = "#0f0";
-        msg.innerText = ✔️ ${email} erfolgreich angemeldet!;
+      const savedEmail = localStorage.getItem('userEmail');
+      const savedPassword = localStorage.getItem('userPassword');
+      if(email === savedEmail && password === savedPassword) {
+        setMessage("Erfolgreich eingeloggt. Willkommen zurück!");
+        // Reset form
+        document.getElementById('loginEmail').value = '';
+        document.getElementById('loginPassword').value = '';
       } else {
-        msg.style.color = "#f00";
-        msg.innerText = "❌ Falsche E-Mail oder Passwort!";
+        setMessage("Falsche E-Mail oder Passwort.");
       }
     }
 
-    // SETTINGS: apply & save in localStorage
-    function applySettings() {
-      const bgUrl = document.getElementById('bgSelect').value;
+    function setMessage(msg) {
+      document.getElementById('message').textContent = msg;
+    }
+
+    // Settings speichern & laden
+    function saveSettings() {
+      const bg = document.getElementById('backgroundSelect').value;
       const font = document.getElementById('fontSelect').value;
       const color = document.getElementById('colorSelect').value;
 
-      document.body.style.backgroundImage = url('${bgUrl}');
-      document.body.style.backgroundRepeat = 'repeat';
-      document.body.style.backgroundSize = '100px 100px';
-      document.body.style.color = color;
-      document.body.style.fontFamily = font;
-      document.body.style.textShadow = 0 0 5px ${color};
+      localStorage.setItem('bgImage', bg);
+      localStorage.setItem('fontFamily', font);
+      localStorage.setItem('textColor', color);
 
-      // Save settings to localStorage
-      const settings = { bgUrl, font, color };
-      localStorage.setItem('userSettings', JSON.stringify(settings));
+      applySettings();
+
+      document.getElementById('settingsMessage').textContent = "Einstellungen gespeichert! ✨";
+      setTimeout(() => {
+        document.getElementById('settingsMessage').textContent = "";
+      }, 3000);
     }
 
-    // Load settings from localStorage on page load
-    function loadSettings() {
-      const settings = JSON.parse(localStorage.getItem('userSettings'));
-      if(settings) {
-        document.getElementById('bgSelect').value = settings.bgUrl;
-        document.getElementById('fontSelect').value = settings.font;
-        document.getElementById('colorSelect').value = settings.color;
+    function applySettings() {
+      const bg = localStorage.getItem('bgImage');
+      const font = localStorage.getItem('fontFamily');
+      const color = localStorage.getItem('textColor');
 
-        document.body.style.backgroundImage = url('${settings.bgUrl}');
-        document.body.style.backgroundRepeat = 'repeat';
+      if(bg) {
+        document.body.style.background = `url('${bg}') repeat`;
         document.body.style.backgroundSize = '100px 100px';
-        document.body.style.color = settings.color;
-        document.body.style.fontFamily = settings.font;
-        document.body.style.textShadow = 0 0 5px ${settings.color};
+        document.getElementById('backgroundSelect').value = bg;
+      }
+      if(font) {
+        document.body.style.fontFamily = font;
+        document.getElementById('fontSelect').value = font;
+      }
+      if(color) {
+        document.body.style.color = color;
+        // Text-shadow nur bei grün, sonst none
+        if(color.toLowerCase() === '#0f0') {
+          document.body.style.textShadow = '0 0 5px #00ff00';
+        } else {
+          document.body.style.textShadow = 'none';
+        }
+        document.getElementById('colorSelect').value = color;
       }
     }
 
-    // Save dark/light mode in localStorage
-    function saveSettings() {
-      const darkMode = document.body.classList.contains('light-mode') ? 'light' : 'dark';
-      const settings = JSON.parse(localStorage.getItem('userSettings')) || {};
-      settings.mode = darkMode;
-      localStorage.setItem('userSettings', JSON.stringify(settings));
-    }
-
-    // Load dark/light mode on page load
+    // Mode vom LocalStorage laden
     function loadMode() {
-      const settings = JSON.parse(localStorage.getItem('userSettings'));
-      if(settings && settings.mode === 'light') {
+      const mode = localStorage.getItem('mode');
+      if(mode === 'light') {
         document.body.classList.add('light-mode');
+      } else {
+        document.body.classList.remove('light-mode');
       }
     }
 
-    // Init on load
-    window.onload = () => {
-      loadSettings();
+    // Beim Laden: Settings & Mode anwenden
+    window.addEventListener('load', () => {
+      applySettings();
       loadMode();
-    };
+    });
   </script>
 </body>
 </html>
