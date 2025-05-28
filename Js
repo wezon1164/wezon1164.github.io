@@ -1,18 +1,18 @@
 <section id="startseite" class="active">
-  <h2>Jetzt anmelden und durchstarten!</h2>
+  <h2>Melden Sie sich jetzt an</h2>
 
-  <h3>Schon am Start? Einfach einloggen</h3>
+  <h3>Schon registriert? Anmelden</h3>
   <form onsubmit="event.preventDefault(); loginUser();">
-    <input type="email" id="loginEmail" placeholder="Deine E-Mail" required />
-    <input type="password" id="loginPassword" placeholder="Dein Passwort" required />
+    <input type="email" id="loginEmail" placeholder="E-Mail Adresse" required />
+    <input type="password" id="loginPassword" placeholder="Passwort" required />
     <button type="submit">Anmelden</button>
   </form>
 
   <hr style="border: 1px solid #0f0; margin: 20px auto; max-width: 300px;">
 
-  <h3>Neu hier? Jetzt registrieren</h3>
+  <h3>Neu hier? Registrieren</h3>
   <form onsubmit="event.preventDefault(); registerUser();">
-    <input type="email" id="registerEmail" placeholder="Deine E-Mail" required />
+    <input type="email" id="registerEmail" placeholder="E-Mail Adresse" required />
     <input type="password" id="registerPassword" placeholder="Passwort erstellen" required />
     <button type="submit">Registrieren</button>
   </form>
