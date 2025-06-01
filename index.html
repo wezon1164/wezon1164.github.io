@@ -1,279 +1,427 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wezon1164 Minecraft Hub</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron&family=Roboto+Mono&family=Anton&family=Fredoka+One&family=Monoton&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minecraft Webseite Wezon1164</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron&family=Roboto+Mono&family=Anton&family=Fredoka+One&family=Monoton&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --main-color: #0f0;
-      --bg-dark: #111;
-      --bg-light: #f0f0f0;
-      --accent: #003300;
-      --text-light: #aaffaa;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       font-family: 'Press Start 2P', cursive;
       background: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png') repeat;
-      background-size: 100px;
-      color: var(--main-color);
-      text-shadow: 0 0 5px lime;
-      transition: 0.3s ease all;
+      background-size: 100px 100px;
+      color: #0f0;
+      text-shadow: 0 0 5px #00ff00;
+      overflow-x: hidden;
+      transition: background 0.5s ease, color 0.5s ease, font-family 0.5s ease;
     }
-
     body.light-mode {
-      background: var(--bg-light);
-      color: #111;
+      background: #f0f0f0;
+      color: #000;
       text-shadow: none;
     }
-
     header {
-      background: var(--bg-dark);
-      color: var(--main-color);
+      background-color: #111;
+      color: #0f0;
       text-align: center;
-      padding: 20px;
-      font-size: 1.3rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      padding: 25px;
+      font-size: 1.5em;
+      animation: glitch 1.5s infinite;
+      position: relative;
     }
-
     .glitch-button {
       position: absolute;
-      top: 15px;
+      top: 10px;
       right: 20px;
-      background: var(--accent);
-      color: var(--text-light);
-      border: 2px solid var(--main-color);
-      border-radius: 8px;
-      padding: 6px 10px;
+      background: #003300;
+      border: 2px solid #0f0;
+      color: #aaffaa;
+      padding: 6px 12px;
+      border-radius: 10px;
       cursor: pointer;
     }
-
     nav {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 8px;
-      background: var(--bg-dark);
-      padding: 12px;
+      background-color: #111;
+      padding: 15px;
     }
-
     nav button {
-      background: var(--accent);
-      color: var(--text-light);
-      border: 2px solid var(--main-color);
-      border-radius: 6px;
-      padding: 8px 12px;
-      font-family: inherit;
+      background-color: #003300;
+      border: 2px solid #0f0;
+      color: #aaffaa;
+      margin: 6px;
+      padding: 10px 18px;
+      border-radius: 8px;
       cursor: pointer;
+      font-family: inherit;
     }
-
     nav button:hover {
-      background: var(--main-color);
-      color: var(--accent);
+      background-color: #0f0;
+      color: #003300;
+      animation: glitch 0.3s infinite;
     }
-
+    @keyframes glitch {
+      0% { text-shadow: 2px 0 red; }
+      20% { text-shadow: -2px 0 cyan; }
+      40% { text-shadow: 2px 0 blue; }
+      60% { text-shadow: -2px 0 lime; }
+      80% { text-shadow: 2px 0 magenta; }
+      100% { text-shadow: -2px 0 yellow; }
+    }
     section {
-      display: none;
       max-width: 900px;
-      margin: 20px auto;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.8);
-      color: var(--text-light);
+      margin: 25px auto;
+      background: rgba(0,0,0,0.8);
       border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 15px #0f0;
+      display: none;
+      color: #aaffaa;
+      font-size: 0.85em;
     }
-
     section.active {
       display: block;
     }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 10px;
-      margin-top: 15px;
-    }
-
-    .gallery img {
-      width: 100%;
-      border: 3px solid var(--main-color);
-      border-radius: 10px;
-    }
-
-    form input, form button, select, textarea {
-      display: block;
-      margin: 8px auto;
-      padding: 10px;
-      width: 80%;
-      max-width: 300px;
-      border-radius: 8px;
-      border: 2px solid var(--main-color);
-      background: rgba(0, 0, 0, 0.6);
-      color: var(--text-light);
-      font-family: inherit;
+    h2 {
+      color: #0f0;
       text-align: center;
+      margin-bottom: 15px;
     }
-
     #clickCount {
       font-size: 2em;
       text-align: center;
+      margin: 10px;
+    }
+    input, select {
+      font-family: inherit;
+      font-size: 0.8em;
+      padding: 6px;
+      margin: 5px auto;
+      border-radius: 8px;
+      border: 2px solid #0f0;
+      background-color: rgba(0,0,0,0.5);
+      color: #aaffaa;
+      text-align: center;
+      display: block;
+      width: 80%;
+      max-width: 300px;
+    }
+    button {
+      display: block;
+      margin: 12px auto;
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #003300;
+      border: 2px solid #0f0;
+      color: #aaffaa;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: inherit;
+      text-align: center;
+    }
+    button:hover {
+      background-color: #0f0;
+      color: #003300;
+      animation: glitch 0.3s infinite;
+    }
+    #message {
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 1em;
+      min-height: 1.5em;
+    }
+    /* Settings specific styles */
+    #settings label {
+      display: block;
+      margin: 15px auto 5px;
+      max-width: 300px;
+      text-align: center;
+      font-weight: bold;
+      color: #0f0;
+    }
+    #settings select {
+      cursor: pointer;
     }
   </style>
 </head>
+
 <body>
   <header>
-    Minecraft Hub Wezon1164
-    <button class="glitch-button" onclick="toggleMode()">🌙 / ☀️</button>
+    Minecraft Webseite Wezon1164
+    <button class="glitch-button" onclick="toggleMode()">🌗 Mode</button>
   </header>
 
   <nav>
-    <button onclick="showSection('startseite')">🏠 Start</button>
-    <button onclick="showSection('regeln')">📜 Regeln</button>
-    <button onclick="showSection('galerie')">🖼️ Galerie</button>
-    <button onclick="showSection('clicker')">🖱️ Clicker</button>
-    <button onclick="showSection('karte')">🗺️ Map</button>
+    <button onclick="showSection('startseite')">Startseite</button>
+    <button onclick="showSection('regeln')">Regeln</button>
+    <button onclick="showSection('discord')">Discord</button>
+    <button onclick="showSection('youtube')">YouTube</button>
+    <button onclick="showSection('galerie')">Galerie</button>
+    <button onclick="showSection('clicker')">Clicker Game</button>
+    <button onclick="showSection('rechner')">Rechner</button>
+    <button onclick="showSection('translator')">Übersetzer</button>
     <button onclick="showSection('settings')">⚙️ Settings</button>
+    <button onclick="showSection('karte')">🗺️ Karte</button>
   </nav>
 
   <section id="startseite" class="active">
-    <h2>Login</h2>
+    <h2>Melden Sie sich jetzt an</h2>
+
+    <h3>Schon registriert? Anmelden</h3>
     <form onsubmit="event.preventDefault(); loginUser();">
-      <input id="loginEmail" type="email" placeholder="E-Mail">
-      <input id="loginPassword" type="password" placeholder="Passwort">
-      <button type="submit">Einloggen</button>
+      <input type="email" id="loginEmail" placeholder="E-Mail Adresse" required />
+      <input type="password" id="loginPassword" placeholder="Passwort" required />
+      <button type="submit">Anmelden</button>
     </form>
-    <h3>Registrieren</h3>
+
+    <hr style="border: 1px solid #0f0; margin: 20px auto; max-width: 300px;">
+
+    <h3>Neu hier? Registrieren</h3>
     <form onsubmit="event.preventDefault(); registerUser();">
-      <input id="registerEmail" type="email" placeholder="E-Mail">
-      <input id="registerPassword" type="password" placeholder="Passwort">
+      <input type="email" id="registerEmail" placeholder="E-Mail Adresse" required />
+      <input type="password" id="registerPassword" placeholder="Passwort erstellen" required />
       <button type="submit">Registrieren</button>
     </form>
+
     <div id="message"></div>
   </section>
 
+  <section id="karte">
+    <h2>🗺️ Minecraft Karte</h2>
+    <p>Hier kannst du die Map vom Server sehen – check die Dörfer, Biome und alles!</p>
+    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/7b/Minecraft_map_item.png" alt="Minecraft Map" style="display:block; margin:auto; max-width:100%; border: 3px solid #0f0; border-radius: 12px;">
+  </section>
+
   <section id="regeln">
-    <h2>Regeln</h2>
+    <h2>Server Regeln</h2>
     <ul>
-      <li>Be nice, no toxic vibes</li>
-      <li>Kein Cheating</li>
-      <li>Respektiere andere Spieler</li>
+      <li>Kein Ragen oder Toxic Verhalten</li>
+      <li>Kein Cheaten oder Exploiten</li>
+      <li>Respektiere alle Spieler</li>
+      <li>Hab Spaß und sei cool</li>
     </ul>
   </section>
 
+  <section id="discord">
+  <h2>Unser Discord Server</h2>
+  <p>Join uns auf Discord: <a href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener noreferrer">discord.gg/xjpRj57cqJ</a></p>
+</section>
+
+  <p>Abonnier uns auf YouTube: <a href="https://youtube.com/@wezon1164" target="_blank" rel="noopener noreferrer">@wezon1164</a></p>
+
   <section id="galerie">
-    <h2>🖼️ Server Galerie</h2>
-    <div class="gallery">
-      <img src="https://i.imgur.com/Ot5DWAW.png" alt="Screenshot 1">
-      <img src="https://i.imgur.com/8Rg2zQF.png" alt="Screenshot 2">
-      <img src="https://i.imgur.com/RHkntVG.png" alt="Screenshot 3">
-      <img src="https://i.imgur.com/1jAqOjG.png" alt="Screenshot 4">
-      <img src="https://i.imgur.com/JwWNSqK.png" alt="Screenshot 5">
-      <img src="https://i.imgur.com/QeVWQ6S.png" alt="Screenshot 6">
-      <img src="https://i.imgur.com/GxB7gFE.png" alt="Screenshot 7">
-    </div>
+    <h2>Galerie</h2>
+    <p>Bilder von coolen Momenten auf dem Server!</p>
+    <img src="https://i.imgur.com/Ot5DWAW.png" alt="Minecraft Screenshot" width="100%">
   </section>
 
   <section id="clicker">
-    <h2>🖱️ Clicker Game</h2>
+    <h2>Clicker Game</h2>
     <div id="clickCount">0</div>
     <button onclick="clickMe()">Klick mich!</button>
   </section>
 
-  <section id="karte">
-    <h2>🗺️ Server Map</h2>
-    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/7b/Minecraft_map_item.png" alt="Map" style="width:100%;border-radius:12px;border:2px solid var(--main-color);">
+  <section id="rechner">
+    <h2>Rechner</h2>
+    <input type="number" id="num1" placeholder="Zahl 1" />
+    <input type="number" id="num2" placeholder="Zahl 2" />
+    <button onclick="calculate()">Berechnen</button>
+    <div id="calcResult"></div>
+  </section>
+
+  <section id="translator">
+    <h2>Übersetzer</h2>
+    <textarea id="translateInput" rows="4" placeholder="Text hier eingeben..."></textarea>
+    <button onclick="translateText()">Übersetzen</button>
+    <div id="translateOutput"></div>
   </section>
 
   <section id="settings">
     <h2>⚙️ Einstellungen</h2>
-    <label for="backgroundSelect">Hintergrund:</label>
+
+    <label for="backgroundSelect">Hintergrundbild wählen:</label>
     <select id="backgroundSelect">
       <option value="https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png">Creeper</option>
+      <option value="https://i.imgur.com/8Rg2zQF.png">Blauer Himmel</option>
+      <option value="https://i.imgur.com/RHkntVG.png">Minecraft Steine</option>
       <option value="https://i.imgur.com/1jAqOjG.png">Dschungel</option>
+      <option value="https://i.imgur.com/JwWNSqK.png">Nether</option>
+      <option value="https://i.imgur.com/QeVWQ6S.png">End</option>
       <option value="https://i.imgur.com/GxB7gFE.png">Diamanten</option>
     </select>
-    <label for="fontSelect">Schriftart:</label>
+
+    <label for="fontSelect">Schriftart wählen:</label>
     <select id="fontSelect">
-      <option value="'Press Start 2P', cursive">Press Start</option>
+      <option value="'Press Start 2P', cursive">Press Start 2P</option>
       <option value="'Orbitron', sans-serif">Orbitron</option>
+      <option value="'Roboto Mono', monospace">Roboto Mono</option>
+      <option value="'Anton', sans-serif">Anton</option>
+      <option value="'Fredoka One', cursive">Fredoka One</option>
+      <option value="'Monoton', cursive">Monoton</option>
     </select>
-    <label for="colorSelect">Textfarbe:</label>
+
+    <label for="colorSelect">Textfarbe wählen:</label>
     <select id="colorSelect">
-      <option value="#0f0">Grün</option>
+      <option value="#0f0">Grün (Classic)</option>
       <option value="#00f">Blau</option>
       <option value="#f00">Rot</option>
+      <option value="#ff0">Gelb</option>
+      <option value="#0ff">Cyan</option>
+      <option value="#fff">Weiß</option>
+      <option value="#f0f">Magenta</option>
     </select>
+
     <button onclick="saveSettings()">Speichern</button>
     <div id="settingsMessage"></div>
   </section>
 
   <script>
-    function showSection(id) {
+    // Navigation Section Switch
+    function showSection(sectionId) {
       document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+      const sec = document.getElementById(sectionId);
+      if(sec) sec.classList.add('active');
     }
 
-    let count = 0;
+    // Clicker Game
+    let clicks = 0;
+    const clickCountElem = document.getElementById('clickCount');
     function clickMe() {
-      count++;
-      document.getElementById('clickCount').textContent = count;
+      clicks++;
+      clickCountElem.textContent = clicks;
     }
 
-    function registerUser() {
-      const email = document.getElementById('registerEmail').value;
-      const pw = document.getElementById('registerPassword').value;
-      if(email && pw){
-        localStorage.setItem('userEmail', email);
-        localStorage.setItem('userPassword', pw);
-        document.getElementById('message').textContent = "Registriert ✨ Jetzt einloggen!";
+    // Rechner
+    function calculate() {
+      const n1 = parseFloat(document.getElementById('num1').value);
+      const n2 = parseFloat(document.getElementById('num2').value);
+      const resElem = document.getElementById('calcResult');
+      if (isNaN(n1) || isNaN(n2)) {
+        resElem.textContent = "Bitte zwei gültige Zahlen eingeben.";
+        return;
       }
+      resElem.textContent = `Summe: ${n1 + n2}, Differenz: ${n1 - n2}, Produkt: ${n1 * n2}, Quotient: ${n2 !== 0 ? (n1 / n2).toFixed(2) : '∞'}`;
     }
 
-    function loginUser() {
-      const email = document.getElementById('loginEmail').value;
-      const pw = document.getElementById('loginPassword').value;
-      if(email === localStorage.getItem('userEmail') && pw === localStorage.getItem('userPassword')){
-        document.getElementById('message').textContent = "Eingeloggt 🎉";
-      } else {
-        document.getElementById('message').textContent = "Fehler: Check Email/Passwort";
+    // Übersetzer (Dummy)
+    function translateText() {
+      const input = document.getElementById('translateInput').value.trim();
+      const output = document.getElementById('translateOutput');
+      if(!input) {
+        output.textContent = "Bitte Text eingeben.";
+        return;
       }
+      // Hier dummy Übersetzung: Einfach rückwärts
+      output.textContent = input.split('').reverse().join('');
     }
 
-    function toggleMode(){
+    // Dark/Light Mode Toggle
+    function toggleMode() {
       document.body.classList.toggle('light-mode');
+      // Save mode in LS
       localStorage.setItem('mode', document.body.classList.contains('light-mode') ? 'light' : 'dark');
     }
 
+    // User Registration & Login (fake, nur Demo)
+    function registerUser() {
+      const email = document.getElementById('registerEmail').value.trim();
+      const password = document.getElementById('registerPassword').value.trim();
+      if(!email || !password) {
+        setMessage("Bitte alle Felder ausfüllen.");
+        return;
+      }
+      // Fake speichern im LS
+      localStorage.setItem('userEmail', email);
+      localStorage.setItem('userPassword', password);
+      setMessage("Registrierung erfolgreich! Jetzt anmelden.");
+      // Reset form
+      document.getElementById('registerEmail').value = '';
+      document.getElementById('registerPassword').value = '';
+    }
+
+    function loginUser() {
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+      const savedEmail = localStorage.getItem('userEmail');
+      const savedPassword = localStorage.getItem('userPassword');
+      if(email === savedEmail && password === savedPassword) {
+        setMessage("Erfolgreich eingeloggt. Willkommen zurück!");
+        // Reset form
+        document.getElementById('loginEmail').value = '';
+        document.getElementById('loginPassword').value = '';
+      } else {
+        setMessage("Falsche E-Mail oder Passwort.");
+      }
+    }
+
+    function setMessage(msg) {
+      document.getElementById('message').textContent = msg;
+    }
+
+    // Settings speichern & laden
     function saveSettings() {
-      localStorage.setItem('bgImage', document.getElementById('backgroundSelect').value);
-      localStorage.setItem('fontFamily', document.getElementById('fontSelect').value);
-      localStorage.setItem('textColor', document.getElementById('colorSelect').value);
+      const bg = document.getElementById('backgroundSelect').value;
+      const font = document.getElementById('fontSelect').value;
+      const color = document.getElementById('colorSelect').value;
+
+      localStorage.setItem('bgImage', bg);
+      localStorage.setItem('fontFamily', font);
+      localStorage.setItem('textColor', color);
+
       applySettings();
-      document.getElementById('settingsMessage').textContent = "Gespeichert 💾";
+
+      document.getElementById('settingsMessage').textContent = "Einstellungen gespeichert! ✨";
+      setTimeout(() => {
+        document.getElementById('settingsMessage').textContent = "";
+      }, 3000);
     }
 
     function applySettings() {
       const bg = localStorage.getItem('bgImage');
       const font = localStorage.getItem('fontFamily');
       const color = localStorage.getItem('textColor');
-      if(bg) document.body.style.background = `url('${bg}') repeat`;
-      if(font) document.body.style.fontFamily = font;
-      if(color) document.body.style.color = color;
+
+      if(bg) {
+        document.body.style.background = `url('${bg}') repeat`;
+        document.body.style.backgroundSize = '100px 100px';
+        document.getElementById('backgroundSelect').value = bg;
+      }
+      if(font) {
+        document.body.style.fontFamily = font;
+        document.getElementById('fontSelect').value = font;
+      }
+      if(color) {
+        document.body.style.color = color;
+        // Text-shadow nur bei grün, sonst none
+        if(color.toLowerCase() === '#0f0') {
+          document.body.style.textShadow = '0 0 5px #00ff00';
+        } else {
+          document.body.style.textShadow = 'none';
+        }
+        document.getElementById('colorSelect').value = color;
+      }
     }
 
+    // Mode vom LocalStorage laden
+    function loadMode() {
+      const mode = localStorage.getItem('mode');
+      if(mode === 'light') {
+        document.body.classList.add('light-mode');
+      } else {
+        document.body.classList.remove('light-mode');
+      }
+    }
+
+    // Beim Laden: Settings & Mode anwenden
     window.addEventListener('load', () => {
-      if(localStorage.getItem('mode') === 'light') document.body.classList.add('light-mode');
       applySettings();
+      loadMode();
     });
   </script>
 </body>
 </html>
-
