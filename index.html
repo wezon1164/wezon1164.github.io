@@ -235,177 +235,249 @@
   <section id="galerie">
     <h2>Galerie</h2>
     <p>Bilder von coolen Momenten auf dem Server!</p>
-    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/47/Creeper_Jumping.png" alt="Minecraft Creeper" style="max-width: 100%; border-radius: 12px; border: 2px solid #0f0;">
+    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/47/Creeper_Jumping.png" alt="Creeper" style="max-width: 300px; border: 2px solid #0f0; border-radius: 12px; margin: 10px;">
+    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/30/Enderman.png" alt="Enderman" style="max-width: 300px; border: 2px solid #0f0; border-radius: 12px; margin: 10px;">
   </section>
 
   <section id="clicker">
-    <h2>Clicker Game</h2>
+    <h2>Clicker Game mit Shop</h2>
     <div id="clickCount">Clicks: 0</div>
     <button onclick="incrementClick()">Klick mich!</button>
+
+    <h3>Shop</h3>
+    <div id="shop">
+      <button onclick="buyUpgrade('doubleClick')">Doppelter Klick (+1 Klick pro Klick) - Kosten: <span id="costDoubleClick">10</span></button>
+      <button onclick="buyUpgrade('autoClicker')">Auto-Klicker (+1 Klick pro Sekunde) - Kosten: <span id="costAutoClicker">50</span></button>
+    </div>
+
+    <div id="shopMessage" style="text-align:center; margin-top:10px; font-weight:bold;"></div>
   </section>
 
   <section id="rechner">
-    <h2>Einfacher Rechner</h2>
-    <input type="number" id="num1" placeholder="Zahl 1" />
-    <input type="number" id="num2" placeholder="Zahl 2" />
-    <select id="operation">
-      <option value="add">+</option>
-      <option value="sub">-</option>
-      <option value="mul">*</option>
-      <option value="div">/</option>
-    </select>
+    <h2>Rechner</h2>
+    <p>Führe einfache Berechnungen durch</p>
+    <input type="text" id="calcInput" placeholder="z.B. 2 + 2" />
     <button onclick="calculate()">Berechnen</button>
-    <div id="calcResult"></div>
+    <div id="calcResult" style="text-align:center; margin-top:10px; font-weight:bold;"></div>
   </section>
 
   <section id="translator">
-    <h2>Übersetzer</h2>
-    <textarea id="textToTranslate" rows="4" placeholder="Text zum Übersetzen eingeben"></textarea>
-    <select id="langFrom">
-      <option value="de">Deutsch</option>
-      <option value="en">Englisch</option>
-    </select>
-    <select id="langTo">
-      <option value="en">Englisch</option>
-      <option value="de">Deutsch</option>
+    <h2>Übersetzer_2_sprachig</h2>
+    <textarea id="textInput" rows="3" placeholder="Gib Text hier ein..."></textarea>
+    <select id="languageSelect">
+      <option value="de-en">Deutsch → Englisch</option>
+      <option value="en-de">Englisch → Deutsch</option>
     </select>
     <button onclick="translateText()">Übersetzen</button>
-    <div id="translatedText"></div>
+    <div id="translationResult" style="text-align:center; margin-top:10px; font-weight:bold;"></div>
   </section>
 
   <section id="settings">
     <h2>Einstellungen</h2>
-    <label for="fontSelect">Schriftart auswählen:</label>
-    <select id="fontSelect" onchange="changeFont(this.value)">
-      <option value="'Press Start 2P', cursive" selected>Press Start 2P</option>
+    <label for="fontSelect">Schriftart wählen:</label>
+    <select id="fontSelect" onchange="changeFont()">
+      <option value="'Press Start 2P', cursive">Press Start 2P</option>
+      <option value="'Orbitron', sans-serif">Orbitron</option>
       <option value="'Roboto Mono', monospace">Roboto Mono</option>
       <option value="'Anton', sans-serif">Anton</option>
       <option value="'Fredoka One', cursive">Fredoka One</option>
       <option value="'Monoton', cursive">Monoton</option>
-      <option value="'Orbitron', sans-serif">Orbitron</option>
     </select>
 
-    <label for="themeSelect">Design auswählen:</label>
-    <select id="themeSelect" onchange="changeTheme(this.value)">
-      <option value="dark" selected>Dunkel</option>
-      <option value="light">Hell</option>
+    <label for="colorSelect">Farbschema wählen:</label>
+    <select id="colorSelect" onchange="changeColorScheme()">
+      <option value="green">Grün</option>
+      <option value="blue">Blau</option>
+      <option value="red">Rot</option>
+      <option value="purple">Lila</option>
     </select>
+
+    <label>
+      <input type="checkbox" id="glitchToggle" onchange="toggleGlitchEffect()" /> Glitch-Effekt aktivieren
+    </label>
   </section>
 
   <script>
-    // Navigation: Sichtbare Sektion umschalten
+    // Navigation
     function showSection(id) {
       document.querySelectorAll('section').forEach(sec => {
         sec.classList.remove('active');
       });
       const section = document.getElementById(id);
-      if(section) section.classList.add('active');
-      // Clear message area
-      const msg = document.getElementById('message');
-      if(msg) msg.textContent = '';
+      if (section) section.classList.add('active');
     }
 
-    // Dunkel/Hell Modus umschalten
-    function toggleMode() {
-      document.body.classList.toggle('light-mode');
-      const themeSelect = document.getElementById('themeSelect');
-      if(document.body.classList.contains('light-mode')) {
-        themeSelect.value = 'light';
+    // Login & Register (Demo mit localStorage)
+    function loginUser() {
+      const email = document.getElementById('loginEmail').value.trim();
+      const pw = document.getElementById('loginPassword').value.trim();
+      const message = document.getElementById('message');
+      if (!email || !pw) {
+        message.textContent = "Bitte E-Mail und Passwort eingeben!";
+        return;
+      }
+      const storedPw = localStorage.getItem('user_' + email);
+      if (storedPw === pw) {
+        message.style.color = 'limegreen';
+        message.textContent = "Erfolgreich angemeldet!";
       } else {
-        themeSelect.value = 'dark';
+        message.style.color = 'red';
+        message.textContent = "Falsche E-Mail oder Passwort!";
+      }
+    }
+    function registerUser() {
+      const email = document.getElementById('registerEmail').value.trim();
+      const pw = document.getElementById('registerPassword').value.trim();
+      const message = document.getElementById('message');
+      if (!email || !pw) {
+        message.textContent = "Bitte E-Mail und Passwort eingeben!";
+        return;
+      }
+      if (localStorage.getItem('user_' + email)) {
+        message.style.color = 'red';
+        message.textContent = "E-Mail bereits registriert!";
+        return;
+      }
+      localStorage.setItem('user_' + email, pw);
+      message.style.color = 'limegreen';
+      message.textContent = "Registrierung erfolgreich! Bitte anmelden.";
+    }
+
+    // Rechner
+    function calculate() {
+      const input = document.getElementById('calcInput').value;
+      const resultDiv = document.getElementById('calcResult');
+      try {
+        // Sicherheitshalber nur Zahlen und einfache Operatoren erlauben
+        if (!/^[0-9+\-*/().\s]+$/.test(input)) throw "Ungültige Eingabe";
+        const result = eval(input);
+        if (result === undefined) throw "Keine Berechnung möglich";
+        resultDiv.style.color = "lime";
+        resultDiv.textContent = "Ergebnis: " + result;
+      } catch (e) {
+        resultDiv.style.color = "red";
+        resultDiv.textContent = "Fehler: " + e;
       }
     }
 
-    // Schriftart ändern
-    function changeFont(font) {
+    // Übersetzer (Demo mit sehr einfachem Ersatz)
+    function translateText() {
+      const text = document.getElementById('textInput').value.trim();
+      const lang = document.getElementById('languageSelect').value;
+      const resultDiv = document.getElementById('translationResult');
+      if (!text) {
+        resultDiv.style.color = 'red';
+        resultDiv.textContent = 'Bitte Text eingeben!';
+        return;
+      }
+      // Sehr einfache Demo-Übersetzung (nur Beispiele)
+      if (lang === 'de-en') {
+        // Demo: Ersetze "Hallo" durch "Hello"
+        let translated = text.replace(/Hallo/gi, 'Hello');
+        resultDiv.style.color = 'lime';
+        resultDiv.textContent = translated;
+      } else if (lang === 'en-de') {
+        // Demo: Ersetze "Hello" durch "Hallo"
+        let translated = text.replace(/Hello/gi, 'Hallo');
+        resultDiv.style.color = 'lime';
+        resultDiv.textContent = translated;
+      } else {
+        resultDiv.style.color = 'red';
+        resultDiv.textContent = 'Unbekannte Spracheinstellung!';
+      }
+    }
+
+    // Einstellungen
+    function changeFont() {
+      const font = document.getElementById('fontSelect').value;
       document.body.style.fontFamily = font;
     }
-
-    // Thema ändern
-    function changeTheme(theme) {
-      if(theme === 'light') {
-        document.body.classList.add('light-mode');
+    function changeColorScheme() {
+      const scheme = document.getElementById('colorSelect').value;
+      let color = '#0f0';
+      switch (scheme) {
+        case 'blue': color = '#00f'; break;
+        case 'red': color = '#f00'; break;
+        case 'purple': color = '#a0f'; break;
+        default: color = '#0f0';
+      }
+      document.body.style.color = color;
+      document.body.style.textShadow = `0 0 5px ${color}`;
+      document.querySelectorAll('header').forEach(h => {
+        h.style.color = color;
+      });
+      document.querySelectorAll('button').forEach(btn => {
+        btn.style.borderColor = color;
+        btn.style.color = color;
+      });
+    }
+    function toggleGlitchEffect() {
+      const enabled = document.getElementById('glitchToggle').checked;
+      const header = document.querySelector('header');
+      if (enabled) {
+        header.style.animation = 'glitch 1.5s infinite';
       } else {
-        document.body.classList.remove('light-mode');
+        header.style.animation = 'none';
       }
     }
 
-    // Clicker Game
+    // Dunkel-/Hellmodus toggle
+    function toggleMode() {
+      document.body.classList.toggle('light-mode');
+    }
+
+    // Clicker Game mit Shop - Erweiterung
     let clicks = 0;
+    let clicksPerClick = 1;
+    let autoClickers = 0;
+
     function incrementClick() {
-      clicks++;
+      clicks += clicksPerClick;
+      updateClickDisplay();
+    }
+
+    function updateClickDisplay() {
       document.getElementById('clickCount').textContent = 'Clicks: ' + clicks;
     }
 
-    // Rechner Funktion
-    function calculate() {
-      const n1 = parseFloat(document.getElementById('num1').value);
-      const n2 = parseFloat(document.getElementById('num2').value);
-      const op = document.getElementById('operation').value;
-      let res;
-      if(isNaN(n1) || isNaN(n2)) {
-        res = 'Bitte zwei gültige Zahlen eingeben!';
-      } else {
-        switch(op) {
-          case 'add': res = n1 + n2; break;
-          case 'sub': res = n1 - n2; break;
-          case 'mul': res = n1 * n2; break;
-          case 'div': res = n2 !== 0 ? (n1 / n2).toFixed(2) : 'Division durch 0 nicht erlaubt'; break;
-        }
-      }
-      document.getElementById('calcResult').textContent = 'Ergebnis: ' + res;
-    }
+    // Shop-Preise
+    let costDoubleClick = 10;
+    let costAutoClicker = 50;
 
-    // Übersetzer (sehr simpel & nur Demo)
-    function translateText() {
-      const text = document.getElementById('textToTranslate').value.trim();
-      const from = document.getElementById('langFrom').value;
-      const to = document.getElementById('langTo').value;
-      let translated = '';
-
-      if(text.length === 0) {
-        translated = 'Bitte Text eingeben.';
-      } else if(from === to) {
-        translated = text;
-      } else {
-        // Simpel, um Demo zu zeigen
-        if(from === 'de' && to === 'en') {
-          translated = 'Translation demo: ' + text;
-        } else if(from === 'en' && to === 'de') {
-          translated = 'Übersetzungsdemo: ' + text;
+    function buyUpgrade(upgrade) {
+      const shopMsg = document.getElementById('shopMessage');
+      if (upgrade === 'doubleClick') {
+        if (clicks >= costDoubleClick) {
+          clicks -= costDoubleClick;
+          clicksPerClick += 1;
+          costDoubleClick = Math.floor(costDoubleClick * 2.5);
+          document.getElementById('costDoubleClick').textContent = costDoubleClick;
+          shopMsg.textContent = 'Doppelter Klick gekauft! Klickstärke: ' + clicksPerClick;
+          updateClickDisplay();
         } else {
-          translated = text;
+          shopMsg.textContent = 'Nicht genug Klicks für doppelten Klick!';
+        }
+      } else if (upgrade === 'autoClicker') {
+        if (clicks >= costAutoClicker) {
+          clicks -= costAutoClicker;
+          autoClickers += 1;
+          costAutoClicker = Math.floor(costAutoClicker * 2);
+          document.getElementById('costAutoClicker').textContent = costAutoClicker;
+          shopMsg.textContent = 'Auto-Klicker gekauft! Anzahl: ' + autoClickers;
+          updateClickDisplay();
+        } else {
+          shopMsg.textContent = 'Nicht genug Klicks für Auto-Klicker!';
         }
       }
-      document.getElementById('translatedText').textContent = translated;
     }
 
-    // Dummy Login/Registrierung (nur Demo)
-    function loginUser() {
-      const email = document.getElementById('loginEmail').value;
-      const pw = document.getElementById('loginPassword').value;
-      const msg = document.getElementById('message');
-      if(email && pw) {
-        msg.textContent = 'Erfolgreich angemeldet (Demo)!';
-        msg.style.color = '#0f0';
-      } else {
-        msg.textContent = 'Bitte E-Mail und Passwort eingeben!';
-        msg.style.color = 'red';
+    // Auto-Klicker automatisch Klicks hinzufügen
+    setInterval(() => {
+      if (autoClickers > 0) {
+        clicks += autoClickers;
+        updateClickDisplay();
       }
-    }
-
-    function registerUser() {
-      const email = document.getElementById('registerEmail').value;
-      const pw = document.getElementById('registerPassword').value;
-      const msg = document.getElementById('message');
-      if(email && pw) {
-        msg.textContent = 'Registrierung erfolgreich (Demo)! Bitte jetzt anmelden.';
-        msg.style.color = '#0f0';
-      } else {
-        msg.textContent = 'Bitte E-Mail und Passwort eingeben!';
-        msg.style.color = 'red';
-      }
-    }
+    }, 1000);
   </script>
 </body>
 </html>
