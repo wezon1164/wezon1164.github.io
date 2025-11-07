@@ -1,483 +1,673 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Minecraft Webseite Wezon1164</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron&family=Roboto+Mono&family=Anton&family=Fredoka+One&family=Monoton&display=swap" rel="stylesheet" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Wezon1164 — Minecraft Server</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Fredoka+One&family=Roboto+Mono&display=swap" rel="stylesheet">
+
   <style>
-    body {
-      margin: 0;
-      font-family: 'Press Start 2P', cursive;
-      background: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png') repeat;
-      background-size: 100px 100px;
-      color: #0f0;
-      text-shadow: 0 0 5px #00ff00;
-      overflow-x: hidden;
-      transition: background 0.5s ease, color 0.5s ease, font-family 0.5s ease;
+    :root{
+      --bg-1: #07120a;
+      --bg-2: #071a0f;
+      --accent: #39ff14;
+      --muted: rgba(255,255,255,0.08);
+      --glass: rgba(0,0,0,0.45);
+      --card-radius: 14px;
+      --max-width: 1100px;
+      --transition: 220ms ease;
+      --ff-sans: "Orbitron", system-ui, sans-serif;
+      --ff-alt: "Roboto Mono", monospace;
     }
-    body.light-mode {
-      background: #f0f0f0;
-      color: #000;
-      text-shadow: none;
+
+    /* Reset & base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      min-height:100%;
+      font-family:var(--ff-sans);
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(57,255,20,0.06), transparent 8%),
+                  linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      color: #e9ffe9;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      transition: background var(--transition), color var(--transition);
+      padding-bottom:40px;
     }
-    header {
-      background-color: #111;
-      color: #0f0;
-      text-align: center;
-      padding: 25px;
-      font-size: 1.5em;
-      animation: glitch 1.5s infinite;
-      position: relative;
+
+    /* Container */
+    .wrap{
+      max-width:var(--max-width);
+      margin:28px auto;
+      padding:20px;
     }
-    .glitch-button {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      background: #003300;
-      border: 2px solid #0f0;
-      color: #aaffaa;
-      padding: 6px 12px;
-      border-radius: 10px;
-      cursor: pointer;
+
+    /* Header */
+    header.site-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.08));
+      border-radius:var(--card-radius);
+      box-shadow: 0 6px 28px rgba(0,0,0,0.45), 0 0 18px rgba(57,255,20,0.05);
+      border: 1px solid rgba(57,255,20,0.08);
     }
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      background-color: #111;
-      padding: 15px;
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
     }
-    nav button {
-      background-color: #003300;
-      border: 2px solid #0f0;
-      color: #aaffaa;
-      margin: 6px;
-      padding: 10px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-family: inherit;
+    .logo{
+      width:56px;
+      height:56px;
+      border-radius:10px;
+      background:linear-gradient(135deg,#063214,#0a3c10);
+      display:grid;
+      place-items:center;
+      font-family: "Fredoka One";
+      color:var(--accent);
+      font-size:18px;
+      letter-spacing:0.4px;
+      box-shadow: inset 0 -6px 18px rgba(0,0,0,0.6);
     }
-    nav button:hover {
-      background-color: #0f0;
-      color: #003300;
-      animation: glitch 0.3s infinite;
+    .title{
+      font-size:1.05rem;
+      line-height:1;
     }
-    @keyframes glitch {
-      0% { text-shadow: 2px 0 red; }
-      20% { text-shadow: -2px 0 cyan; }
-      40% { text-shadow: 2px 0 blue; }
-      60% { text-shadow: -2px 0 lime; }
-      80% { text-shadow: 2px 0 magenta; }
-      100% { text-shadow: -2px 0 yellow; }
+    .subtitle{
+      font-size:0.72rem;
+      color:rgba(233,255,233,0.6);
+      font-family:var(--ff-alt);
     }
-    section {
-      max-width: 900px;
-      margin: 25px auto;
-      background: rgba(0,0,0,0.8);
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 0 15px #0f0;
-      display: none;
-      color: #aaffaa;
-      font-size: 0.85em;
+
+    /* Top actions */
+    .actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
     }
-    section.active {
-      display: block;
+    .btn{
+      --bg: rgba(3,51,3,0.85);
+      background:linear-gradient(180deg,var(--bg), rgba(3,71,3,0.9));
+      color:var(--accent);
+      padding:8px 12px;
+      border-radius:10px;
+      border:1px solid rgba(57,255,20,0.14);
+      cursor:pointer;
+      font-family:inherit;
+      transition: transform var(--transition), box-shadow var(--transition);
     }
-    h2 {
-      color: #0f0;
-      text-align: center;
-      margin-bottom: 15px;
+    .btn:active{transform:translateY(1px)}
+    .icon-btn{
+      display:inline-grid;
+      place-items:center;
+      width:40px;height:40px;padding:0;
     }
-    #clickCount {
-      font-size: 2em;
-      text-align: center;
-      margin: 10px;
+
+    /* Layout: nav + main */
+    .layout{
+      display:grid;
+      grid-template-columns: 260px 1fr;
+      gap:18px;
+      margin-top:18px;
     }
-    input, select, textarea {
-      font-family: inherit;
-      font-size: 0.8em;
-      padding: 6px;
-      margin: 5px auto;
-      border-radius: 8px;
-      border: 2px solid #0f0;
-      background-color: rgba(0,0,0,0.5);
-      color: #aaffaa;
-      text-align: center;
-      display: block;
-      width: 80%;
-      max-width: 300px;
-      resize: vertical;
+
+    /* Sidebar nav */
+    nav.sidebar{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));
+      padding:12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.02);
+      position:sticky;
+      top:20px;
+      height:fit-content;
     }
-    button {
-      display: block;
-      margin: 12px auto;
-      padding: 10px 20px;
-      font-size: 1em;
-      background-color: #003300;
-      border: 2px solid #0f0;
-      color: #aaffaa;
-      border-radius: 10px;
-      cursor: pointer;
-      font-family: inherit;
-      text-align: center;
+    nav ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+    nav button.nav-item{
+      text-align:left;
+      padding:10px 12px;
+      border-radius:10px;
+      background:transparent;
+      color:inherit;
+      border:1px solid transparent;
+      cursor:pointer;
+      transition:all var(--transition);
+      font-family:var(--ff-alt);
+      font-size:0.95rem;
     }
-    button:hover {
-      background-color: #0f0;
-      color: #003300;
-      animation: glitch 0.3s infinite;
+    nav button.nav-item:hover{
+      background:var(--muted);
+      transform:translateX(4px);
+      border-color: rgba(57,255,20,0.08);
     }
-    #message {
-      text-align: center;
-      margin-top: 10px;
-      font-weight: bold;
-      font-size: 1em;
-      min-height: 1.5em;
+    nav button.nav-item[aria-current="true"]{
+      background: linear-gradient(90deg, rgba(57,255,20,0.06), rgba(57,255,20,0.02));
+      border-color: rgba(57,255,20,0.12);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
     }
-    /* Settings specific styles */
-    #settings label {
-      display: block;
-      margin: 15px auto 5px;
-      max-width: 300px;
-      text-align: center;
-      font-weight: bold;
-      color: #0f0;
+
+    /* Main content & cards */
+    main{
+      min-height:320px;
     }
-    #settings select {
-      cursor: pointer;
+    .card{
+      background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.35));
+      border-radius:var(--card-radius);
+      padding:18px;
+      margin-bottom:16px;
+      border:1px solid rgba(255,255,255,0.02);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+      backdrop-filter: blur(6px);
     }
-    iframe {
-      display: block;
-      margin: 15px auto;
-      max-width: 100%;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 0 10px #0f0;
-      height: 315px;
+    h2{margin:0 0 8px 0;color:var(--accent);font-size:1.05rem}
+    p.lead{margin:0 0 12px 0;color:rgba(233,255,233,0.8)}
+
+    /* Forms */
+    form .field{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      margin-bottom:10px;
     }
+    input[type="email"], input[type="password"], input[type="text"], textarea, select{
+      padding:10px 12px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.06);
+      background: rgba(0,0,0,0.35);
+      color:inherit;
+      font-family:var(--ff-alt);
+      outline:none;
+      transition:box-shadow var(--transition), border-color var(--transition);
+    }
+    input:focus, textarea:focus, select:focus{
+      box-shadow: 0 6px 18px rgba(57,255,20,0.06);
+      border-color: rgba(57,255,20,0.12);
+    }
+    .muted{color:rgba(233,255,233,0.6); font-size:0.9rem}
+
+    /* Gallery */
+    .gallery{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .gallery img{
+      width:calc(50% - 10px);
+      border-radius:10px;
+      border:1px solid rgba(57,255,20,0.06);
+      max-width:320px;
+      display:block;
+    }
+
+    /* Clicker UI */
+    .clicker-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .click-count{
+      font-family:var(--ff-alt);
+      font-size:1.6rem;
+      padding:8px 12px;
+      border-radius:10px;
+      background:rgba(0,0,0,0.3);
+      border:1px solid rgba(255,255,255,0.03);
+      min-width:150px;
+      text-align:center;
+    }
+    .shop{display:flex;gap:8px;flex-wrap:wrap}
+
+    /* Responsive adjustments */
+    @media (max-width:900px){
+      .layout{grid-template-columns:1fr; padding-bottom:40px}
+      nav.sidebar{display:flex;overflow:auto;gap:8px;flex-direction:row;padding:8px}
+      nav ul{flex-direction:row}
+      nav button.nav-item{white-space:nowrap; padding:10px 14px}
+      .gallery img{width:100%}
+    }
+
+    /* Light mode */
+    body.light{
+      --bg-1: #f3f5f3;
+      --bg-2: #eef4ef;
+      --accent: #005522;
+      color:#05220f;
+    }
+
+    /* small helpers */
+    .row{display:flex;gap:10px;align-items:center}
+    .center{text-align:center}
+    a.link{color:var(--accent); text-decoration:underline}
+    footer{margin-top:20px;text-align:center;color:rgba(233,255,233,0.6);font-size:0.9rem}
   </style>
 </head>
-
 <body>
-  <header>
-    Minecraft Webseite Wezon1164
-    <button class="glitch-button" onclick="toggleMode()">🌗 Mode</button>
-  </header>
+  <div class="wrap">
+    <header class="site-header" role="banner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">W1164</div>
+        <div>
+          <div class="title">Wezon1164 — Minecraft</div>
+          <div class="subtitle">Server • Community • Clips</div>
+        </div>
+      </div>
 
-  <nav>
-    <button onclick="showSection('startseite')">Startseite</button>
-    <button onclick="showSection('regeln')">Regeln</button>
-    <button onclick="showSection('discord')">Discord</button>
-    <button onclick="showSection('youtube')">YouTube</button>
-    <button onclick="showSection('galerie')">Galerie</button>
-    <button onclick="showSection('clicker')">Clicker Game</button>
-    <button onclick="showSection('rechner')">Rechner</button>
-    <button onclick="showSection('translator')">2 Sprachiger Übersetzter</button>
-    <button onclick="showSection('settings')">⚙️ Settings</button>
-    <button onclick="showSection('karte')">🗺️ bald geht die  Karte</button>
-  </nav>
+      <div class="actions">
+        <button class="btn" id="themeToggle" title="Hell/Dunkel umschalten" aria-pressed="false">🌗</button>
+        <a class="btn" href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener" aria-label="Discord beitreten">Discord</a>
+        <button class="btn" id="openSettings">Einstellungen</button>
+      </div>
+    </header>
 
-  <section id="startseite" class="active">
-    <h2>Melden Sie sich jetzt an</h2>
+    <div class="layout" role="main">
+      <nav class="sidebar" aria-label="Seiten Navigation">
+        <ul>
+          <li><button class="nav-item" data-section="home" aria-current="true">Startseite</button></li>
+          <li><button class="nav-item" data-section="rules">Regeln</button></li>
+          <li><button class="nav-item" data-section="discord">Discord</button></li>
+          <li><button class="nav-item" data-section="youtube">YouTube</button></li>
+          <li><button class="nav-item" data-section="gallery">Galerie</button></li>
+          <li><button class="nav-item" data-section="clicker">Clicker Game</button></li>
+          <li><button class="nav-item" data-section="tools">Rechner & Übersetzer</button></li>
+          <li><button class="nav-item" data-section="map">Karte</button></li>
+          <li><button class="nav-item" data-section="settings">Einstellungen</button></li>
+        </ul>
+      </nav>
 
-    <h3>Schon registriert? Anmelden</h3>
-    <form onsubmit="event.preventDefault(); loginUser();">
-      <input type="email" id="loginEmail" placeholder="E-Mail Adresse" required />
-      <input type="password" id="loginPassword" placeholder="Passwort" required />
-      <button type="submit">Anmelden</button>
-    </form>
+      <main>
+        <!-- HOME -->
+        <section id="home" class="card" data-section>
+          <h2>Willkommen auf dem Server</h2>
+          <p class="lead">Melde dich an oder registriere dich — safe & simpel. Schau dir den Server an, join unserem Discord und abonniere den YouTube-Kanal.</p>
 
-    <hr style="border: 1px solid #0f0; margin: 20px auto; max-width: 300px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div>
+              <h3 style="margin-top:0">Anmelden</h3>
+              <form id="loginForm" onsubmit="event.preventDefault(); loginUser()">
+                <div class="field">
+                  <label class="muted" for="loginEmail">E-Mail</label>
+                  <input id="loginEmail" type="email" required autocomplete="email">
+                </div>
+                <div class="field">
+                  <label class="muted" for="loginPassword">Passwort</label>
+                  <input id="loginPassword" type="password" required autocomplete="current-password">
+                </div>
+                <div class="row">
+                  <button class="btn" type="submit">Anmelden</button>
+                  <div id="loginMsg" class="muted" aria-live="polite"></div>
+                </div>
+              </form>
+            </div>
 
-    <h3>Neu hier? Registrieren</h3>
-    <form onsubmit="event.preventDefault(); registerUser();">
-      <input type="email" id="registerEmail" placeholder="E-Mail Adresse" required />
-      <input type="password" id="registerPassword" placeholder="Passwort erstellen" required />
-      <button type="submit">Registrieren</button>
-    </form>
+            <div>
+              <h3 style="margin-top:0">Registrieren</h3>
+              <form id="registerForm" onsubmit="event.preventDefault(); registerUser()">
+                <div class="field">
+                  <label class="muted" for="regEmail">E-Mail</label>
+                  <input id="regEmail" type="email" required autocomplete="email">
+                </div>
+                <div class="field">
+                  <label class="muted" for="regPassword">Passwort</label>
+                  <input id="regPassword" type="password" required autocomplete="new-password">
+                </div>
+                <div class="row">
+                  <button class="btn" type="submit">Registrieren</button>
+                  <div id="regMsg" class="muted" aria-live="polite"></div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
 
-    <div id="message"></div>
-  </section>
+        <!-- RULES -->
+        <section id="rules" class="card" hidden data-section>
+          <h2>Server Regeln</h2>
+          <ul>
+            <li>Sei respektvoll – kein Toxic / Ragen</li>
+            <li>Kein Cheaten oder Exploiten</li>
+            <li>Keine Beleidigungen oder Hassrede</li>
+            <li>Hilfe & Vorschläge im Discord posten</li>
+          </ul>
+        </section>
 
-  <section id="karte">
-    <h2>🗺️ Minecraft Karte</h2>
-    <p>Hier kannst du die Map vom Server sehen – check die Dörfer, Biome und alles!</p>
-    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/7b/Minecraft_map_item.png" alt="Minecraft Map" style="display:block; margin:auto; max-width:100%; border: 3px solid #0f0; border-radius: 12px;">
-  </section>
+        <!-- DISCORD -->
+        <section id="discord" class="card" hidden data-section>
+          <h2>Discord</h2>
+          <p>Tritt unserem Server bei und vernetze dich mit anderen Spielern.</p>
+          <a class="link" href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener">discord.gg/xjpRj57cqJ</a>
+        </section>
 
-  <section id="regeln">
-    <h2>Server Regeln</h2>
-    <ul>
-      <li>Kein Ragen oder Toxic Verhalten</li>
-      <li>Kein Cheaten oder Exploiten</li>
-      <li>Respektiere alle Spieler</li>
-      <li>Hab Spaß und sei cool</li>
-      <li>schreib bei Discord ideen für die webseite</li>
-    </ul>
-  </section>
+        <!-- YOUTUBE -->
+        <section id="youtube" class="card" hidden data-section>
+          <h2>YouTube</h2>
+          <p class="muted">Abonniere für Server-Tutorials & Clips</p>
+          <a class="link" href="https://youtube.com/@Wezon1164" target="_blank" rel="noopener">@Wezon1164</a>
+          <div style="margin-top:12px">
+            <iframe width="100%" height="320" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video" allowfullscreen style="border-radius:10px;border:1px solid rgba(255,255,255,0.02)"></iframe>
+          </div>
+        </section>
 
-  <section id="discord">
-    <h2>Unser Discord Server</h2>
-    <p>Join uns auf Discord: <a href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener noreferrer">discord.gg/xjpRj57cqJ</a></p>
-  </section>
+        <!-- GALLERY -->
+        <section id="gallery" class="card" hidden data-section>
+          <h2>Galerie</h2>
+          <p class="muted">Screenshots vom Server</p>
+          <div class="gallery">
+            <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/47/Creeper_Jumping.png" alt="Creeper">
+            <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/30/Enderman.png" alt="Enderman">
+          </div>
+        </section>
 
-  <section id="youtube">
-    <h2>YouTube Kanal</h2>
-    <p>ihr könnt mein Kanal Abonniere Kanal: 
-      <a href="https://youtube.com/@Wezon1164" target="_blank" rel="noopener noreferrer">@Wezon1164</a>
-    </p>
-    <!-- Beispiel eingebettetes Video -->
-    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube Video" allowfullscreen></iframe>
-  </section>
+        <!-- CLICKER -->
+        <section id="clicker" class="card" hidden data-section>
+          <h2>Clicker Game</h2>
+          <div class="clicker-top">
+            <div class="click-count" id="clickCount">Clicks: 0</div>
+            <div class="row">
+              <button class="btn" id="clickBtn">Klick mich!</button>
+              <button class="btn" id="resetClick">Reset</button>
+            </div>
+          </div>
 
-  <section id="galerie">
-    <h2>Galerie</h2>
-    <p>Bilder von coolen Momenten auf dem Server!</p>
-    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/47/Creeper_Jumping.png" alt="Creeper" style="max-width: 300px; border: 2px solid #0f0; border-radius: 12px; margin: 10px;">
-    <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/30/Enderman.png" alt="Enderman" style="max-width: 300px; border: 2px solid #0f0; border-radius: 12px; margin: 10px;">
-  </section>
+          <h3 style="margin-top:14px">Shop</h3>
+          <div class="shop" id="shopArea">
+            <div style="min-width:220px">
+              <div class="muted">Doppel-Klick (+1 pro Klick)</div>
+              <div style="display:flex;gap:8px;margin-top:6px">
+                <button class="btn" id="buyDouble">Kaufen (<span id="priceDouble">10</span>)</button>
+                <div id="doubleInfo" class="muted">Level: 0</div>
+              </div>
+            </div>
 
-  <section id="clicker">
-    <h2>Clicker Game mit Shop</h2>
-    <div id="clickCount">Clicks: 2</div>
-    <button onclick="incrementClick()">Klick mich!</button>
+            <div style="min-width:220px">
+              <div class="muted">Auto-Klicker (+1/Sekunde)</div>
+              <div style="display:flex;gap:8px;margin-top:6px">
+                <button class="btn" id="buyAuto">Kaufen (<span id="priceAuto">50</span>)</button>
+                <div id="autoInfo" class="muted">Anzahl: 0</div>
+              </div>
+            </div>
+          </div>
+          <div id="shopMsg" class="muted" style="margin-top:8px" aria-live="polite"></div>
+        </section>
 
-    <h3>Shop</h3>
-    <div id="shop">
-      <button onclick="buyUpgrade('doubleClick')">Doppelter Klick (+1 Klick pro Klick) - Kosten: <span id="costDoubleClick">10</span></button>
-      <button onclick="buyUpgrade('autoClicker')">Auto-Klicker (+1 Klick pro Sekunde) - Kosten: <span id="costAutoClicker">50</span></button>
+        <!-- TOOLS -->
+        <section id="tools" class="card" hidden data-section>
+          <h2>Rechner</h2>
+          <p class="muted">Einfache mathematische Ausdrücke (nur + - * / ( ) und Zahlen)</p>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <input id="calcInput" type="text" placeholder="z. B. 12*(3+4)" style="flex:1;min-width:160px">
+            <button class="btn" id="calcBtn">Berechnen</button>
+          </div>
+          <div id="calcResult" class="muted" style="margin-top:8px" aria-live="polite"></div>
+
+          <hr style="border:none;height:1px;background:rgba(255,255,255,0.03);margin:16px 0">
+
+          <h2>2-Sprachiger Übersetzer (Demo)</h2>
+          <textarea id="textInput" rows="3" placeholder="Text eingeben..." style="width:100%;"></textarea>
+          <div style="display:flex;gap:8px;margin-top:8px;align-items:center">
+            <select id="languageSelect">
+              <option value="de-en">Deutsch → Englisch</option>
+              <option value="en-de">Englisch → Deutsch</option>
+            </select>
+            <button class="btn" id="translateBtn">Übersetzen</button>
+          </div>
+          <div id="translationResult" class="muted" style="margin-top:10px" aria-live="polite"></div>
+        </section>
+
+        <!-- MAP -->
+        <section id="map" class="card" hidden data-section>
+          <h2>Karte (bald)</h2>
+          <p class="muted">Hier wird bald eine interaktive Map eingebaut.</p>
+          <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/7b/Minecraft_map_item.png" alt="Minecraft Karte" style="width:100%;max-width:640px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)">
+        </section>
+
+        <!-- SETTINGS -->
+        <section id="settings" class="card" hidden data-section>
+          <h2>Einstellungen</h2>
+          <div class="field">
+            <label class="muted" for="fontSelect">Schriftart</label>
+            <select id="fontSelect">
+              <option value="Orbitron">Orbitron</option>
+              <option value="Fredoka One">Fredoka One</option>
+              <option value="Roboto Mono">Roboto Mono</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label class="muted">Design</label>
+            <div style="display:flex;gap:8px">
+              <button class="btn" id="themeDark">Dunkel</button>
+              <button class="btn" id="themeLight">Hell</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="muted"><input type="checkbox" id="glitchToggle"> Glitch Effekt (nur Titel)</label>
+          </div>
+        </section>
+
+      </main>
     </div>
 
-    <div id="shopMessage" style="text-align:center; margin-top:10px; font-weight:bold;"></div>
-  </section>
-
-  <section id="rechner">
-    <h2>Rechner</h2>
-    <p>Führe einfache Berechnungen durch</p>
-    <input type="text" id="calcInput" placeholder="z.B. 2 + 2" />
-    <button onclick="calculate()">Berechnen</button>
-    <div id="calcResult" style="text-align:center; margin-top:10px; font-weight:bold;"></div>
-  </section>
-
-  <section id="translator">
-    <h2>2 Sprachiger Übersetzter</h2>
-    <textarea id="textInput" rows="3" placeholder="Gib Text hier ein..."></textarea>
-    <select id="languageSelect">
-      <option value="de-en">Deutsch → Englisch</option>
-      <option value="en-de">Englisch → Deutsch</option>
-    </select>
-    <button onclick="translateText()">Übersetzen</button>
-    <div id="translationResult" style="text-align:center; margin-top:10px; font-weight:bold;"></div>
-  </section>
-
-  <section id="settings">
-    <h2>Einstellungen</h2>
-    <label for="fontSelect">Schriftart wählen:</label>
-    <select id="fontSelect" onchange="changeFont()">
-      <option value="'Press Start 2P', cursive">Press Start 2P</option>
-      <option value="'Orbitron', sans-serif">Orbitron</option>
-      <option value="'Roboto Mono', monospace">Roboto Mono</option>
-      <option value="'Anton', sans-serif">Anton</option>
-      <option value="'Fredoka One', cursive">Fredoka One</option>
-      <option value="'Monoton', cursive">Monoton</option>
-    </select>
-
-    <label for="colorSelect">Farbschema wählen:</label>
-    <select id="colorSelect" onchange="changeColorScheme()">
-      <option value="green">Grün</option>
-      <option value="blue">Blau</option>
-      <option value="red">Rot</option>
-      <option value="purple">Lila</option>
-    </select>
-
-    <label>
-      <input type="checkbox" id="glitchToggle" onchange="toggleGlitchEffect()" /> Glitch-Effekt aktivieren
-    </label>
-  </section>
+    <footer>
+      © <span id="year"></span> Wezon1164 — Made with ♥
+    </footer>
+  </div>
 
   <script>
-    // Navigation
-    function showSection(id) {
-      document.querySelectorAll('section').forEach(sec => {
-        sec.classList.remove('active');
+    // --- Simple SPA navigation ---
+    const navButtons = document.querySelectorAll('nav.sidebar button.nav-item');
+    const sections = document.querySelectorAll('[data-section]');
+    navButtons.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const id = btn.dataset.section;
+        showSection(id);
       });
-      const section = document.getElementById(id);
-      if (section) section.classList.add('active');
+    });
+
+    function showSection(id){
+      sections.forEach(s=>{
+        if(s.id === id){ s.hidden = false; }
+        else { s.hidden = true; }
+      });
+      // update aria-current
+      navButtons.forEach(nb=>{
+        nb.setAttribute('aria-current', nb.dataset.section === id ? 'true' : 'false');
+      });
+      // scroll to top of main area on small screens
+      window.scrollTo({top:0,behavior:'smooth'});
     }
 
-    // Login & Register (Demo mit localStorage)
-    function loginUser() {
-      const email = document.getElementById('loginEmail').value.trim();
-      const pw = document.getElementById('loginPassword').value.trim();
-      const message = document.getElementById('message');
-      if (!email || !pw) {
-        message.textContent = "Bitte E-Mail und Passwort eingeben!";
-        return;
-      }
-      const storedPw = localStorage.getItem('user_' + email);
-      if (storedPw === pw) {
-        message.style.color = 'limegreen';
-        message.textContent = "Erfolgreich angemeldet!";
+    // init default
+    showSection('home');
+
+    // --- Theme / preferences ---
+    const themeToggle = document.getElementById('themeToggle');
+    const themeLightBtn = document.getElementById('themeLight');
+    const themeDarkBtn = document.getElementById('themeDark');
+    const fontSelect = document.getElementById('fontSelect');
+    const glitchToggle = document.getElementById('glitchToggle');
+
+    function applyPreferences(){
+      const theme = localStorage.getItem('w_theme') || 'dark';
+      document.body.classList.toggle('light', theme === 'light');
+      themeToggle.setAttribute('aria-pressed', theme === 'light');
+      const font = localStorage.getItem('w_font') || 'Orbitron';
+      document.body.style.fontFamily = `"${font}", system-ui, sans-serif`;
+      fontSelect.value = font;
+      const glitch = localStorage.getItem('w_glitch') === 'true';
+      glitchToggle.checked = glitch;
+      document.querySelector('.title').style.textShadow = glitch ? '0 0 8px rgba(57,255,20,0.8)' : 'none';
+    }
+    applyPreferences();
+
+    themeToggle.addEventListener('click', ()=>{
+      const current = document.body.classList.contains('light') ? 'light' : 'dark';
+      const next = current === 'light' ? 'dark' : 'light';
+      localStorage.setItem('w_theme', next);
+      applyPreferences();
+    });
+    themeLightBtn.addEventListener('click', ()=>{ localStorage.setItem('w_theme','light'); applyPreferences(); });
+    themeDarkBtn.addEventListener('click', ()=>{ localStorage.setItem('w_theme','dark'); applyPreferences(); });
+
+    fontSelect.addEventListener('change', ()=>{
+      localStorage.setItem('w_font', fontSelect.value);
+      applyPreferences();
+    });
+
+    glitchToggle.addEventListener('change', ()=>{
+      localStorage.setItem('w_glitch', glitchToggle.checked);
+      applyPreferences();
+    });
+
+    // open settings button
+    document.getElementById('openSettings').addEventListener('click', ()=> showSection('settings'));
+
+    // --- Simple auth demo using localStorage (NOT for production) ---
+    function loginUser(){
+      const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+      const pw = document.getElementById('loginPassword').value;
+      const msg = document.getElementById('loginMsg');
+      if(!email || !pw){ msg.textContent = 'Bitte E-Mail & Passwort'; return; }
+      const stored = localStorage.getItem('acc_'+email);
+      if(stored === pw){
+        msg.textContent = 'Erfolgreich angemeldet ✓';
       } else {
-        message.style.color = 'red';
-        message.textContent = "Falsche E-Mail oder Passwort!";
+        msg.textContent = 'E-Mail oder Passwort falsch';
       }
     }
-    function registerUser() {
-      const email = document.getElementById('registerEmail').value.trim();
-      const pw = document.getElementById('registerPassword').value.trim();
-      const message = document.getElementById('message');
-      if (!email || !pw) {
-        message.textContent = "Bitte E-Mail und Passwort eingeben!";
-        return;
-      }
-      if (localStorage.getItem('user_' + email)) {
-        message.style.color = 'red';
-        message.textContent = "E-Mail bereits registriert!";
-        return;
-      }
-      localStorage.setItem('user_' + email, pw);
-      message.style.color = 'limegreen';
-      message.textContent = "Registrierung erfolgreich! Bitte anmelden.";
+    function registerUser(){
+      const email = document.getElementById('regEmail').value.trim().toLowerCase();
+      const pw = document.getElementById('regPassword').value;
+      const msg = document.getElementById('regMsg');
+      if(!email || !pw){ msg.textContent = 'Bitte E-Mail & Passwort'; return; }
+      if(localStorage.getItem('acc_'+email)){ msg.textContent = 'E-Mail bereits registriert'; return; }
+      localStorage.setItem('acc_'+email, pw);
+      msg.textContent = 'Registrierung erfolgreich ✓';
     }
 
-    // Rechner
-    function calculate() {
-      const input = document.getElementById('calcInput').value;
-      const resultDiv = document.getElementById('calcResult');
-      try {
-        // Sicherheitshalber nur Zahlen und einfache Operatoren erlauben
-        if (!/^[0-9+\-*/().\s]+$/.test(input)) throw "Ungültige Eingabe";
-        const result = eval(input);
-        if (result === undefined) throw "Keine Berechnung möglich";
-        resultDiv.style.color = "lime";
-        resultDiv.textContent = "Ergebnis: " + result;
-      } catch (e) {
-        resultDiv.style.color = "red";
-        resultDiv.textContent = "Fehler: " + e;
-      }
+    // --- Clicker game ---
+    let clicks = parseInt(localStorage.getItem('w_clicks') || '0',10);
+    let clicksPerClick = parseInt(localStorage.getItem('w_cpc') || '1',10);
+    let autoClickers = parseInt(localStorage.getItem('w_auto') || '0',10);
+
+    const clickCountEl = document.getElementById('clickCount');
+    const clickBtn = document.getElementById('clickBtn');
+    const resetClick = document.getElementById('resetClick');
+    const priceDoubleEl = document.getElementById('priceDouble');
+    const priceAutoEl = document.getElementById('priceAuto');
+    const doubleInfo = document.getElementById('doubleInfo');
+    const autoInfo = document.getElementById('autoInfo');
+    const shopMsg = document.getElementById('shopMsg');
+
+    let priceDouble = parseInt(localStorage.getItem('w_priceDouble') || '10',10);
+    let priceAuto = parseInt(localStorage.getItem('w_priceAuto') || '50',10);
+
+    function updateClickUI(){
+      clickCountEl.textContent = 'Clicks: ' + clicks;
+      priceDoubleEl.textContent = priceDouble;
+      priceAutoEl.textContent = priceAuto;
+      doubleInfo.textContent = 'Level: ' + (clicksPerClick - 1);
+      autoInfo.textContent = 'Anzahl: ' + autoClickers;
+      localStorage.setItem('w_clicks', clicks);
+      localStorage.setItem('w_cpc', clicksPerClick);
+      localStorage.setItem('w_auto', autoClickers);
+      localStorage.setItem('w_priceDouble', priceDouble);
+      localStorage.setItem('w_priceAuto', priceAuto);
+    }
+    updateClickUI();
+
+    clickBtn.addEventListener('click', ()=>{ clicks += clicksPerClick; updateClickUI(); });
+    resetClick.addEventListener('click', ()=>{
+      clicks = 0; clicksPerClick = 1; autoClickers = 0; priceDouble = 10; priceAuto = 50; updateClickUI();
+    });
+
+    document.getElementById('buyDouble').addEventListener('click', ()=>{
+      if(clicks >= priceDouble){
+        clicks -= priceDouble;
+        clicksPerClick += 1;
+        priceDouble = Math.floor(priceDouble * 2.2);
+        shopMsg.textContent = 'Doppel-Klick gekauft!';
+      } else shopMsg.textContent = 'Nicht genug Clicks!';
+      updateClickUI();
+    });
+
+    document.getElementById('buyAuto').addEventListener('click', ()=>{
+      if(clicks >= priceAuto){
+        clicks -= priceAuto;
+        autoClickers += 1;
+        priceAuto = Math.floor(priceAuto * 1.9);
+        shopMsg.textContent = 'Auto-Klicker gekauft!';
+      } else shopMsg.textContent = 'Nicht genug Clicks!';
+      updateClickUI();
+    });
+
+    setInterval(()=>{ if(autoClickers>0){ clicks += autoClickers; updateClickUI(); } },1000);
+
+    // --- Calculator (safe-ish) ---
+    const calcBtn = document.getElementById('calcBtn');
+    const calcInput = document.getElementById('calcInput');
+    const calcResult = document.getElementById('calcResult');
+
+    function safeEval(expr){
+      // allow only numbers, whitespace and operators +-*/(). 
+      if(!/^[0-9+\-*/().\s]+$/.test(expr)) throw 'Ungültige Zeichen';
+      // Evaluate using Function (still be careful) — for demo only.
+      // Remove leading zeros to keep parse neat:
+      const fn = new Function('return (' + expr + ')');
+      return fn();
     }
 
-    // Übersetzer (Demo mit sehr einfachem Ersatz)
-    function translateText() {
-      const text = document.getElementById('textInput').value.trim();
+    calcBtn.addEventListener('click', ()=>{
+      const v = calcInput.value.trim();
+      if(!v){ calcResult.textContent = 'Bitte Ausdruck eingeben'; return; }
+      try{
+        const res = safeEval(v);
+        calcResult.textContent = 'Ergebnis: ' + res;
+      }catch(e){
+        calcResult.textContent = 'Fehler: ' + e;
+      }
+    });
+
+    // --- Simple Demo translator ---
+    const translateBtn = document.getElementById('translateBtn');
+    const textInput = document.getElementById('textInput');
+    const translationResult = document.getElementById('translationResult');
+
+    // tiny demo dictionary
+    const dict_de_en = {
+      'hallo':'hello','tschüss':'bye','danke':'thanks','server':'server','spieler':'player','karte':'map','kaufen':'buy','klick':'click'
+    };
+    const dict_en_de = Object.fromEntries(Object.entries(dict_de_en).map(([k,v])=>[v,k]));
+
+    translateBtn.addEventListener('click', ()=>{
+      const t = textInput.value.trim();
       const lang = document.getElementById('languageSelect').value;
-      const resultDiv = document.getElementById('translationResult');
-      if (!text) {
-        resultDiv.style.color = 'red';
-        resultDiv.textContent = 'Bitte Text eingeben!';
-        return;
-      }
-      // Sehr einfache Demo-Übersetzung (nur Beispiele)
-      if (lang === 'de-en') {
-        // Demo: Ersetze "Hallo" durch "Hello"
-        let translated = text.replace(/Hallo/gi, 'Hello');
-        resultDiv.style.color = 'lime';
-        resultDiv.textContent = translated;
-      } else if (lang === 'en-de') {
-        // Demo: Ersetze "Hello" durch "Hallo"
-        let translated = text.replace(/Hello/gi, 'Hallo');
-        resultDiv.style.color = 'lime';
-        resultDiv.textContent = translated;
-      } else {
-        resultDiv.style.color = 'red';
-        resultDiv.textContent = 'Unbekannte Spracheinstellung!';
-      }
-    }
+      if(!t){ translationResult.textContent = 'Bitte Text eingeben'; return; }
+      const words = t.split(/\s+/);
+      const translated = words.map(w=>{
+        const key = w.toLowerCase().replace(/[^\wäöüß]/g,'');
+        if(lang === 'de-en') return dict_de_en[key] || w;
+        return dict_en_de[key] || w;
+      }).join(' ');
+      translationResult.textContent = translated;
+    });
 
-    // Einstellungen
-    function changeFont() {
-      const font = document.getElementById('fontSelect').value;
-      document.body.style.fontFamily = font;
-    }
-    function changeColorScheme() {
-      const scheme = document.getElementById('colorSelect').value;
-      let color = '#0f0';
-      switch (scheme) {
-        case 'blue': color = '#00f'; break;
-        case 'red': color = '#f00'; break;
-        case 'purple': color = '#a0f'; break;
-        default: color = '#0f0';
-      }
-      document.body.style.color = color;
-      document.body.style.textShadow = `0 0 5px ${color}`;
-      document.querySelectorAll('header').forEach(h => {
-        h.style.color = color;
+    // --- small utilities ---
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Accessibility: enable keyboard navigation for nav
+    navButtons.forEach(nb=>{
+      nb.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); nb.click(); }
       });
-      document.querySelectorAll('button').forEach(btn => {
-        btn.style.borderColor = color;
-        btn.style.color = color;
-      });
+    });
+
+    // Smooth scroll on hash (optional)
+    if(location.hash){
+      const h = location.hash.replace('#','');
+      setTimeout(()=>{ showSection(h); }, 200);
     }
-    function toggleGlitchEffect() {
-      const enabled = document.getElementById('glitchToggle').checked;
-      const header = document.querySelector('header');
-      if (enabled) {
-        header.style.animation = 'glitch 1.5s infinite';
-      } else {
-        header.style.animation = 'none';
-      }
-    }
-
-    // Dunkel-/Hellmodus toggle
-    function toggleMode() {
-      document.body.classList.toggle('light-mode');
-    }
-
-    // Clicker Game mit Shop - Erweiterung
-    let clicks = 0;
-    let clicksPerClick = 1;
-    let autoClickers = 0;
-
-    function incrementClick() {
-      clicks += clicksPerClick;
-      updateClickDisplay();
-    }
-
-    function updateClickDisplay() {
-      document.getElementById('clickCount').textContent = 'Clicks: ' + clicks;
-    }
-
-    // Shop-Preise
-    let costDoubleClick = 10;
-    let costAutoClicker = 50;
-
-    function buyUpgrade(upgrade) {
-      const shopMsg = document.getElementById('shopMessage');
-      if (upgrade === 'doubleClick') {
-        if (clicks >= costDoubleClick) {
-          clicks -= costDoubleClick;
-          clicksPerClick += 1;
-          costDoubleClick = Math.floor(costDoubleClick * 2.5);
-          document.getElementById('costDoubleClick').textContent = costDoubleClick;
-          shopMsg.textContent = 'Doppelter Klick gekauft! Klickstärke: ' + clicksPerClick;
-          updateClickDisplay();
-        } else {
-          shopMsg.textContent = 'Nicht genug Klicks für doppelten Klick!';
-        }
-      } else if (upgrade === 'autoClicker') {
-        if (clicks >= costAutoClicker) {
-          clicks -= costAutoClicker;
-          autoClickers += 1;
-          costAutoClicker = Math.floor(costAutoClicker * 2);
-          document.getElementById('costAutoClicker').textContent = costAutoClicker;
-          shopMsg.textContent = 'Auto-Klicker gekauft! Anzahl: ' + autoClickers;
-          updateClickDisplay();
-        } else {
-          shopMsg.textContent = 'Nicht genug Klicks für Auto-Klicker!';
-        }
-      }
-    }
-
-    // Auto-Klicker automatisch Klicks hinzufügen
-    setInterval(() => {
-      if (autoClickers > 0) {
-        clicks += autoClickers;
-        updateClickDisplay();
-      }
-    }, 1000);
   </script>
 </body>
 </html>
