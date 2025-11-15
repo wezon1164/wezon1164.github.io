@@ -1,430 +1,395 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Wezon1164 — Minecraft Server (Modern)</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Fredoka+One&family=Roboto+Mono&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minecraft Webseite — Wezon1164 (verbessert)</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron&family=Roboto+Mono&family=Fredoka+One&display=swap" rel="stylesheet"> 
   <style>
     :root{
-      --bg-1:#06130a;
-      --bg-2:#071a10;
-      --accent:#39ff14;
-      --muted:rgba(255,255,255,0.06);
-      --glass:rgba(0,0,0,0.42);
-      --card-radius:12px;
-      --max-w:1100px;
-      --ff-main:"Orbitron",system-ui,sans-serif;
-      --ff-mono:"Roboto Mono",monospace;
-      --t:200ms;
+      --accent: #0f0;
+      --bg: #0b0b0b;
+      --card-bg: rgba(0,0,0,0.75);
+      --btn-bg: #003300;
+      --btn-text: #aaffaa;
+      --glass: rgba(255,255,255,0.03);
     }
-
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{
-      margin:0;
-      font-family:var(--ff-main);
-      color:#e6ffe6;
-      background:
-        radial-gradient(800px 400px at 10% 10%, rgba(57,255,20,0.03), transparent 8%),
-        linear-gradient(180deg,var(--bg-1),var(--bg-2));
+    body {
+      margin: 0;
+      font-family: 'Press Start 2P', cursive;
+      background: url('https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/21/Creeper.png') repeat;
+      background-size: 100px 100px;
+      color: var(--accent);
+      text-shadow: 0 0 5px var(--accent);
+      transition: background 0.4s ease, color 0.3s ease, font-family 0.3s ease;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
-      transition:background var(--t), color var(--t);
-      padding:28px 12px 60px;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
     }
-
-    .wrap{max-width:var(--max-w);margin:0 auto;display:flex;flex-direction:column;gap:18px}
-
-    /* Header */
+    body.light-mode{
+      background: linear-gradient(180deg,#f6f8fb,#e8eef6);
+      color:#111;
+      text-shadow:none;
+    }
     header{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      padding:14px;border-radius:var(--card-radius);
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
-      border:1px solid rgba(57,255,20,0.06);
-      box-shadow:0 8px 30px rgba(0,0,0,0.45), 0 0 18px rgba(57,255,20,0.03);
+      background-color: rgba(0,0,0,0.9);
+      color:var(--accent);
+      text-align:center;
+      padding:18px 12px;
+      font-size:1.2rem;
+      position:relative;
     }
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{
-      width:56px;height:56px;border-radius:10px;
-      background:linear-gradient(135deg,#053216,#0a3b10);
-      display:grid;place-items:center;font-family:"Fredoka One",sans-serif;
-      color:var(--accent);font-size:18px;
+    .glitch-button{
+      position:absolute;right:16px;top:12px;background:var(--btn-bg);border:2px solid var(--accent);color:var(--btn-text);padding:6px 10px;border-radius:10px;cursor:pointer
     }
-    .title{font-size:1.05rem}
-    .subtitle{font-size:0.75rem;color:rgba(230,255,230,0.7);font-family:var(--ff-mono)}
+    nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:8px;background:rgba(0,0,0,0.9)}
+    nav button{background:var(--btn-bg);border:2px solid var(--accent);color:var(--btn-text);padding:8px 12px;border-radius:8px;cursor:pointer;font-family:inherit}
+    main{flex:1;display:flex;flex-direction:column;align-items:center;padding:12px;gap:12px}
 
-    /* Top actions */
-    .actions{display:flex;gap:8px;align-items:center}
-    .btn{
-      background:linear-gradient(180deg, rgba(3,51,3,0.88), rgba(6,86,6,0.9));
-      color:var(--accent);padding:8px 12px;border-radius:10px;border:1px solid rgba(57,255,20,0.12);
-      cursor:pointer;font-family:inherit;transition:transform var(--t),box-shadow var(--t),opacity var(--t);
-    }
-    .btn:active{transform:translateY(1px)}
-    .icon-btn{width:40px;height:40px;display:inline-grid;place-items:center;padding:0}
+    .card{max-width:1000px;width:100%;background:var(--card-bg);border-radius:12px;padding:18px;box-shadow:0 0 18px var(--accent);color:var(--btn-text)}
+    .hidden{display:none}
+    h2{text-align:center;color:var(--accent);margin-top:0}
 
-    /* Layout */
-    .layout{display:grid;grid-template-columns:260px 1fr;gap:18px;align-items:start}
-    @media (max-width:900px){ .layout{grid-template-columns:1fr} }
+    form{display:flex;flex-direction:column;align-items:center;gap:8px}
+    input,select,textarea{font-family:inherit;font-size:0.8rem;padding:8px;border-radius:8px;border:2px solid var(--accent);background:transparent;color:inherit;width:90%;max-width:420px}
+    button[type="submit"], .btn{display:inline-block;padding:8px 16px;border-radius:10px;border:2px solid var(--accent);background:var(--btn-bg);color:var(--btn-text);cursor:pointer}
+    .muted{color:#aaccaa;font-size:0.9rem}
 
-    /* Sidebar */
-    nav.sidebar{
-      padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));
-      border:1px solid rgba(255,255,255,0.02);position:sticky;top:20px;
-    }
-    nav ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
-    .nav-item{
-      text-align:left;padding:10px 12px;border-radius:10px;background:transparent;border:1px solid transparent;
-      color:inherit;cursor:pointer;font-family:var(--ff-mono);font-size:0.98rem;transition:all var(--t);
-    }
-    .nav-item:hover{background:var(--muted);transform:translateX(6px)}
-    .nav-item[aria-current="true"]{background:linear-gradient(90deg, rgba(57,255,20,0.05), transparent);border-color:rgba(57,255,20,0.08)}
+    /* responsive YouTube */
+    .video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px}
+    .video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
 
-    /* Cards */
-    main{min-height:320px}
-    .card{
-      background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.36));
-      border-radius:12px;padding:16px;margin-bottom:14px;border:1px solid rgba(255,255,255,0.02);
-      box-shadow:0 10px 30px rgba(0,0,0,0.45);backdrop-filter: blur(6px);
-    }
-    h2{margin:0 0 8px 0;color:var(--accent);font-size:1.05rem}
-    p.lead{margin:0 0 12px 0;color:rgba(230,255,230,0.75)}
+    /* gallery */
+    .gallery{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+    .gallery img{max-width:220px;border:2px solid var(--accent);border-radius:10px}
 
-    /* Forms & inputs */
-    .field{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
-    input[type="text"], textarea, select{
-      padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);
-      background:rgba(0,0,0,0.32);color:inherit;font-family:var(--ff-mono);outline:none;transition:box-shadow var(--t);
-    }
-    input:focus, textarea:focus, select:focus{box-shadow:0 8px 20px rgba(57,255,20,0.06);border-color:rgba(57,255,20,0.12)}
+    /* clicker */
+    .clicker-controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center}
+    .shop button{width:100%;max-width:420px}
 
-    /* Gallery */
-    .gallery{display:flex;gap:10px;flex-wrap:wrap}
-    .gallery img{width:calc(50% - 10px);border-radius:10px;border:1px solid rgba(57,255,20,0.04);max-width:320px}
-    @media (max-width:700px){ .gallery img{width:100%} }
+    footer{padding:12px;text-align:center;color:var(--btn-text);background:rgba(0,0,0,0.8)}
 
-    /* Clicker */
-    .clicker-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-    .click-count{font-family:var(--ff-mono);font-size:1.6rem;padding:8px 12px;border-radius:10px;background:rgba(0,0,0,0.28);border:1px solid rgba(255,255,255,0.03);min-width:140px;text-align:center}
-
-    /* tiny helpers */
-    .muted{color:rgba(230,255,230,0.7);font-size:0.95rem}
-    .row{display:flex;gap:8px;align-items:center}
-    footer{margin-top:6px;text-align:center;color:rgba(230,255,230,0.5);font-size:0.9rem}
-
-    /* Light mode */
-    body.light{
-      --bg-1:#f3f6f3;--bg-2:#eef4ef;--accent:#075a2a;color:#05220f;
-      background:linear-gradient(180deg,var(--bg-1),var(--bg-2));
-    }
-
-    /* subtle title-glow */
-    .title-glow{transition:text-shadow var(--t)}
+    @media (max-width:600px){header{font-size:0.85rem}nav{gap:6px}input,select,textarea{width:95%}}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header role="banner">
-      <div class="brand">
-        <div class="logo" aria-hidden="true">W1164</div>
+  <header>
+    Minecraft Webseite — Wezon1164
+    <button class="glitch-button" id="modeToggle">🌗 Mode</button>
+  </header>
+
+  <nav aria-label="Hauptnavigation">
+    <button data-section="startseite">Startseite</button>
+    <button data-section="regeln">Regeln</button>
+    <button data-section="discord">Discord</button>
+    <button data-section="youtube">YouTube</button>
+    <button data-section="galerie">Galerie</button>
+    <button data-section="clicker">Clicker Game</button>
+    <button data-section="rechner">Rechner</button>
+    <button data-section="translator">Übersetzer</button>
+    <button data-section="settings">Einstellungen</button>
+    <button data-section="karte">Karte</button>
+  </nav>
+
+  <main>
+    <!-- STARTSEITE -->
+    <section id="startseite" class="card">
+      <h2>Melde dich an oder registriere dich</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start">
         <div>
-          <div class="title title-glow">Wezon1164 — Minecraft</div>
-          <div class="subtitle">Community • Server • Clips</div>
+          <h3>Anmelden</h3>
+          <form id="loginForm">
+            <input type="email" id="loginEmail" placeholder="E-Mail" required />
+            <input type="password" id="loginPassword" placeholder="Passwort" required />
+            <button type="submit">Anmelden</button>
+            <div id="loginMsg" class="muted" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+        <div>
+          <h3>Registrieren</h3>
+          <form id="registerForm">
+            <input type="email" id="registerEmail" placeholder="E-Mail" required />
+            <input type="password" id="registerPassword" placeholder="Passwort" required minlength="6" />
+            <button type="submit">Registrieren</button>
+            <div id="registerMsg" class="muted" role="status" aria-live="polite"></div>
+          </form>
         </div>
       </div>
+    </section>
 
-      <div class="actions">
-        <button class="btn icon-btn" id="themeToggle" aria-pressed="false" title="Hell/Dunkel">🌗</button>
-        <a class="btn" href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener">Discord</a>
-        <button class="btn" id="openSettings">Einstellungen</button>
+    <!-- KARTE -->
+    <section id="karte" class="card hidden">
+      <h2>🗺️ Minecraft Karte</h2>
+      <p class="muted">(Dies ist ein Vorschau-Bild — die echte interaktive Karte kann eingebunden werden, sobald die Map-Datei verfügbar ist.)</p>
+      <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/7b/Minecraft_map_item.png" alt="Minecraft Map" style="display:block;margin:auto;max-width:100%;border:3px solid var(--accent);border-radius:12px">
+    </section>
+
+    <!-- REGELN -->
+    <section id="regeln" class="card hidden">
+      <h2>Server Regeln</h2>
+      <ul>
+        <li>Kein Ragen oder toxisches Verhalten</li>
+        <li>Kein Cheaten oder Exploiten</li>
+        <li>Respektiere alle Spieler</li>
+        <li>Hab Spaß und sei freundlich</li>
+        <li>Schreibe bei Discord Ideen für die Webseite</li>
+      </ul>
+    </section>
+
+    <!-- DISCORD -->
+    <section id="discord" class="card hidden">
+      <h2>Unser Discord</h2>
+      <p class="muted">Join uns auf Discord:</p>
+      <p><a href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener noreferrer">discord.gg/xjpRj57cqJ</a></p>
+    </section>
+
+    <!-- YOUTUBE -->
+    <section id="youtube" class="card hidden">
+      <h2>YouTube Kanal</h2>
+      <p class="muted">Abonniere unseren Kanal: <a href="https://youtube.com/@Wezon1164" target="_blank" rel="noopener noreferrer">@Wezon1164</a></p>
+      <div class="video-wrap">
+        <!-- unbedingt eigenes Video einfügen -->
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube Video" allowfullscreen loading="lazy"></iframe>
       </div>
-    </header>
+    </section>
 
-    <div class="layout" role="main">
-      <nav class="sidebar" aria-label="Seiten Navigation">
-        <ul>
-          <li><button class="nav-item" data-section="home" aria-current="true">Startseite</button></li>
-          <li><button class="nav-item" data-section="rules">Regeln</button></li>
-          <li><button class="nav-item" data-section="discord">Discord</button></li>
-          <li><button class="nav-item" data-section="youtube">YouTube / Songs</button></li>
-          <li><button class="nav-item" data-section="gallery">Galerie</button></li>
-          <li><button class="nav-item" data-section="clicker">Clicker Game</button></li>
-          <li><button class="nav-item" data-section="tools">Rechner & Übersetzer</button></li>
-          <li><button class="nav-item" data-section="map">Karte (bald)</button></li>
-          <li><button class="nav-item" data-section="settings">Einstellungen</button></li>
-        </ul>
-      </nav>
+    <!-- GALERIE -->
+    <section id="galerie" class="card hidden">
+      <h2>Galerie</h2>
+      <div class="gallery">
+        <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/47/Creeper_Jumping.png" alt="Creeper">
+        <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/30/Enderman.png" alt="Enderman">
+      </div>
+    </section>
 
-      <main>
-        <!-- HOME -->
-        <section id="home" class="card" data-section>
-          <h2>Willkommen auf dem Server</h2>
-          <p class="lead">Alles Wichtige an einem Ort — join Discord, schau Videos, spiel Clicker und probier die Tools.</p>
+    <!-- CLICKER -->
+    <section id="clicker" class="card hidden">
+      <h2>Clicker Game mit Shop</h2>
+      <div id="clickCount" style="font-size:1.6rem;text-align:center;margin:6px 0">Clicks: 0</div>
+      <div class="clicker-controls">
+        <button class="btn" id="clickBtn">Klick mich!</button>
+        <button class="btn" id="saveClicker">Speichern</button>
+        <button class="btn" id="resetClicker">Reset</button>
+      </div>
+      <h3 style="text-align:center">Shop</h3>
+      <div class="shop">
+        <button class="btn" id="buyDouble">Doppelter Klick (+1 Klick pro Klick) - Kosten: <span id="costDouble">10</span></button>
+        <button class="btn" id="buyAuto">Auto-Klicker (+1 Klick/Sekunde) - Kosten: <span id="costAuto">50</span></button>
+      </div>
+      <div id="shopMsg" class="muted" style="text-align:center;margin-top:10px"></div>
+    </section>
 
-          <div style="display:grid;grid-template-columns:1fr;gap:12px">
-            <div class="card" style="padding:12px;">
-              <h3 style="margin:0 0 8px 0">Schnelllinks</h3>
-              <div class="row" style="flex-wrap:wrap">
-                <a class="btn" href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener">Zum Discord</a>
-                <a class="btn" href="https://youtube.com/@Wezon1164" target="_blank" rel="noopener">YouTube</a>
-                <button class="btn" onclick="showSection('gallery')">Galerie</button>
-              </div>
-            </div>
+    <!-- RECHNER -->
+    <section id="rechner" class="card hidden">
+      <h2>Rechner</h2>
+      <p class="muted">Einfacher, sicherer Rechner (erlaubte Zeichen: 0-9 + - * / ( ) . )</p>
+      <input id="calcInput" placeholder="z. B. 2 + 2">
+      <button class="btn" id="calcBtn">Berechnen</button>
+      <div id="calcResult" class="muted" style="text-align:center;margin-top:8px"></div>
+    </section>
 
-            <div class="card" style="padding:12px;">
-              <h3 style="margin:0 0 8px 0">Nachrichten</h3>
-              <p class="muted">Server-Updates, Events und Community-Ankündigungen findest du im Discord.</p>
-            </div>
-          </div>
-        </section>
+    <!-- TRANSLATOR -->
+    <section id="translator" class="card hidden">
+      <h2>2-sprachiger Übersetzer (Demo)</h2>
+      <textarea id="textInput" rows="4" placeholder="Gib Text ein..."></textarea>
+      <select id="languageSelect">
+        <option value="de-en">Deutsch → Englisch</option>
+        <option value="en-de">Englisch → Deutsch</option>
+      </select>
+      <button class="btn" id="translateBtn">Übersetzen</button>
+      <div id="translationResult" class="muted" style="text-align:center;margin-top:8px"></div>
+      <p class="muted" style="margin-top:8px">(Demo-Übersetzer: nutzt einfache Ersetzungen. Für echte Übersetzungen bitte API einbinden.)</p>
+    </section>
 
-        <!-- RULES -->
-        <section id="rules" class="card" hidden data-section>
-          <h2>Server Regeln</h2>
-          <ul>
-            <li>Sei respektvoll — kein Toxic / Ragen</li>
-            <li>Kein Cheaten oder Exploiten</li>
-            <li>Keine Beleidigungen oder Hassrede</li>
-            <li>Ideen & Vorschläge im Discord posten</li>
-          </ul>
-        </section>
+    <!-- SETTINGS -->
+    <section id="settings" class="card hidden">
+      <h2>Einstellungen</h2>
+      <label for="fontSelect">Schriftart wählen:</label>
+      <select id="fontSelect">
+        <option value="'Press Start 2P', cursive">Press Start 2P</option>
+        <option value="'Orbitron', sans-serif">Orbitron</option>
+        <option value="'Roboto Mono', monospace">Roboto Mono</option>
+        <option value="'Fredoka One', cursive">Fredoka One</option>
+      </select>
 
-        <!-- DISCORD -->
-        <section id="discord" class="card" hidden data-section>
-          <h2>Discord</h2>
-          <p class="muted">Tritt unserem Server bei, tausche dich aus und poste Screenshots.</p>
-          <a class="muted" href="https://discord.gg/xjpRj57cqJ" target="_blank" rel="noopener">discord.gg/xjpRj57cqJ</a>
-        </section>
+      <label for="colorSelect">Farbschema wählen:</label>
+      <select id="colorSelect">
+        <option value="green">Grün</option>
+        <option value="blue">Blau</option>
+        <option value="red">Rot</option>
+        <option value="purple">Lila</option>
+      </select>
 
-        <!-- YOUTUBE / SONGS -->
-        <section id="youtube" class="card" hidden data-section>
-          <h2>YouTube & Songs</h2>
-          <p class="muted">Hier sind deine Videos & eine kleine Song-Player-Box — füge eigene Tracks hinzu, indem du die URL einfügst.</p>
+      <label style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px">
+        <input type="checkbox" id="glitchToggle"> Glitch-Effekt aktivieren
+      </label>
+      <p class="muted">Einstellungen werden lokal gespeichert.</p>
+    </section>
 
-          <div style="display:grid;grid-template-columns:1fr;gap:12px">
-            <div>
-              <iframe width="100%" height="320" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video" allowfullscreen style="border-radius:10px;border:1px solid rgba(255,255,255,0.02)"></iframe>
-            </div>
+  </main>
 
-            <div class="card" style="padding:12px;">
-              <h3 style="margin:0 0 8px 0">Songs Player</h3>
-              <!-- zwei Beispiel-Songs (öffentliche Sample-MP3s). Du kannst hier eigene URLs einsetzen -->
-              <div class="row" style="flex-direction:column;gap:8px">
-                <div>
-                  <div class="muted">Song A</div>
-                  <audio controls preload="none" style="width:100%" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
-                </div>
-                <div>
-                  <div class="muted">Song B</div>
-                  <audio controls preload="none" style="width:100%" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"></audio>
-                </div>
-                <div style="margin-top:8px">
-                  <label class="muted">Eigene Song-URL einfügen (mp3):</label>
-                  <div class="row">
-                    <input id="songUrl" type="text" placeholder="https://example.com/song.mp3" style="flex:1">
-                    <button class="btn" id="addSong">Laden</button>
-                  </div>
-                  <div id="songMsg" class="muted" aria-live="polite"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- GALLERY -->
-        <section id="gallery" class="card" hidden data-section>
-          <h2>Galerie</h2>
-          <p class="muted">Screenshots & co.</p>
-          <div class="gallery" id="galleryGrid">
-            <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/47/Creeper_Jumping.png" alt="Creeper">
-            <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/30/Enderman.png" alt="Enderman">
-          </div>
-        </section>
-
-        <!-- CLICKER -->
-        <section id="clicker" class="card" hidden data-section>
-          <h2>Clicker Game</h2>
-          <div class="clicker-top">
-            <div class="click-count" id="clickCount">Clicks: 0</div>
-            <div class="row">
-              <button class="btn" id="clickBtn">Klick mich!</button>
-              <button class="btn" id="resetClick">Reset</button>
-            </div>
-          </div>
-
-          <h3 style="margin-top:12px">Shop</h3>
-          <div class="row" id="shopArea" style="flex-wrap:wrap">
-            <div style="min-width:220px">
-              <div class="muted">Doppel-Klick (+1 pro Klick)</div>
-              <div class="row" style="margin-top:6px">
-                <button class="btn" id="buyDouble">Kaufen (<span id="priceDouble">10</span>)</button>
-                <div id="doubleInfo" class="muted">Level: 0</div>
-              </div>
-            </div>
-
-            <div style="min-width:220px">
-              <div class="muted">Auto-Klicker (+1/s)</div>
-              <div class="row" style="margin-top:6px">
-                <button class="btn" id="buyAuto">Kaufen (<span id="priceAuto">50</span>)</button>
-                <div id="autoInfo" class="muted">Anzahl: 0</div>
-              </div>
-            </div>
-          </div>
-          <div id="shopMsg" class="muted" style="margin-top:8px" aria-live="polite"></div>
-        </section>
-
-        <!-- TOOLS -->
-        <section id="tools" class="card" hidden data-section>
-          <h2>Rechner & Übersetzer</h2>
-
-          <div style="display:grid;grid-template-columns:1fr;gap:12px">
-            <div>
-              <h3 style="margin:0 0 8px 0">Rechner</h3>
-              <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-                <input id="calcInput" type="text" placeholder="z.B. 2 * (3 + 4)" style="flex:1;min-width:160px">
-                <button class="btn" id="calcBtn">Berechnen</button>
-              </div>
-              <div id="calcResult" class="muted" style="margin-top:8px" aria-live="polite"></div>
-            </div>
-
-            <div>
-              <h3 style="margin:0 0 8px 0">2-Sprachiger Übersetzer (Demo)</h3>
-              <textarea id="textInput" rows="3" placeholder="Text eingeben..." style="width:100%"></textarea>
-              <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
-                <select id="languageSelect">
-                  <option value="de-en">Deutsch → Englisch</option>
-                  <option value="en-de">Englisch → Deutsch</option>
-                </select>
-                <button class="btn" id="translateBtn">Übersetzen</button>
-              </div>
-              <div id="translationResult" class="muted" style="margin-top:8px" aria-live="polite"></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- MAP -->
-        <section id="map" class="card" hidden data-section>
-          <h2>Karte (bald)</h2>
-          <p class="muted">Eine interaktive Karte kommt später — hier ein Platzhalter.</p>
-          <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/7b/Minecraft_map_item.png" alt="Minecraft Karte" style="width:100%;max-width:640px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)">
-        </section>
-
-        <!-- SETTINGS -->
-        <section id="settings" class="card" hidden data-section>
-          <h2>Einstellungen</h2>
-
-          <div class="field">
-            <label class="muted">Design</label>
-            <div class="row">
-              <button class="btn" id="themeDark">Dunkel</button>
-              <button class="btn" id="themeLight">Hell</button>
-              <label style="margin-left:8px" class="muted"><input type="checkbox" id="glitchToggle"> Titel-Glow</label>
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="muted">Galerie: Bild hinzufügen (URL)</label>
-            <div class="row">
-              <input id="newImageUrl" type="text" placeholder="https://.../bild.png">
-              <button class="btn" id="addImage">Hinzufügen</button>
-            </div>
-            <div id="galleryMsg" class="muted" aria-live="polite"></div>
-          </div>
-        </section>
-
-      </main>
-    </div>
-
-    <footer>© <span id="year"></span> Wezon1164 — Made with ♥</footer>
-  </div>
+  <footer>© Wezon1164 — Verbessert. Kopiere die Datei auf deinen Server und öffne sie im Browser.</footer>
 
   <script>
-    /* ---------- Navigation (SPA-ish) ---------- */
-    const navButtons = document.querySelectorAll('.nav-item');
-    const sections = document.querySelectorAll('[data-section]');
-    navButtons.forEach(btn=>{
-      btn.addEventListener('click', ()=> showSection(btn.dataset.section));
-      btn.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') { e.preventDefault(); btn.click(); } });
-    });
+    // --- Navigation ---
+    document.querySelectorAll('nav button').forEach(btn => btn.addEventListener('click', () => {
+      const id = btn.dataset.section;
+      showSection(id);
+    }));
+
     function showSection(id){
-      sections.forEach(s=> s.id === id ? s.hidden = false : s.hidden = true);
-      navButtons.forEach(nb => nb.setAttribute('aria-current', nb.dataset.section === id ? 'true' : 'false'));
-      window.scrollTo({top:0,behavior:'smooth'});
+      document.querySelectorAll('main > section').forEach(s => s.classList.add('hidden'));
+      const sec = document.getElementById(id);
+      if(sec) sec.classList.remove('hidden');
+      // save last section
+      localStorage.setItem('wezon_last_section', id);
     }
-    showSection('home');
+    // restore last
+    const last = localStorage.getItem('wezon_last_section') || 'startseite';
+    showSection(last);
 
-    /* ---------- Theme / Settings ---------- */
-    const themeToggle = document.getElementById('themeToggle');
-    const themeLightBtn = document.getElementById('themeLight');
-    const themeDarkBtn = document.getElementById('themeDark');
+    // --- Mode toggle ---
+    document.getElementById('modeToggle').addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      localStorage.setItem('wezon_lightmode', document.body.classList.contains('light-mode'));
+    });
+    // restore mode
+    if(localStorage.getItem('wezon_lightmode') === 'true') document.body.classList.add('light-mode');
+
+    // --- Settings persistence ---
+    const fontSelect = document.getElementById('fontSelect');
+    const colorSelect = document.getElementById('colorSelect');
     const glitchToggle = document.getElementById('glitchToggle');
-    const titleEl = document.querySelector('.title');
 
-    function applyPrefs(){
-      const theme = localStorage.getItem('w_theme') || 'dark';
-      document.body.classList.toggle('light', theme === 'light');
-      themeToggle.setAttribute('aria-pressed', theme === 'light');
-      const glitch = localStorage.getItem('w_glitch') === 'true';
-      glitchToggle.checked = glitch;
-      titleEl.style.textShadow = glitch ? '0 0 10px rgba(57,255,20,0.9)' : 'none';
+    function applySettings(){
+      document.body.style.fontFamily = fontSelect.value;
+      let c = '#0f0';
+      switch(colorSelect.value){case 'blue': c='#00f';break;case 'red': c='#f00';break;case 'purple':c='#a0f';break;default:c='#0f0'}
+      document.documentElement.style.setProperty('--accent', c);
+      document.querySelectorAll('button, input, select, textarea').forEach(el => el.style.borderColor = c);
+      if(glitchToggle.checked) document.querySelector('header').style.animation = 'glitch 1.5s infinite'; else document.querySelector('header').style.animation = 'none';
     }
-    applyPrefs();
+    // load
+    (function(){
+      const sFont = localStorage.getItem('wezon_font'); if(sFont) fontSelect.value = sFont;
+      const sColor = localStorage.getItem('wezon_color'); if(sColor) colorSelect.value = sColor;
+      const sGlitch = localStorage.getItem('wezon_glitch') === 'true'; glitchToggle.checked = sGlitch;
+      applySettings();
+    })();
+    fontSelect.addEventListener('change', ()=>{ localStorage.setItem('wezon_font', fontSelect.value); applySettings(); });
+    colorSelect.addEventListener('change', ()=>{ localStorage.setItem('wezon_color', colorSelect.value); applySettings(); });
+    glitchToggle.addEventListener('change', ()=>{ localStorage.setItem('wezon_glitch', glitchToggle.checked); applySettings(); });
 
-    themeToggle.addEventListener('click', ()=>{
-      const cur = document.body.classList.contains('light') ? 'light' : 'dark';
-      localStorage.setItem('w_theme', cur === 'light' ? 'dark' : 'light');
-      applyPrefs();
+    // --- Auth (demo localStorage) ---
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    loginForm.addEventListener('submit', e => { e.preventDefault(); loginUser(); });
+    registerForm.addEventListener('submit', e => { e.preventDefault(); registerUser(); });
+
+    function loginUser(){
+      const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+      const pw = document.getElementById('loginPassword').value;
+      const msg = document.getElementById('loginMsg');
+      if(!email || !pw){ msg.textContent = 'Bitte E-Mail und Passwort eingeben!'; return; }
+      const stored = localStorage.getItem('wezon_user_' + email);
+      if(stored && JSON.parse(stored).pw === pw){ msg.textContent = 'Erfolgreich angemeldet!'; msg.style.color='limegreen'; }
+      else { msg.textContent = 'Falsche E-Mail oder Passwort!'; msg.style.color='crimson'; }
+    }
+    function registerUser(){
+      const email = document.getElementById('registerEmail').value.trim().toLowerCase();
+      const pw = document.getElementById('registerPassword').value;
+      const msg = document.getElementById('registerMsg');
+      if(!email || !pw){ msg.textContent = 'Bitte E-Mail und Passwort eingeben!'; return; }
+      if(localStorage.getItem('wezon_user_' + email)){ msg.textContent='E-Mail bereits registriert!'; msg.style.color='crimson'; return; }
+      const obj = { pw: pw, created: new Date().toISOString() };
+      localStorage.setItem('wezon_user_' + email, JSON.stringify(obj));
+      msg.textContent='Registrierung erfolgreich! Bitte anmelden.'; msg.style.color='limegreen';
+    }
+
+    // --- Rechner (sichere Auswertung) ---
+    const calcBtn = document.getElementById('calcBtn');
+    calcBtn.addEventListener('click', () => {
+      const input = document.getElementById('calcInput').value.trim();
+      const out = document.getElementById('calcResult');
+      if(!/^[0-9+\-*/().\s]+$/.test(input)){ out.textContent='Fehler: Ungültige Zeichen'; out.style.color='crimson'; return; }
+      try{
+        // sichere Function - disallow letters
+        const fn = new Function('return (' + input + ')');
+        const result = fn();
+        if(typeof result === 'number' && isFinite(result)) { out.textContent = 'Ergebnis: ' + result; out.style.color='limegreen'; }
+        else { out.textContent='Fehler: Keine gültige Berechnung'; out.style.color='crimson'; }
+      }catch(e){ out.textContent='Fehler: ' + e; out.style.color='crimson'; }
     });
-    themeLightBtn.addEventListener('click', ()=>{ localStorage.setItem('w_theme','light'); applyPrefs(); });
-    themeDarkBtn.addEventListener('click', ()=>{ localStorage.setItem('w_theme','dark'); applyPrefs(); });
 
-    glitchToggle.addEventListener('change', ()=>{ localStorage.setItem('w_glitch', glitchToggle.checked); applyPrefs(); });
-
-    document.getElementById('openSettings').addEventListener('click', ()=> showSection('settings'));
-
-    /* ---------- Gallery add image ---------- */
-    document.getElementById('addImage').addEventListener('click', ()=>{
-      const url = document.getElementById('newImageUrl').value.trim();
-      const msg = document.getElementById('galleryMsg');
-      if(!url){ msg.textContent = 'Bitte Bild-URL eingeben'; return; }
-      const img = document.createElement('img');
-      img.src = url;
-      img.alt = 'User image';
-      img.style.borderRadius = '10px';
-      img.style.border = '1px solid rgba(57,255,20,0.04)';
-      img.onload = ()=> {
-        document.getElementById('galleryGrid').prepend(img);
-        msg.textContent = 'Bild hinzugefügt ✓';
-        document.getElementById('newImageUrl').value = '';
-      };
-      img.onerror = ()=> { msg.textContent = 'Bild konnte nicht geladen werden'; };
+    // --- Übersetzer (Demo: einfache Ersetzungen) ---
+    document.getElementById('translateBtn').addEventListener('click', ()=>{
+      const text = document.getElementById('textInput').value.trim();
+      const lang = document.getElementById('languageSelect').value;
+      const out = document.getElementById('translationResult');
+      if(!text){ out.textContent='Bitte Text eingeben!'; out.style.color='crimson'; return; }
+      // sehr einfache demo-ersetzungen
+      if(lang==='de-en'){ out.textContent = text.replace(/Hallo/gi,'Hello').replace(/wie gehts/gi,'how are you'); out.style.color='limegreen'; }
+      else{ out.textContent = text.replace(/Hello/gi,'Hallo').replace(/thank you/gi,'danke'); out.style.color='limegreen'; }
     });
 
-    /* ---------- Songs (add URL to small player) ---------- */
-    document.getElementById('addSong').addEventListener('click', ()=>{
-      const url = document.getElementById('songUrl').value.trim();
-      const msg = document.getElementById('songMsg');
-      if(!url){ msg.textContent = 'Bitte Song-URL eingeben'; return; }
-      const audio = document.createElement('audio');
-      audio.controls = true; audio.preload = 'none'; audio.src = url; audio.style.width = '100%';
-      // insert above the add form (in youtube section)
-      const youtubeSection = document.getElementById('youtube');
-      const card = youtubeSection.querySelector('.card') || youtubeSection;
-      youtubeSection.appendChild(audio);
-      msg.textContent = 'Song geladen ✓';
-      document.getElementById('songUrl').value = '';
-    });
-
-    /* ---------- Clicker game ---------- */
-    let clicks = parseInt(localStorage.getItem('w_clicks')||'0',10);
-    let clicksPerClick = parseInt(localStorage.getItem('w_cpc')||'1',10);
-    let autoClickers = parseInt(localStorage.getItem('w_auto')||'0',10);
-    let priceDouble = parseInt(localStorage.getItem('w_priceDouble')||'10',10);
-    let priceAuto = parseInt(localStorage.getItem('w_priceAuto')||'50',10);
+    // --- Clicker (mit Persistence) ---
+    let clicks = Number(localStorage.getItem('wezon_clicks') || 0);
+    let clicksPerClick = Number(localStorage.getItem('wezon_clicksPerClick') || 1);
+    let autoClickers = Number(localStorage.getItem('wezon_auto') || 0);
+    let costDouble = Number(localStorage.getItem('wezon_costDouble') || 10);
+    let costAuto = Number(localStorage.getItem('wezon_costAuto') || 50);
 
     const clickCountEl = document.getElementById('clickCount');
-    const clickBtn = document.getElementById('clickBtn')
+    const costDoubleEl = document.getElementById('costDouble');
+    const costAutoEl = document.getElementById('costAuto');
+    const shopMsg = document.getElementById('shopMsg');
+
+    function updateClickDisplay(){ clickCountEl.textContent = 'Clicks: ' + clicks; costDoubleEl.textContent = costDouble; costAutoEl.textContent = costAuto; }
+    updateClickDisplay();
+
+    document.getElementById('clickBtn').addEventListener('click', ()=>{ clicks += clicksPerClick; updateClickDisplay(); });
+    document.getElementById('saveClicker').addEventListener('click', ()=>{ saveClicker(); shopMsg.textContent='Fortschritt gespeichert.'; shopMsg.style.color='limegreen'; });
+    document.getElementById('resetClicker').addEventListener('click', ()=>{
+      if(confirm('Clicker zurücksetzen?')){ clicks=0; clicksPerClick=1; autoClickers=0; costDouble=10; costAuto=50; saveClicker(); updateClickDisplay(); shopMsg.textContent='Zurückgesetzt.'; shopMsg.style.color='crimson'; }
+    });
+
+    document.getElementById('buyDouble').addEventListener('click', ()=>{
+      if(clicks >= costDouble){ clicks -= costDouble; clicksPerClick += 1; costDouble = Math.floor(costDouble * 2.5); saveClicker(); shopMsg.textContent='Doppelter Klick gekauft!'; shopMsg.style.color='limegreen'; updateClickDisplay(); }
+      else { shopMsg.textContent='Nicht genug Klicks!'; shopMsg.style.color='crimson'; }
+    });
+    document.getElementById('buyAuto').addEventListener('click', ()=>{
+      if(clicks >= costAuto){ clicks -= costAuto; autoClickers += 1; costAuto = Math.floor(costAuto * 2); saveClicker(); shopMsg.textContent='Auto-Klicker gekauft!'; shopMsg.style.color='limegreen'; updateClickDisplay(); }
+      else { shopMsg.textContent='Nicht genug Klicks!'; shopMsg.style.color='crimson'; }
+    });
+
+    function saveClicker(){
+      localStorage.setItem('wezon_clicks', clicks);
+      localStorage.setItem('wezon_clicksPerClick', clicksPerClick);
+      localStorage.setItem('wezon_auto', autoClickers);
+      localStorage.setItem('wezon_costDouble', costDouble);
+      localStorage.setItem('wezon_costAuto', costAuto);
+    }
+    // auto click loop
+    setInterval(()=>{ if(autoClickers>0){ clicks += autoClickers; updateClickDisplay(); } }, 1000);
+
+    // save on unload
+    window.addEventListener('beforeunload', saveClicker);
+
+    // keyboard submit for forms
+    ['loginForm','registerForm'].forEach(id => document.getElementById(id).addEventListener('keypress', e => { if(e.key==='Enter') e.preventDefault(); }));
+
+    // small accessibility: focus first input on startseite
+    document.getElementById('loginEmail').focus();
+
+    // --- optional: simple glitch keyframes used above ---
+    const style = document.createElement('style'); style.textContent = `@keyframes glitch{0%{text-shadow:2px 0 red}20%{text-shadow:-2px 0 cyan}40%{text-shadow:2px 0 blue}60%{text-shadow:-2px 0 lime}80%{text-shadow:2px 0 magenta}100%{text-shadow:-2px 0 yellow}}`; document.head.appendChild(style);
+
+  </script>
+</body>
+</html>
