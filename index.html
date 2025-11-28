@@ -65,10 +65,6 @@
     .video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px}
     .video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
 
-    /* gallery */
-    .gallery{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-    .gallery img{max-width:220px;border:2px solid var(--accent);border-radius:10px}
-
     /* clicker */
     .clicker-controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center}
     .shop button{width:100%;max-width:420px}
@@ -89,7 +85,6 @@
     <button data-section="regeln">Regeln</button>
     <button data-section="discord">Discord</button>
     <button data-section="youtube">YouTube</button>
-    <button data-section="galerie">Galerie</button>
     <button data-section="clicker">Clicker Game</button>
     <button data-section="rechner">Rechner</button>
     <button data-section="translator">Übersetzer</button>
@@ -98,13 +93,6 @@
 
   <main>
     
-    <!-- KARTE -->
-    <section id="karte" class="card hidden">
-      <h2>🗺️ Minecraft Karte</h2>
-      <p class="muted">(Dies ist ein Vorschau-Bild — die echte interaktive Karte kann eingebunden werden, sobald die Map-Datei verfügbar ist.)</p>
-      <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/7b/Minecraft_map_item.png" alt="Minecraft Map" style="display:block;margin:auto;max-width:100%;border:3px solid var(--accent);border-radius:12px">
-    </section>
-
     <!-- REGELN -->
     <section id="regeln" class="card hidden">
       <h2>Server Regeln</h2>
@@ -132,15 +120,6 @@
       <div class="video-wrap"
         <!-- unbedingt eigenes Video einfügen -->
         <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube Video" allowfullscreen loading="lazy"></iframe>
-      </div>
-    </section>
-
-    <!-- GALERIE -->
-    <section id="galerie" class="card hidden">
-      <h2>Galerie</h2>
-      <div class="gallery">
-        <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/47/Creeper_Jumping.png" alt="Creeper">
-        <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/30/Enderman.png" alt="Enderman">
       </div>
     </section>
 
@@ -209,8 +188,6 @@
     </section>
 
   </main>
-
-  <footer>© Wezon1164 — Verbessert. Kopiere die Datei auf deinen Server und öffne sie im Browser.</footer>
 
   <script>
     // --- Navigation ---
